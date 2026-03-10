@@ -17,10 +17,6 @@ export default defineConfig({
     hostname: 'https://etephym.github.io/shindo/'
   },
 
-  markdown: {
-    lineNumbers: true
-  },
-
   themeConfig: {
     logo: '/logo.jpg',
 
@@ -34,8 +30,26 @@ export default defineConfig({
       {
         text: 'Shindo Life',
         items: [
-          { text: 'Guide', link: '/guide' },
-          { text: 'Tips & Tricks', link: '/tips' }
+          { text: '📖 Guide', link: '/guide' },
+          { text: '💡 Tips & Tricks', link: '/tips' }
+        ]
+      },
+      {
+        text: 'В гайде',
+        collapsed: true,
+        items: [
+          { text: 'Пассивки менторов', link: '/guide#пассивки-менторов' },
+          { text: 'Менторы', link: '/guide#менторы' },
+          { text: 'Rep Bonus', link: '/guide#rep-bonus-stats' },
+          { text: 'Расы', link: '/guide#расы' },
+          { text: 'Хилки', link: '/guide#хилки' },
+          { text: 'Термины', link: '/guide#термины' },
+          { text: 'Elements', link: '/guide#elements' },
+          { text: 'Kenjutsu', link: '/guide#kenjutsu' },
+          { text: 'Sub Abilities', link: '/guide#sub-abilities' },
+          { text: 'Sub Modes', link: '/guide#sub-modes' },
+          { text: 'Weapons', link: '/guide#weapons' },
+          { text: 'Баг слотов', link: '/guide#баг-слотов' },
         ]
       }
     ],
@@ -46,9 +60,7 @@ export default defineConfig({
     },
 
     search: { provider: 'local' },
-
     externalLinkIcon: true,
-
     returnToTopLabel: 'Наверх',
     sidebarMenuLabel: 'Меню',
     darkModeSwitchLabel: 'Тема',
