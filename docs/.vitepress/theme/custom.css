@@ -1,15 +1,15 @@
 html {
-  background-color: #13131a !important;
+  background-color: #0a0a0f !important;
 }
 
 :root {
-  --vp-c-bg: #13131a;
-  --vp-c-bg-soft: #1c1c26;
-  --vp-c-bg-mute: #22222e;
-  --vp-c-bg-alt: #13131a;
-  --vp-sidebar-bg-color: #13131a;
-  --vp-nav-bg-color: #13131a;
-  --vp-c-divider: #2a2a38;
-  --vp-c-gutter: #0d0d12;
+  --vp-c-bg: #0a0a0f;
+  --vp-c-bg-soft: #111118;
+  --vp-c-bg-mute: #16161e;
+  --vp-c-bg-alt: #0a0a0f;
+  --vp-sidebar-bg-color: #0a0a0f;
+  --vp-nav-bg-color: #0a0a0f;
+  --vp-c-divider: #1e1e28;
+  --vp-c-gutter: #060609;
   --vp-home-hero-name-color: #7c8cff;
 }
