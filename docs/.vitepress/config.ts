@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/shindo/
+  base: '/shindo/'
   title: "Shindo Life Docs",
   description: "ETEPHYM",
   themeConfig: {
