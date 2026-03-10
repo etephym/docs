@@ -5,7 +5,7 @@ export default defineConfig({
   lang: 'ru-RU',
   title: "Shindo Life Docs",
   description: "Гайды и советы по Shindo Life от ETEPHYM",
-  appearance: 'dark',
+  appearance: 'force-dark',
   cleanUrls: true,
   lastUpdated: true,
 
@@ -15,7 +15,6 @@ export default defineConfig({
       { text: 'Guide', link: '/guide' },
       { text: 'Tips & Tricks', link: '/tips' }
     ],
-
     sidebar: [
       {
         text: 'Shindo Life',
@@ -25,24 +24,13 @@ export default defineConfig({
         ]
       }
     ],
-
-    search: {
-      provider: 'local'
-    },
-
-    footer: {
-      message: 'Shindo Life Docs by ETEPHYM'
-    },
-
+    search: { provider: 'local' },
+    footer: { message: 'Shindo Life Docs by ETEPHYM' },
     editLink: {
       pattern: 'https://github.com/etephym/shindo/edit/main/docs/:path',
       text: 'Редактировать на GitHub'
     },
-
-    lastUpdated: {
-      text: 'Обновлено'
-    },
-
+    lastUpdated: { text: 'Обновлено' },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/etephym/shindo' }
     ]
