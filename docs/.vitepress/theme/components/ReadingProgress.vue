@@ -17,18 +17,19 @@ function update() {
   rafId = requestAnimationFrame(() => {
     rafId = null
 
-    const doc     = document.documentElement
     const scrollY = window.scrollY
-    const total   = doc.scrollHeight - doc.clientHeight
 
-    if (total <= 0) {
+    // Measure only to end of doc content, not footer/prev-next buttons
+    const contentEl = document.querySelector('.vp-doc')
+    const total = contentEl
+      ? contentEl.getBoundingClientRect().bottom + scrollY - window.innerHeight
+      : document.documentElement.scrollHeight - window.innerHeight
+
+    if (total <= 0 || scrollY <= 0) {
       progress.value = 0
-    } else if (scrollY <= 0) {
-      progress.value = 0
-    } else if (scrollY >= total - 1) {
+    } else if (scrollY >= total) {
       progress.value = 100
     } else {
-      // floor instead of round — avoids jumping to 2% at top and 99% at bottom
       progress.value = Math.floor((scrollY / total) * 100)
     }
 
