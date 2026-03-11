@@ -1,34 +1,35 @@
 <script setup lang="ts">
-// Renders a starfield particles background on the homepage only
-import { onMounted, onUnmounted, ref } from 'vue'
+// Starfield particles — only active on homepage (/ and /en/)
+// Mounts a canvas directly into body so it sits behind all content
+import { onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vitepress'
 import { tsParticles } from '@tsparticles/engine'
 import { loadSlim } from '@tsparticles/slim'
 
-const route  = useRoute()
-const loaded = ref(false)
+const route = useRoute()
+let initialized = false
 
-async function init() {
+async function start() {
+  if (initialized) return
+  initialized = true
   await loadSlim(tsParticles)
   await tsParticles.load({
     id: 'tsparticles',
     options: {
-      fullScreen:  { enable: false },
+      fullScreen:  { enable: true, zIndex: 0 },
       background:  { color: { value: 'transparent' } },
       fpsLimit:    60,
       particles: {
-        number:  { value: 120, density: { enable: true, width: 1920 } },
+        number:  { value: 130, density: { enable: true, width: 1920 } },
         color:   { value: ['#54a0ff', '#ff6b6b', '#ff9ff3', '#ffffff'] },
         opacity: {
-          value: { min: 0.1, max: 0.6 },
-          animation: { enable: true, speed: 0.5, sync: false },
+          value: { min: 0.1, max: 0.55 },
+          animation: { enable: true, speed: 0.4, sync: false },
         },
-        size: {
-          value: { min: 0.5, max: 2 },
-        },
+        size: { value: { min: 0.5, max: 1.8 } },
         move: {
           enable:    true,
-          speed:     0.3,
+          speed:     0.25,
           direction: 'none',
           random:    true,
           outModes:  { default: 'out' },
@@ -39,41 +40,30 @@ async function init() {
           onHover: { enable: true, mode: 'grab' },
         },
         modes: {
-          grab: { distance: 120, links: { opacity: 0.2 } },
+          grab: { distance: 100, links: { opacity: 0.15 } },
         },
       },
       detectRetina: true,
     },
   })
-  loaded.value = true
 }
 
-onMounted(() => {
-  // Only show on homepage (root and /en/)
-  if (route.path === '/' || route.path === '/en/') init()
-})
-
-onUnmounted(() => {
+function stop() {
   tsParticles.domItem(0)?.destroy()
-})
+  initialized = false
+  // Remove canvas left by tsparticles
+  document.getElementById('tsparticles')?.remove()
+}
+
+function check() {
+  const isHome = route.path === '/' || route.path === '/en/'
+  if (isHome) start()
+  else stop()
+}
+
+onMounted(() => check())
+watch(() => route.path, () => check())
+onUnmounted(() => stop())
 </script>
 
-<template>
-  <div
-    v-if="loaded"
-    id="tsparticles"
-    class="particles-wrap"
-  />
-</template>
-
-<style scoped>
-.particles-wrap {
-  position: fixed;
-  top:      0;
-  left:     0;
-  width:    100%;
-  height:   100%;
-  z-index:  0;
-  pointer-events: none;
-}
-</style>
+<template><span /></template>
