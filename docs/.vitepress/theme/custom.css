@@ -213,7 +213,7 @@ html { scroll-behavior: smooth; }
    Heading highlight on sidebar anchor click — smooth fade
    ============================================================= */
 .vp-doc .heading-highlighted {
-  border-left:   3px solid #54a0ff;
+  border-left:   3px solid transparent;
   border-radius: 4px;
   padding-left:  12px;
   margin-left:   -15px;
@@ -221,7 +221,7 @@ html { scroll-behavior: smooth; }
 }
 
 @keyframes heading-flash {
-  0%   { background: rgba(84, 160, 255, 0.25); box-shadow: 0 0 20px rgba(84, 160, 255, 0.15); }
-  30%  { background: rgba(84, 160, 255, 0.18); box-shadow: 0 0 14px rgba(84, 160, 255, 0.10); }
-  100% { background: rgba(84, 160, 255, 0.00); box-shadow: none; }
+  0%   { background: rgba(84, 160, 255, 0.25); border-left-color: rgba(84, 160, 255, 1.00); box-shadow: 0 0 20px rgba(84, 160, 255, 0.15); }
+  30%  { background: rgba(84, 160, 255, 0.18); border-left-color: rgba(84, 160, 255, 0.80); box-shadow: 0 0 14px rgba(84, 160, 255, 0.10); }
+  100% { background: rgba(84, 160, 255, 0.00); border-left-color: rgba(84, 160, 255, 0.00); box-shadow: none; }
 }
