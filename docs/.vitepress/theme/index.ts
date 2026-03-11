@@ -13,10 +13,10 @@ import vitepressNprogress from 'vitepress-plugin-nprogress'
 import 'vitepress-plugin-nprogress/lib/css/index.css'
 
 // Components
-import Breadcrumb       from './components/Breadcrumb.vue'
-import ReadingTime      from './components/ReadingTime.vue'
-import ReadingProgress  from './components/ReadingProgress.vue'
-import CopyHeadingLink  from './components/CopyHeadingLink.vue'
+import Breadcrumb      from './components/Breadcrumb.vue'
+import ReadingTime     from './components/ReadingTime.vue'
+import ReadingProgress from './components/ReadingProgress.vue'
+import CopyHeadingLink from './components/CopyHeadingLink.vue'
 
 // Global styles
 import './custom.css'
@@ -37,11 +37,10 @@ const ZoomSetup = {
 const HeadingHighlight = {
   setup() {
     const route = useRoute()
-
     const highlight = () => {
-      document.querySelectorAll('.heading-highlighted').forEach(el => {
+      document.querySelectorAll('.heading-highlighted').forEach(el =>
         el.classList.remove('heading-highlighted')
-      })
+      )
       const hash = decodeURIComponent(window.location.hash.slice(1))
       if (!hash) return
       const target = document.getElementById(hash)
@@ -49,11 +48,21 @@ const HeadingHighlight = {
       target.classList.add('heading-highlighted')
       setTimeout(() => target.classList.remove('heading-highlighted'), 2500)
     }
-
     onMounted(() => nextTick(highlight))
     watch(() => route.hash, () => nextTick(highlight))
   },
   render: () => null,
+}
+
+// Shows reading progress only on doc pages, not on homepage
+const ProgressWrapper = {
+  setup() {
+    const route = useRoute()
+    return () => {
+      const isHome = route.path === '/' || route.path === '/en/'
+      return isHome ? null : h(ReadingProgress)
+    }
+  },
 }
 
 export default {
@@ -68,8 +77,8 @@ export default {
         h(HeadingHighlight),
         h(CopyHeadingLink),
       ]),
-      // Reading progress badge — shown on all pages
-      'layout-bottom': () => h(ReadingProgress),
+      // Reading progress badge — hidden on homepage
+      'layout-bottom': () => h(ProgressWrapper),
     })
   },
 
