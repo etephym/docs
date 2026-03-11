@@ -1,49 +1,82 @@
 ---
-outline: deep
+title: Runtime API Examples
+outline: [2, 3]
 ---
 
 # Runtime API Examples
 
-This page demonstrates usage of some of the runtime APIs provided by VitePress.
+Эта страница показывает шаблонные примеры для runtime API VitePress, которые можно сразу переносить в свои страницы.
 
-The main `useData()` API can be used to access site, theme, and page data for the current page. It works in both `.md` and `.vue` files:
+## useData()
 
-```md
-<script setup>
+```vue
+<script setup lang="ts">
 import { useData } from 'vitepress'
 
-const { theme, page, frontmatter } = useData()
+const { site, theme, page, frontmatter, lang, dir } = useData()
 </script>
 
-## Results
-
-### Theme Data
-<pre>{{ theme }}</pre>
-
-### Page Data
-<pre>{{ page }}</pre>
-
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
+<template>
+  <pre>{{ site }}</pre>
+  <pre>{{ theme }}</pre>
+  <pre>{{ page }}</pre>
+  <pre>{{ frontmatter }}</pre>
+  <p>Lang: {{ lang }}</p>
+  <p>Dir: {{ dir }}</p>
+</template>
 ```
 
-<script setup>
-import { useData } from 'vitepress'
+## useRoute() + useRouter()
 
-const { site, theme, page, frontmatter } = useData()
+```vue
+<script setup lang="ts">
+import { useRoute, useRouter } from 'vitepress'
+
+const route = useRoute()
+const router = useRouter()
+
+function goToTips() {
+  router.go('/tips')
+}
 </script>
 
-## Results
+<template>
+  <p>Current path: {{ route.path }}</p>
+  <button @click="goToTips">Go to Tips</button>
+</template>
+```
 
-### Theme Data
-<pre>{{ theme }}</pre>
+## withBase()
 
-### Page Data
-<pre>{{ page }}</pre>
+```ts
+import { withBase } from 'vitepress'
 
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
+const logoUrl = withBase('/logo.jpg')
+```
 
-## More
+## inBrowser
 
-Check out the documentation for the [full list of runtime APIs](https://vitepress.dev/reference/runtime-api#usedata).
+```ts
+import { inBrowser } from 'vitepress'
+
+if (inBrowser) {
+  console.log('Код выполняется в браузере')
+}
+```
+
+## useData() — живой мини-пример
+
+<script setup lang="ts">
+import { useData } from 'vitepress'
+
+const { page, frontmatter, lang } = useData()
+</script>
+
+- Текущий путь: **{{ page.relativePath }}**
+- Язык: **{{ lang }}**
+- Заголовок из frontmatter: **{{ frontmatter.title || 'не задан' }}**
+
+## Дополнительно
+
+- [VitePress Templates](/vitepress-templates)
+- [Markdown Examples](/markdown-examples)

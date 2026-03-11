@@ -1,47 +1,40 @@
 ---
 layout: home
 
+title: Shindo Life Docs
+
+description: "Финальная версия сайта: полный гайд, советы и актуальные боевые пресеты."
+
 hero:
   name: "Shindo Life"
   text: "Docs by ETEPHYM"
-  tagline: All guides, tier lists and mechanics in one place
+  tagline: Гайды, механики, готовые пресеты и практические советы для PvP/PvE
   image:
     src: /logo.jpg
     alt: Shindo Life
   actions:
     - theme: brand
-      text: 📖 Read the Guide
+      text: 📖 Открыть Guide
       link: /guide
     - theme: alt
       text: 💡 Tips & Tricks
       link: /tips
-    - theme: alt
-      text: Discord
-      link: https://discord.gg/cmCpgkb5zq
 
 features:
   - icon: ⚔️
-    title: Mentors & Races
-    details: Full breakdown of all mentors, passives, and races. Tier lists and combo tips.
-    link: /guide#менторы
-  - icon: 🧪
-    title: Elements & Kenjutsu
-    details: Tier lists for elements, kenjutsu, sub modes and sub abilities.
-    link: /guide#elements
-  - icon: 💊
-    title: Heals & Items
-    details: Best heals, weapons, throwables and companions for every situation.
-    link: /guide#хилки
-  - icon: 💡
-    title: Tips & Tricks
-    details: Advanced tips, tricks and mechanics to improve your gameplay.
+    title: Игровые гайды
+    details: Менторы, расы, предметы, антидоджи, полезные связки и термины.
+    link: /guide
+  - icon: 🧠
+    title: Готовые пресеты
+    details: Конкретные рабочие схемы для боёв, фарма и контроля без абстрактных шаблонов.
+    link: /guide#готовые-пресеты-билдов
+  - icon: 🛠️
+    title: Interactive Build Planner
+    details: В Guide и Tips встроены интерактивные шаблоны билда для PvP/War/Farm.
+    link: /tips#интерактивный-шаблон-билда
+  - icon: 📦
+    title: Контент без воды
+    details: "Упор на практику: что брать, как играть, где ошибаются и как закрывать матчапы."
     link: /tips
-  - icon: 📖
-    title: Terms
-    details: PB, BB, iFrame, Grab, Andodge — all terms explained.
-    link: /guide#термины
-  - icon: 🐛
-    title: Slot Bug
-    details: How to increase your skill slot count from your phone.
-    link: /guide#баг-слотов
 ---
