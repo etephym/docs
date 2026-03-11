@@ -119,19 +119,21 @@ html.dark {
    ============================================================= */
 .VPHero .name {
   background: linear-gradient(
-    90deg,
-    #ff6b6b, #5f27cd, #54a0ff
+    270deg,
+    #ff6b6b, #feca57, #48dbfb,
+    #ff9ff3, #54a0ff, #5f27cd, #ff6b6b
   );
+  background-size:         400% 400%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip:         text;
-  animation:               rainbow-hue 4s ease-in-out infinite;
+  animation:               rainbow 6s ease infinite;
 }
 
-@keyframes rainbow-hue {
-  0%   { filter: hue-rotate(0deg);   }
-  50%  { filter: hue-rotate(180deg); }
-  100% { filter: hue-rotate(360deg); }
+@keyframes rainbow {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
 }
 
 
