@@ -26,7 +26,7 @@ features:
   - icon: ⚔️
     title: Менторы и расы
     details: Полный разбор всех менторов, пассивок и рас. Тир-листы и советы по комбо.
-    link: /guide#менторы
+    link: /guide#mentors
   - icon: 🧪
     title: Элементы и Kenjutsu
     details: Тир-листы элементов, kenjutsu, sub modes и sub abilities.
@@ -34,7 +34,7 @@ features:
   - icon: 💊
     title: Хилки и предметы
     details: Лучшие хилки, оружия, throwables и companions для любой ситуации.
-    link: /guide#хилки
+    link: /guide#heals
   - icon: 💡
     title: Советы и фишки
     details: Продвинутые советы, микромеханики и полезные баги для улучшения игры.
@@ -42,9 +42,9 @@ features:
   - icon: 📖
     title: Термины
     details: PB, BB, iFrame, Grab, Andodge — все термины объяснены понятно.
-    link: /guide#термины
+    link: /guide#terms
   - icon: 🐛
     title: Баг слотов
     details: Как увеличить количество слотов скиллов через телефон.
-    link: /guide#баг-слотов
+    link: /guide#slot-bug
 ---
