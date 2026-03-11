@@ -1,6 +1,5 @@
 /* =============================================================
    Custom Styles — Shindo Life Docs
-   Overrides VitePress default theme CSS variables and components
    ============================================================= */
 
 /* --- Typography: Google Fonts Inter --- */
@@ -15,14 +14,14 @@
    Dark theme — background and surface colors
    ============================================================= */
 .dark {
-  --vp-c-bg:             #0d0d0d;   /* main page background        */
-  --vp-c-bg-soft:        #141414;   /* cards, callout blocks       */
-  --vp-c-bg-mute:        #1a1a1a;   /* subtle muted surfaces       */
-  --vp-c-bg-alt:         #0d0d0d;   /* alternate bg (same as main) */
-  --vp-sidebar-bg-color: #0d0d0d;   /* sidebar background          */
-  --vp-nav-bg-color:     #0d0d0d;   /* navbar background           */
-  --vp-c-divider:        #222222;   /* divider / border lines      */
-  --vp-c-gutter:         #080808;   /* layout gutter color         */
+  --vp-c-bg:             #0d0d0d;
+  --vp-c-bg-soft:        #141414;
+  --vp-c-bg-mute:        #1a1a1a;
+  --vp-c-bg-alt:         #0d0d0d;
+  --vp-sidebar-bg-color: #0d0d0d;
+  --vp-nav-bg-color:     #0d0d0d;
+  --vp-c-divider:        #222222;
+  --vp-c-gutter:         #080808;
 }
 
 html.dark {
@@ -50,13 +49,13 @@ html.dark {
 
 
 /* =============================================================
-   Navbar logo — animated rainbow glow effect
+   Navbar logo — animated rainbow glow
    ============================================================= */
 .VPNavBarTitle .logo,
 .VPNavBarTitle img {
-  filter:     drop-shadow(0 0 6px rgba(255, 107, 107, 0.7))
-              drop-shadow(0 0 14px rgba(84, 160, 255, 0.5));
-  animation:  logo-glow 4s ease-in-out infinite;
+  filter:    drop-shadow(0 0 6px rgba(255, 107, 107, 0.7))
+             drop-shadow(0 0 14px rgba(84, 160, 255, 0.5));
+  animation: logo-glow 4s ease-in-out infinite;
   transition: filter 0.3s ease;
 }
 
@@ -82,100 +81,6 @@ html.dark {
   }
 }
 
-
-/* =============================================================
-   Homepage hero — animated rainbow gradient title
-   ============================================================= */
-.VPHero .name {
-  background: linear-gradient(
-    270deg,
-    #ff6b6b, #feca57, #48dbfb,
-    #ff9ff3, #54a0ff, #5f27cd, #ff6b6b
-  );
-  background-size:         400% 400%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip:         text;
-  animation:               rainbow 6s ease infinite;
-}
-
-@keyframes rainbow {
-  0%   { background-position: 0%   50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0%   50%; }
-}
-
-
-/* =============================================================
-   Callout blocks
-   Usage: ::: tip | ::: warning | ::: danger | ::: info
-   ============================================================= */
-.vp-doc .custom-block.tip     { border-color: #5eead4; }
-.vp-doc .custom-block.tip     .custom-block-title { color: #5eead4; }
-
-.vp-doc .custom-block.warning { border-color: #fbbf24; }
-.vp-doc .custom-block.warning .custom-block-title { color: #fbbf24; }
-
-.vp-doc .custom-block.danger  { border-color: #f87171; }
-.vp-doc .custom-block.danger  .custom-block-title { color: #f87171; }
-
-.vp-doc .custom-block.info    { border-color: #60a5fa; }
-.vp-doc .custom-block.info    .custom-block-title { color: #60a5fa; }
-
-
-/* =============================================================
-   Badge component
-   Usage in markdown: <Badge type="tip" text="S+" />
-   Types: tip (green) | warning (yellow) | danger (red) | info (blue)
-   ============================================================= */
-.vp-badge.tip {
-  background: rgba(94, 234, 212, 0.12);
-  color:      #5eead4;
-  border:     1px solid rgba(94, 234, 212, 0.25);
-}
-.vp-badge.warning {
-  background: rgba(251, 191, 36, 0.12);
-  color:      #fbbf24;
-  border:     1px solid rgba(251, 191, 36, 0.25);
-}
-.vp-badge.danger {
-  background: rgba(248, 113, 113, 0.12);
-  color:      #f87171;
-  border:     1px solid rgba(248, 113, 113, 0.25);
-}
-.vp-badge.info {
-  background: rgba(96, 165, 250, 0.12);
-  color:      #60a5fa;
-  border:     1px solid rgba(96, 165, 250, 0.25);
-}
-
-
-/* =============================================================
-   Code blocks
-   ============================================================= */
-.dark div[class*='language-'] {
-  background: #111111 !important;
-  border:     1px solid #222222;
-}
-
-
-/* =============================================================
-   Tables — alternating row colors in dark mode
-   ============================================================= */
-.vp-doc table                    { border-collapse: collapse; width: 100%; }
-.dark .vp-doc tr:nth-child(even) { background: #141414; }
-.dark .vp-doc th                 { background: #1a1a1a; }
-
-
-/* =============================================================
-   Misc
-   ============================================================= */
-
-/* Smooth anchor jump scrolling */
-html { scroll-behavior: smooth; }
-
-/* Subtle hover transition on all doc links */
-.vp-doc a { transition: color 0.2s; }
 
 /* =============================================================
    Homepage hero image — animated rainbow glow
@@ -210,30 +115,92 @@ html { scroll-behavior: smooth; }
 
 
 /* =============================================================
-   Heading highlight on sidebar anchor click — underline style
+   Homepage hero — animated rainbow gradient title
+   ============================================================= */
+.VPHero .name {
+  background: linear-gradient(
+    270deg,
+    #ff6b6b, #feca57, #48dbfb,
+    #ff9ff3, #54a0ff, #5f27cd, #ff6b6b
+  );
+  background-size:         400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip:         text;
+  animation:               rainbow 6s ease infinite;
+}
+
+@keyframes rainbow {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+
+/* =============================================================
+   Callout blocks — tip / warning / danger / info
+   ============================================================= */
+.vp-doc .custom-block.tip     { border-color: #5eead4; }
+.vp-doc .custom-block.tip     .custom-block-title { color: #5eead4; }
+
+.vp-doc .custom-block.warning { border-color: #fbbf24; }
+.vp-doc .custom-block.warning .custom-block-title { color: #fbbf24; }
+
+.vp-doc .custom-block.danger  { border-color: #f87171; }
+.vp-doc .custom-block.danger  .custom-block-title { color: #f87171; }
+
+.vp-doc .custom-block.info    { border-color: #60a5fa; }
+.vp-doc .custom-block.info    .custom-block-title { color: #60a5fa; }
+
+
+/* =============================================================
+   Badge component
+   Usage: <Badge type="tip" text="S+" />
+   ============================================================= */
+.vp-badge.tip     { background: rgba(94,  234, 212, 0.12); color: #5eead4; border: 1px solid rgba(94,  234, 212, 0.25); }
+.vp-badge.warning { background: rgba(251, 191,  36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191,  36, 0.25); }
+.vp-badge.danger  { background: rgba(248, 113, 113, 0.12); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.25); }
+.vp-badge.info    { background: rgba(96,  165, 250, 0.12); color: #60a5fa; border: 1px solid rgba(96,  165, 250, 0.25); }
+
+
+/* =============================================================
+   Code blocks
+   ============================================================= */
+.dark div[class*='language-'] {
+  background: #111111 !important;
+  border:     1px solid #222222;
+}
+
+
+/* =============================================================
+   Tables — alternating row colors
+   ============================================================= */
+.vp-doc table                    { border-collapse: collapse; width: 100%; }
+.dark .vp-doc tr:nth-child(even) { background: #141414; }
+.dark .vp-doc th                 { background: #1a1a1a; }
+
+
+/* =============================================================
+   Misc
+   ============================================================= */
+html { scroll-behavior: smooth; }
+.vp-doc a { transition: color 0.2s; }
+
+
+/* =============================================================
+   Heading highlight on sidebar anchor click — underline fade
    Class is added/removed by HeadingHighlight in index.ts
    ============================================================= */
 .vp-doc .heading-highlighted {
+  text-decoration:           underline;
+  text-underline-offset:     5px;
+  text-decoration-thickness: 2px;
+  text-decoration-color:     rgba(84, 160, 255, 0.00);
   animation: heading-flash 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes heading-flash {
-  0%   {
-    text-decoration:       underline;
-    text-decoration-color: rgba(84, 160, 255, 1.00);
-    text-underline-offset: 5px;
-    text-decoration-thickness: 2px;
-  }
-  60%  {
-    text-decoration:       underline;
-    text-decoration-color: rgba(84, 160, 255, 0.40);
-    text-underline-offset: 5px;
-    text-decoration-thickness: 2px;
-  }
-  100% {
-    text-decoration:       underline;
-    text-decoration-color: rgba(84, 160, 255, 0.00);
-    text-underline-offset: 5px;
-    text-decoration-thickness: 2px;
-  }
+  0%   { text-decoration-color: rgba(84, 160, 255, 1.00); }
+  60%  { text-decoration-color: rgba(84, 160, 255, 0.40); }
+  100% { text-decoration-color: rgba(84, 160, 255, 0.00); }
 }

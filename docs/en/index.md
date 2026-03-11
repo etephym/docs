@@ -7,7 +7,7 @@ description: Guides, tier lists and mechanics for Shindo Life by ETEPHYM
 hero:
   name: "Shindo Life"
   text: "Docs by ETEPHYM"
-  tagline: All guides, tier lists and mechanics in one place — soon
+  tagline: All guides, tier lists and mechanics in one place
   image:
     src: /logo.jpg
     alt: Shindo Life
@@ -24,27 +24,27 @@ hero:
 
 features:
   - icon: ⚔️
-    title: Mentors & Races — soon
-    details: soon
+    title: Mentors & Races
+    details: Full breakdown of all mentors, passives and races. Tier lists and combo tips.
     link: /en/guide#mentors
   - icon: 🧪
-    title: Elements & Kenjutsu — soon
-    details: soon
+    title: Elements & Kenjutsu
+    details: Tier lists for elements, kenjutsu, sub modes and sub abilities.
     link: /en/guide#elements
   - icon: 💊
-    title: Heals & Items — soon
-    details: soon
+    title: Heals & Items
+    details: Best heals, weapons, throwables and companions for every situation.
     link: /en/guide#heals
   - icon: 💡
-    title: Tips & Tricks — soon
-    details: soon
+    title: Tips & Tricks
+    details: Advanced tips, micro-mechanics and useful bugs to improve your gameplay.
     link: /en/tips
   - icon: 📖
-    title: Terms — soon
-    details: soon
+    title: Terms
+    details: PB, BB, iFrame, Grab, Andodge — all terms explained clearly.
     link: /en/guide#terms
   - icon: 🐛
-    title: Slot Bug — soon
-    details: soon
+    title: Slot Bug
+    details: How to increase your skill slot count using your phone.
     link: /en/guide#slot-bug
 ---
