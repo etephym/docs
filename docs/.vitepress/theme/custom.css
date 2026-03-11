@@ -229,28 +229,20 @@ html { scroll-behavior: smooth; }
   border-radius: 4px;
   padding-left:  12px;
   margin-left:   -15px;
-  animation:     heading-flash 1.8s ease forwards;
-}
-
-@keyframes heading-flash {
-  0%   { background: rgba(84, 160, 255, 0.22); }
-  100% { background: rgba(84, 160, 255, 0.08); }
-}
 
 /* =============================================================
-   Heading highlight on sidebar anchor click
-   Class is added/removed by HeadingHighlight component in index.ts
+   Heading highlight on sidebar anchor click — smooth fade
    ============================================================= */
 .vp-doc .heading-highlighted {
-  background:    rgba(84, 160, 255, 0.12);
   border-left:   3px solid #54a0ff;
   border-radius: 4px;
   padding-left:  12px;
   margin-left:   -15px;
-  animation:     heading-flash 2s ease forwards;
+  animation:     heading-flash 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes heading-flash {
-  0%   { background: rgba(84, 160, 255, 0.28); }
-  100% { background: transparent; }
+  0%   { background: rgba(84, 160, 255, 0.25); box-shadow: 0 0 20px rgba(84, 160, 255, 0.15); }
+  30%  { background: rgba(84, 160, 255, 0.18); box-shadow: 0 0 14px rgba(84, 160, 255, 0.10); }
+  100% { background: rgba(84, 160, 255, 0.0);  box-shadow: none; }
 }
