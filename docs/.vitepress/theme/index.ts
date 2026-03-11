@@ -47,32 +47,29 @@ const HeadingHighlight = {
   render: () => null,
 }
 
-// Shows reading progress only on doc pages, not homepage
-const ConditionalProgress = {
-  setup() {
-    const route = useRoute()
-    return () => {
-      const isHome = route.path === '/' || route.path === '/en/'
-      return isHome ? null : h(ReadingProgress)
-    }
-  },
-}
-
 export default {
   extends: DefaultTheme,
 
   Layout() {
+    const route = useRoute()
+    const isHome = () => route.path === '/' || route.path === '/en/'
+
     return h(DefaultTheme.Layout, null, {
+      // Particles go into layout-top — renders on ALL pages including homepage
+      'layout-top': () => h(ParticlesBackground),
+
       'doc-before': () => h('div', { class: 'doc-tools' }, [
         h(Breadcrumb),
         h(ReadingTime),
         h(ZoomSetup),
         h(HeadingHighlight),
         h(CopyHeadingLink),
-        h(ParticlesBackground),
       ]),
-      'doc-after':     () => h(ShareButton),
-      'layout-bottom': () => h(ConditionalProgress),
+
+      'doc-after': () => h(ShareButton),
+
+      // Only show progress on doc pages
+      'layout-bottom': () => isHome() ? null : h(ReadingProgress),
     })
   },
 
