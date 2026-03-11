@@ -281,3 +281,37 @@ body:has(.VPHome) .rp-wrap {
 .VPNavBar .content {
   background: transparent !important;
 }
+
+/* =============================================================
+   Body background — needed for navbar transparency to show
+   ============================================================= */
+html.dark body {
+  background: #0d0d0d !important;
+}
+
+html:not(.dark) body {
+  background: #f0f0f0 !important;
+}
+
+/* Sidebar transparent */
+.dark .VPSidebar {
+  background: rgba(13, 13, 13, 0.6) !important;
+}
+
+.VPSidebar {
+  background: rgba(240, 240, 240, 0.6) !important;
+}
+
+/* Content area transparent */
+.dark .VPContent {
+  background: transparent !important;
+}
+
+.VPContent {
+  background: transparent !important;
+}
+
+/* Doc area transparent */
+.dark .vp-doc {
+  background: transparent !important;
+}
