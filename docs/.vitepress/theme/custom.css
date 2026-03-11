@@ -281,3 +281,10 @@ html { scroll-behavior: smooth; }
 .dark .VPSidebarItem.is-active > .item {
   text-shadow: 0 0 10px rgba(84, 160, 255, 0.5);
 }
+
+/* Remove permanent left border from all h2 — only show on highlight */
+.vp-doc h2 {
+  border-left:  none !important;
+  padding-left: 0 !important;
+  margin-left:  0 !important;
+}
