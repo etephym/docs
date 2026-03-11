@@ -13,17 +13,30 @@ const RADIUS = 20
 const CIRCUM = 2 * Math.PI * RADIUS
 
 let idleTimer: ReturnType<typeof setTimeout> | null = null
+let rafId:     number | null = null
 
 function update() {
-  const doc   = document.documentElement
-  const total = doc.scrollHeight - doc.clientHeight
+  if (rafId) return
+  rafId = requestAnimationFrame(() => {
+    rafId = null
 
-  progress.value = total > 0 ? Math.round((window.scrollY / total) * 100) : 0
-  visible.value  = window.scrollY > 200
-  idle.value     = false
+    const doc     = document.documentElement
+    const total   = doc.scrollHeight - doc.clientHeight
+    const scrollY = window.scrollY
 
-  if (idleTimer) clearTimeout(idleTimer)
-  idleTimer = setTimeout(() => { idle.value = true }, 3000)
+    // Force 100% when within 2px of bottom to avoid stuck 99%
+    if (total > 0 && total - scrollY <= 2) {
+      progress.value = 100
+    } else {
+      progress.value = total > 0 ? Math.round((scrollY / total) * 100) : 0
+    }
+
+    visible.value = scrollY > 200
+    idle.value    = false
+
+    if (idleTimer) clearTimeout(idleTimer)
+    idleTimer = setTimeout(() => { idle.value = true }, 3000)
+  })
 }
 
 function scrollToTop() {
@@ -38,9 +51,9 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', update)
   if (idleTimer) clearTimeout(idleTimer)
+  if (rafId)     cancelAnimationFrame(rafId)
 })
 
-// SVG arc offset — 0% = full gap, 100% = full circle
 const strokeOffset = (pct: number) => CIRCUM - (pct / 100) * CIRCUM
 </script>
 
@@ -52,25 +65,14 @@ const strokeOffset = (pct: number) => CIRCUM - (pct / 100) * CIRCUM
       :title="idle ? 'Наверх' : `${progress}% прочитано`"
       @click="scrollToTop"
     >
-      <!-- SVG progress ring -->
       <svg :width="SIZE" :height="SIZE" class="rp-ring">
-        <!-- Background track -->
         <circle
-          :cx="SIZE / 2"
-          :cy="SIZE / 2"
-          :r="RADIUS"
-          fill="none"
-          stroke="rgba(84,160,255,0.12)"
-          stroke-width="2.5"
+          :cx="SIZE / 2" :cy="SIZE / 2" :r="RADIUS"
+          fill="none" stroke="rgba(84,160,255,0.12)" stroke-width="2.5"
         />
-        <!-- Animated progress arc -->
         <circle
-          :cx="SIZE / 2"
-          :cy="SIZE / 2"
-          :r="RADIUS"
-          fill="none"
-          stroke="#54a0ff"
-          stroke-width="2.5"
+          :cx="SIZE / 2" :cy="SIZE / 2" :r="RADIUS"
+          fill="none" stroke="#54a0ff" stroke-width="2.5"
           stroke-linecap="round"
           :stroke-dasharray="CIRCUM"
           :stroke-dashoffset="strokeOffset(progress)"
@@ -79,7 +81,6 @@ const strokeOffset = (pct: number) => CIRCUM - (pct / 100) * CIRCUM
         />
       </svg>
 
-      <!-- Center: % text or arrow icon -->
       <Transition name="icon-swap" mode="out-in">
         <span v-if="!idle" key="pct" class="rp-label">{{ progress }}%</span>
         <span v-else key="arrow" class="rp-arrow">
@@ -116,7 +117,6 @@ const strokeOffset = (pct: number) => CIRCUM - (pct / 100) * CIRCUM
   box-shadow: 0 0 22px rgba(84, 160, 255, 0.35);
 }
 
-/* SVG ring sits on top as absolute overlay */
 .rp-ring {
   position: absolute;
   top:      0;
@@ -124,10 +124,9 @@ const strokeOffset = (pct: number) => CIRCUM - (pct / 100) * CIRCUM
 }
 
 .rp-arc {
-  transition: stroke-dashoffset 0.4s ease;
+  transition: stroke-dashoffset 0.3s linear;
 }
 
-/* Percentage text */
 .rp-label {
   font-size:   11px;
   font-weight: 600;
@@ -136,20 +135,17 @@ const strokeOffset = (pct: number) => CIRCUM - (pct / 100) * CIRCUM
   user-select: none;
 }
 
-/* Arrow icon */
 .rp-arrow {
   display:     flex;
   align-items: center;
   color:       #54a0ff;
 }
 
-/* Swap animation between % and arrow */
 .icon-swap-enter-active,
 .icon-swap-leave-active { transition: opacity 0.25s ease, transform 0.25s ease; }
-.icon-swap-enter-from   { opacity: 0; transform: translateY(4px); }
+.icon-swap-enter-from   { opacity: 0; transform: translateY(4px);  }
 .icon-swap-leave-to     { opacity: 0; transform: translateY(-4px); }
 
-/* Widget appear/disappear */
 .progress-fade-enter-active,
 .progress-fade-leave-active { transition: opacity 0.3s ease, transform 0.3s ease; }
 .progress-fade-enter-from,
