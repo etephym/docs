@@ -284,3 +284,26 @@ body:has(.VPHome) .rp-wrap {
 .VPNavBar .container {
   background: transparent !important;
 }
+
+/* =============================================================
+   Doc pages — transparent content background
+   ============================================================= */
+.dark .VPDoc,
+.dark .VPContent,
+.dark #VPContent {
+  background: transparent !important;
+}
+
+.VPDoc,
+.VPContent,
+#VPContent {
+  background: transparent !important;
+}
+
+.dark html {
+  background-color: #0d0d0d !important;
+}
+
+html {
+  background-color: #f6f6f7 !important;
+}
