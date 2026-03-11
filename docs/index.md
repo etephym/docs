@@ -1,47 +1,43 @@
 ---
 layout: home
 
+title: Shindo Life Docs
+
+description: Гайды по Shindo + большая коллекция шаблонов VitePress.
+
 hero:
   name: "Shindo Life"
   text: "Docs by ETEPHYM"
-  tagline: All guides, tier lists and mechanics in one place
+  tagline: Гайды, механики и готовые шаблоны VitePress в одном месте
   image:
     src: /logo.jpg
     alt: Shindo Life
   actions:
     - theme: brand
-      text: 📖 Read the Guide
+      text: 📖 Открыть Guide
       link: /guide
+    - theme: alt
+      text: 🧩 VitePress Templates
+      link: /vitepress-templates
     - theme: alt
       text: 💡 Tips & Tricks
       link: /tips
-    - theme: alt
-      text: Discord
-      link: https://discord.gg/cmCpgkb5zq
 
 features:
   - icon: ⚔️
-    title: Mentors & Races
-    details: Full breakdown of all mentors, passives, and races. Tier lists and combo tips.
-    link: /guide#менторы
-  - icon: 🧪
-    title: Elements & Kenjutsu
-    details: Tier lists for elements, kenjutsu, sub modes and sub abilities.
-    link: /guide#elements
-  - icon: 💊
-    title: Heals & Items
-    details: Best heals, weapons, throwables and companions for every situation.
-    link: /guide#хилки
-  - icon: 💡
-    title: Tips & Tricks
-    details: Advanced tips, tricks and mechanics to improve your gameplay.
-    link: /tips
-  - icon: 📖
-    title: Terms
-    details: PB, BB, iFrame, Grab, Andodge — all terms explained.
-    link: /guide#термины
-  - icon: 🐛
-    title: Slot Bug
-    details: How to increase your skill slot count from your phone.
-    link: /guide#баг-слотов
+    title: Игровые гайды
+    details: Менторы, расы, предметы, антидоджи, полезные связки и термины.
+    link: /guide
+  - icon: 🧩
+    title: Полный шаблон VitePress
+    details: Примеры для frontmatter, навигации, custom containers, code groups и runtime API.
+    link: /vitepress-templates
+  - icon: 🧠
+    title: Шаблоны под доработку
+    details: Можно копировать блоки в свой проект и адаптировать под любую структуру контента.
+    link: /markdown-examples
+  - icon: 📦
+    title: Runtime API
+    details: useData, useRoute, withBase и примеры компонентов под VitePress.
+    link: /api-examples
 ---

@@ -1,3 +1,9 @@
+---
+title: Guide
+description: Основной гайд по механикам, тир-листам и терминам Shindo Life.
+outline: [2, 3]
+---
+
 # Guide
 
 ## Пассивки менторов

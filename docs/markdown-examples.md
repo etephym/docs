@@ -1,85 +1,98 @@
-# Markdown Extension Examples
+---
+title: Markdown Examples
+outline: [2, 3]
+---
 
-This page demonstrates some of the built-in markdown extensions provided by VitePress.
+# Markdown Examples
 
-## Syntax Highlighting
+Страница-шаблон с наиболее полезными конструкциями VitePress Markdown.
 
-VitePress provides Syntax Highlighting powered by [Shiki](https://github.com/shikijs/shiki), with additional features like line-highlighting:
+## Headers
 
-**Input**
+# H1
+## H2
+### H3
 
-````md
-```js{4}
-export default {
-  data () {
-    return {
-      msg: 'Highlighted!'
-    }
-  }
+## Emphasis
+
+- **bold**
+- *italic*
+- ~~strike~~
+- `inline code`
+
+## Lists
+
+- Item A
+- Item B
+  - Nested B.1
+
+1. First
+2. Second
+
+## Links
+
+- [Внутренняя ссылка на Guide](/guide)
+- [Внешняя ссылка на VitePress](https://vitepress.dev)
+
+## Blockquote
+
+> Хорошая документация — это когда разработчик понимает, что делать дальше, без вопросов.
+
+## Tables
+
+| Feature | Status | Notes |
+| --- | --- | --- |
+| Custom containers | ✅ | Используются в гайдах |
+| Code groups | ✅ | Для сравнения шаблонов |
+| Vue in Markdown | ✅ | Через `<script setup>` |
+
+## Code Block
+
+```ts
+export function formatBuildName(name: string): string {
+  return name.trim().toUpperCase()
 }
 ```
-````
 
-**Output**
+## Code Group
 
-```js{4}
-export default {
-  data () {
-    return {
-      msg: 'Highlighted!'
-    }
-  }
-}
+::: code-group
+
+```ts [types.ts]
+export type BuildType = 'pvp' | 'farm'
 ```
+
+```ts [constants.ts]
+export const DEFAULT_BUILD: BuildType = 'pvp'
+```
+
+:::
 
 ## Custom Containers
 
-**Input**
-
-```md
-::: info
-This is an info box.
+::: tip Подсказка
+Используй этот стиль для “что делать”.
 :::
 
-::: tip
-This is a tip.
+::: warning Важно
+Используй для “чего не делать”.
 :::
 
-::: warning
-This is a warning.
+::: danger Ошибка
+Используй для критичных багов и потерь прогресса.
 :::
 
-::: danger
-This is a dangerous warning.
+::: details Спойлер / подробности
+Скрытый дополнительный контент.
 :::
 
-::: details
-This is a details block.
-:::
-```
+## Badge
 
-**Output**
+<Badge type="tip" text="template" />
+<Badge type="warning" text="draft" />
+<Badge type="danger" text="critical" />
 
-::: info
-This is an info box.
-:::
+## Перейти дальше
 
-::: tip
-This is a tip.
-:::
-
-::: warning
-This is a warning.
-:::
-
-::: danger
-This is a dangerous warning.
-:::
-
-::: details
-This is a details block.
-:::
-
-## More
-
-Check out the documentation for the [full list of markdown extensions](https://vitepress.dev/guide/markdown).
+- [VitePress Templates](/vitepress-templates)
+- [Runtime API Examples](/api-examples)
