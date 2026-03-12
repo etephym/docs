@@ -356,3 +356,18 @@ a.VPNavScreenMenuLink,
   padding-bottom: 7px !important;
   padding-left:   14px !important;
 }
+
+/* =============================================================
+   Mobile nav — fix Контент button padding + reduce item opacity
+   ============================================================= */
+.VPNavScreenMenuGroup .button {
+  padding-top:    7px !important;
+  padding-bottom: 7px !important;
+}
+
+.VPNavScreenMenuLink,
+.VPNavScreenMenuGroup,
+.VPNavScreenAppearance {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border:     1px solid rgba(255, 255, 255, 0.06) !important;
+}
