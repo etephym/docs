@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { useRoute } from 'vitepress'
 
 const progress = ref(0)
 const visible  = ref(false)
@@ -9,18 +10,20 @@ const SIZE   = 48
 const RADIUS = 20
 const CIRCUM = 2 * Math.PI * RADIUS
 
+const route = useRoute()
+
 let idleTimer: ReturnType<typeof setTimeout> | null = null
-let total = 0
+let total      = 0
 let lastScroll = -1
 
 function calcTotal() {
   const contentEl = document.querySelector('.vp-doc')
   if (contentEl) {
-    const rect = contentEl.getBoundingClientRect()
-    total = rect.top + window.scrollY + contentEl.scrollHeight - window.innerHeight
+    total = contentEl.offsetTop + contentEl.scrollHeight - window.innerHeight
   } else {
     total = document.documentElement.scrollHeight - window.innerHeight
   }
+  lastScroll = -1
 }
 
 function update() {
@@ -43,19 +46,26 @@ function update() {
   idleTimer = setTimeout(() => { idle.value = true }, 3000)
 }
 
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
+function onResize() { calcTotal(); update() }
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }) }
+
+watch(() => route.path, () => {
+  progress.value = 0
+  visible.value  = false
+  lastScroll     = -1
+  requestAnimationFrame(() => requestAnimationFrame(() => { calcTotal(); update() }))
+})
 
 onMounted(() => {
   calcTotal()
-  window.addEventListener('scroll', update, { passive: true })
-  window.addEventListener('resize', () => { calcTotal(); update() })
   update()
+  window.addEventListener('scroll', update,   { passive: true })
+  window.addEventListener('resize', onResize, { passive: true })
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', update)
+  window.removeEventListener('resize', onResize)
   if (idleTimer) clearTimeout(idleTimer)
 })
 
@@ -70,28 +80,17 @@ const strokeOffset = (pct: number) => CIRCUM - (pct / 100) * CIRCUM
       :title="idle ? 'Наверх' : `${progress}% прочитано`"
       @click="scrollToTop"
     >
-      <svg :width="SIZE" :height="SIZE" class="rp-ring">
-        <circle
-          :cx="SIZE / 2" :cy="SIZE / 2" :r="RADIUS"
-          fill="none" stroke="rgba(84,160,255,0.12)" stroke-width="2.5"
-        />
-        <circle
-          :cx="SIZE / 2" :cy="SIZE / 2" :r="RADIUS"
-          fill="none" stroke="#54a0ff" stroke-width="2.5"
-          stroke-linecap="round"
-          :stroke-dasharray="CIRCUM"
-          :stroke-dashoffset="strokeOffset(progress)"
-          transform="rotate(-90, 24, 24)"
-          class="rp-arc"
-        />
+      <svg :width="SIZE" :height="SIZE" class="rp-ring" aria-hidden="true">
+        <circle :cx="SIZE/2" :cy="SIZE/2" :r="RADIUS" fill="none" stroke="rgba(84,160,255,0.12)" stroke-width="2.5"/>
+        <circle :cx="SIZE/2" :cy="SIZE/2" :r="RADIUS" fill="none" stroke="#54a0ff" stroke-width="2.5"
+          stroke-linecap="round" :stroke-dasharray="CIRCUM" :stroke-dashoffset="strokeOffset(progress)"
+          transform="rotate(-90, 24, 24)" class="rp-arc"/>
       </svg>
-
       <Transition name="icon-swap" mode="out-in">
         <span v-if="!idle" key="pct" class="rp-label">{{ progress }}%</span>
         <span v-else key="arrow" class="rp-arrow">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-            <polyline points="18 15 12 9 6 15" />
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <polyline points="18 15 12 9 6 15"/>
           </svg>
         </span>
       </Transition>
@@ -101,70 +100,24 @@ const strokeOffset = (pct: number) => CIRCUM - (pct / 100) * CIRCUM
 
 <style scoped>
 .rp-wrap {
-  position:        fixed;
-  bottom:          28px;
-  right:           28px;
-  z-index:         100;
-  width:           48px;
-  height:          48px;
-  display:         flex;
-  align-items:     center;
-  justify-content: center;
-  cursor:          pointer;
-  background:      rgba(13, 13, 13, 0.85);
-  border-radius:   50%;
-  box-shadow:      0 0 12px rgba(84, 160, 255, 0.12);
-  transition:      box-shadow 0.2s ease;
+  position: fixed; bottom: 28px; right: 28px; z-index: 100;
+  width: 48px; height: 48px; display: flex; align-items: center;
+  justify-content: center; cursor: pointer; user-select: none;
+  background: rgba(13,13,13,0.85); border-radius: 50%;
+  box-shadow: 0 0 12px rgba(84,160,255,0.12); transition: box-shadow 0.2s ease;
 }
-
-:root:not(.dark) .rp-wrap {
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
-}
-
-:root:not(.dark) .rp-label {
-  color: #2563eb;
-}
-
-:root:not(.dark) .rp-arrow {
-  color: #2563eb;
-}
-
-.rp-wrap:hover {
-  box-shadow: 0 0 22px rgba(84, 160, 255, 0.35);
-}
-
-.rp-ring {
-  position: absolute;
-  top:      0;
-  left:     0;
-}
-
-.rp-arc {
-  transition: none;
-}
-
-.rp-label {
-  font-size:   11px;
-  font-weight: 600;
-  color:       #54a0ff;
-  line-height: 1;
-  user-select: none;
-}
-
-.rp-arrow {
-  display:     flex;
-  align-items: center;
-  color:       #54a0ff;
-}
-
-.icon-swap-enter-active,
-.icon-swap-leave-active { transition: opacity 0.25s ease, transform 0.25s ease; }
-.icon-swap-enter-from   { opacity: 0; transform: translateY(4px);  }
-.icon-swap-leave-to     { opacity: 0; transform: translateY(-4px); }
-
-.progress-fade-enter-active,
-.progress-fade-leave-active { transition: opacity 0.3s ease, transform 0.3s ease; }
-.progress-fade-enter-from,
-.progress-fade-leave-to     { opacity: 0; transform: translateY(8px); }
+:root:not(.dark) .rp-wrap { background: rgba(255,255,255,0.95); box-shadow: 0 0 12px rgba(0,0,0,0.08); }
+.rp-wrap:hover { box-shadow: 0 0 22px rgba(84,160,255,0.35); }
+:root:not(.dark) .rp-wrap:hover { box-shadow: 0 0 22px rgba(37,99,235,0.25); }
+.rp-ring { position: absolute; inset: 0; }
+.rp-arc { transition: none; }
+.rp-label { font-size: 11px; font-weight: 600; color: #54a0ff; line-height: 1; }
+:root:not(.dark) .rp-label { color: #2563eb; }
+.rp-arrow { display: flex; align-items: center; color: #54a0ff; }
+:root:not(.dark) .rp-arrow { color: #2563eb; }
+.icon-swap-enter-active, .icon-swap-leave-active { transition: opacity 0.2s ease, transform 0.2s ease; }
+.icon-swap-enter-from { opacity: 0; transform: translateY(4px); }
+.icon-swap-leave-to { opacity: 0; transform: translateY(-4px); }
+.progress-fade-enter-active, .progress-fade-leave-active { transition: opacity 0.25s ease, transform 0.25s ease; }
+.progress-fade-enter-from, .progress-fade-leave-to { opacity: 0; transform: translateY(6px); }
 </style>
