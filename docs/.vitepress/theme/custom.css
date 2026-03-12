@@ -58,8 +58,8 @@ html.dark {
    ============================================================= */
 .VPNavBarTitle .logo,
 .VPNavBarTitle img {
-  filter:    drop-shadow(0 0 4px rgba(255, 107, 107, 0.4))
-             drop-shadow(0 0 10px rgba(84, 160, 255, 0.3));
+  filter:    drop-shadow(0 0 6px rgba(255, 107, 107, 0.55))
+             drop-shadow(0 0 14px rgba(84, 160, 255, 0.4));
   animation: logo-glow 4s ease-in-out infinite;
   transition: filter 0.3s ease;
 }
@@ -73,16 +73,16 @@ html.dark {
 
 @keyframes logo-glow {
   0%,  100% {
-    filter: drop-shadow(0 0 3px  rgba(255, 107, 107, 0.3))
-            drop-shadow(0 0 8px rgba(84,  160, 255, 0.2));
+    filter: drop-shadow(0 0 5px  rgba(255, 107, 107, 0.5))
+            drop-shadow(0 0 12px rgba(84,  160, 255, 0.35));
   }
   33% {
-    filter: drop-shadow(0 0 5px  rgba(84,  160, 255, 0.4))
-            drop-shadow(0 0 12px rgba(255, 159, 243, 0.25));
+    filter: drop-shadow(0 0 7px  rgba(84,  160, 255, 0.6))
+            drop-shadow(0 0 16px rgba(255, 159, 243, 0.4));
   }
   66% {
-    filter: drop-shadow(0 0 5px  rgba(95,  39,  205, 0.35))
-            drop-shadow(0 0 12px rgba(255, 202,  87, 0.25));
+    filter: drop-shadow(0 0 7px  rgba(95,  39,  205, 0.55))
+            drop-shadow(0 0 16px rgba(255, 202,  87, 0.4));
   }
 }
 
@@ -91,8 +91,8 @@ html.dark {
    Homepage hero image — animated rainbow glow
    ============================================================= */
 .VPHero .image-src {
-  filter:    drop-shadow(0 0 5px rgba(255, 107, 107, 0.4))
-             drop-shadow(0 0 14px rgba(84, 160, 255, 0.3));
+  filter:    drop-shadow(0 0 7px rgba(255, 107, 107, 0.55))
+             drop-shadow(0 0 18px rgba(84, 160, 255, 0.4));
   animation: hero-glow 4s ease-in-out infinite;
   transition: filter 0.3s ease;
 }
@@ -105,16 +105,16 @@ html.dark {
 
 @keyframes hero-glow {
   0%,  100% {
-    filter: drop-shadow(0 0 4px  rgba(255, 107, 107, 0.3))
-            drop-shadow(0 0 12px rgba(84,  160, 255, 0.2));
+    filter: drop-shadow(0 0 6px  rgba(255, 107, 107, 0.5))
+            drop-shadow(0 0 16px rgba(84,  160, 255, 0.35));
   }
   33% {
-    filter: drop-shadow(0 0 6px rgba(84,  160, 255, 0.4))
-            drop-shadow(0 0 14px rgba(255, 159, 243, 0.25));
+    filter: drop-shadow(0 0 10px rgba(84,  160, 255, 0.6))
+            drop-shadow(0 0 20px rgba(255, 159, 243, 0.4));
   }
   66% {
-    filter: drop-shadow(0 0 6px rgba(95,  39,  205, 0.35))
-            drop-shadow(0 0 14px rgba(255, 202,  87, 0.25));
+    filter: drop-shadow(0 0 10px rgba(95,  39,  205, 0.55))
+            drop-shadow(0 0 20px rgba(255, 202,  87, 0.4));
   }
 }
 
@@ -245,12 +245,12 @@ html:not(.dark) header.VPNav {
    ============================================================= */
 .VPHero .name,
 .VPHero .text {
-  filter:    drop-shadow(0 0 5px rgba(255, 107, 107, 0.3))
-             drop-shadow(0 0 12px rgba(84, 160, 255, 0.2));
+  filter:    drop-shadow(0 0 7px rgba(255, 107, 107, 0.45))
+             drop-shadow(0 0 16px rgba(84, 160, 255, 0.3));
   animation: hero-glow 4s ease-in-out infinite;
 }
 
 .VPHero .tagline {
-  filter:    drop-shadow(0 0 4px rgba(84, 160, 255, 0.2));
+  filter:    drop-shadow(0 0 6px rgba(84, 160, 255, 0.35));
   animation: hero-glow 4s ease-in-out infinite;
 }
