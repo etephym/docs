@@ -7,6 +7,7 @@
 
 :root {
   --vp-font-family-base: 'Inter', sans-serif;
+  --vp-nav-bg-color:     transparent;
 }
 
 
@@ -19,33 +20,36 @@
   --vp-c-bg-mute:        #1a1a1a;
   --vp-c-bg-alt:         #0d0d0d;
   --vp-sidebar-bg-color: #0d0d0d;
-  --vp-nav-bg-color:     #0d0d0d;
+  --vp-nav-bg-color:     transparent;
   --vp-c-divider:        #222222;
   --vp-c-gutter:         #080808;
 }
 
 html.dark {
-  background-color: #0d0d0d !important;
+  background-color: #0d0d0d;
 }
 
 
 /* =============================================================
    Navbar — frosted glass effect
    ============================================================= */
-.dark .VPNav {
-  border-bottom:   1px solid #1f1f1f;
-  backdrop-filter: blur(12px);
-  background:      rgba(13, 13, 13, 0.4) !important;
+.VPNav {
+  backdrop-filter:         blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
 }
 
-.VPNav {
-  backdrop-filter: blur(12px);
-  background:      rgba(255, 255, 255, 0.4) !important;
+.dark .VPNav {
+  border-bottom: 1px solid #1f1f1f;
+  background:    rgba(13, 13, 13, 0.4) !important;
+}
+
+html:not(.dark) .VPNav {
+  background: rgba(255, 255, 255, 0.4) !important;
 }
 
 
 /* =============================================================
-   Sidebar — subtle blur background
+   Sidebar — subtle blur
    ============================================================= */
 .dark .VPSidebar {
   backdrop-filter: blur(8px);
@@ -58,9 +62,9 @@ html.dark {
    ============================================================= */
 .VPNavBarTitle .logo,
 .VPNavBarTitle img {
-  filter:    drop-shadow(0 0 6px rgba(255, 107, 107, 0.55))
-             drop-shadow(0 0 14px rgba(84, 160, 255, 0.4));
-  animation: logo-glow 4s ease-in-out infinite;
+  filter:     drop-shadow(0 0 6px rgba(255, 107, 107, 0.55))
+              drop-shadow(0 0 14px rgba(84, 160, 255, 0.4));
+  animation:  logo-glow 4s ease-in-out infinite;
   transition: filter 0.3s ease;
 }
 
@@ -72,7 +76,7 @@ html.dark {
 }
 
 @keyframes logo-glow {
-  0%,  100% {
+  0%, 100% {
     filter: drop-shadow(0 0 5px  rgba(255, 107, 107, 0.5))
             drop-shadow(0 0 12px rgba(84,  160, 255, 0.35));
   }
@@ -91,9 +95,9 @@ html.dark {
    Homepage hero image — animated rainbow glow
    ============================================================= */
 .VPHero .image-src {
-  filter:    drop-shadow(0 0 7px rgba(255, 107, 107, 0.55))
-             drop-shadow(0 0 18px rgba(84, 160, 255, 0.4));
-  animation: hero-glow 4s ease-in-out infinite;
+  filter:     drop-shadow(0 0 7px rgba(255, 107, 107, 0.55))
+              drop-shadow(0 0 18px rgba(84, 160, 255, 0.4));
+  animation:  hero-glow 4s ease-in-out infinite;
   transition: filter 0.3s ease;
 }
 
@@ -104,7 +108,7 @@ html.dark {
 }
 
 @keyframes hero-glow {
-  0%,  100% {
+  0%, 100% {
     filter: drop-shadow(0 0 6px  rgba(255, 107, 107, 0.5))
             drop-shadow(0 0 16px rgba(84,  160, 255, 0.35));
   }
@@ -120,25 +124,32 @@ html.dark {
 
 
 /* =============================================================
-   Homepage hero — animated rainbow gradient title
+   Homepage hero — animated rainbow gradient on hero name
    ============================================================= */
 .VPHero .name {
-  background: linear-gradient(
-    270deg,
-    #ff6b6b, #feca57, #48dbfb,
-    #ff9ff3, #54a0ff, #5f27cd, #ff6b6b
-  );
+  background:              linear-gradient(270deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff, #5f27cd, #ff6b6b);
   background-size:         400% 400%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip:         text;
-  animation:               rainbow 6s ease infinite, hero-glow 4s ease-in-out infinite;
+  animation:               rainbow 6s ease infinite;
 }
 
 @keyframes rainbow {
   0%   { background-position: 0%   50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0%   50%; }
+}
+
+.VPHero .text {
+  filter:    drop-shadow(0 0 7px rgba(255, 107, 107, 0.45))
+             drop-shadow(0 0 16px rgba(84, 160, 255, 0.3));
+  animation: hero-glow 4s ease-in-out infinite;
+}
+
+.VPHero .tagline {
+  filter:    drop-shadow(0 0 6px rgba(84, 160, 255, 0.35));
+  animation: hero-glow 4s ease-in-out infinite;
 }
 
 
@@ -177,7 +188,7 @@ html.dark {
 
 
 /* =============================================================
-   Tables — alternating row colors
+   Tables — alternating row colors in dark mode
    ============================================================= */
 .vp-doc table                    { border-collapse: collapse; width: 100%; }
 .dark .vp-doc tr:nth-child(even) { background: #141414; }
@@ -187,69 +198,31 @@ html.dark {
 /* =============================================================
    Misc
    ============================================================= */
-html { scroll-behavior: smooth; }
+html      { scroll-behavior: smooth; }
 .vp-doc a { transition: color 0.2s; }
 
 
 /* =============================================================
-   Heading highlight on sidebar anchor click — underline fade
+   Heading highlight on anchor click — underline fade
    ============================================================= */
 .vp-doc .heading-highlighted {
   text-decoration:           underline;
   text-underline-offset:     5px;
   text-decoration-thickness: 2px;
-  text-decoration-color:     rgba(84, 160, 255, 0.00);
-  animation: heading-flash 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  text-decoration-color:     rgba(84, 160, 255, 0);
+  animation:                 heading-flash 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes heading-flash {
-  0%   { text-decoration-color: rgba(84, 160, 255, 1.00); }
-  60%  { text-decoration-color: rgba(84, 160, 255, 0.40); }
-  100% { text-decoration-color: rgba(84, 160, 255, 0.00); }
+  0%   { text-decoration-color: rgba(84, 160, 255, 1); }
+  60%  { text-decoration-color: rgba(84, 160, 255, 0.4); }
+  100% { text-decoration-color: rgba(84, 160, 255, 0); }
 }
 
 
 /* =============================================================
    Hide reading progress on homepage
    ============================================================= */
-.VPHome ~ .rp-wrap,
 body:has(.VPHome) .rp-wrap {
   display: none !important;
-}
-
-/* =============================================================
-   Navbar — force blur and transparency
-   ============================================================= */
-header.VPNav {
-  backdrop-filter:         blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-}
-
-html.dark header.VPNav {
-  background: rgba(13, 13, 13, 0.4) !important;
-}
-
-html:not(.dark) header.VPNav {
-  background: rgba(255, 255, 255, 0.4) !important;
-}
-
-/* =============================================================
-   Navbar — override VitePress nav background variable
-   ============================================================= */
-:root {
-  --vp-nav-bg-color: transparent;
-}
-
-/* =============================================================
-   Homepage hero — glow on name and tagline text
-   ============================================================= */
-.VPHero .text {
-  filter:    drop-shadow(0 0 7px rgba(255, 107, 107, 0.45))
-             drop-shadow(0 0 16px rgba(84, 160, 255, 0.3));
-  animation: hero-glow 4s ease-in-out infinite;
-}
-
-.VPHero .tagline {
-  filter:    drop-shadow(0 0 6px rgba(84, 160, 255, 0.35));
-  animation: hero-glow 4s ease-in-out infinite;
 }
