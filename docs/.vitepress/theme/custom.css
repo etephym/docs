@@ -392,12 +392,6 @@ a.VPNavScreenMenuLink,
 }
 
 
-/* =============================================================
-   Mobile nav — fix Контент group overflow
-   ============================================================= */
-.VPNavScreenMenuGroup {
-  overflow: visible !important;
-}
 
 /* =============================================================
    Mobile nav — match group height to link height
