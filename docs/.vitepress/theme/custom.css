@@ -228,3 +228,20 @@ html      { scroll-behavior: smooth; }
 body:has(.VPHome) .rp-wrap {
   display: none !important;
 }
+
+/* =============================================================
+   Mobile local nav bar — frosted glass (mirrors main navbar)
+   ============================================================= */
+.VPLocalNav {
+  backdrop-filter:         blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.dark .VPLocalNav {
+  border-bottom: 1px solid #1f1f1f !important;
+  background:    rgba(13, 13, 13, 0.4) !important;
+}
+
+html:not(.dark) .VPLocalNav {
+  background: rgba(255, 255, 255, 0.4) !important;
+}
