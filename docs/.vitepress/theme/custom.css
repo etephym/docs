@@ -391,3 +391,10 @@ a.VPNavScreenMenuLink,
   padding-left:   14px !important;
 }
 
+
+/* =============================================================
+   Mobile nav — fix Контент group overflow
+   ============================================================= */
+.VPNavScreenMenuGroup {
+  overflow: visible !important;
+}
