@@ -216,3 +216,19 @@ html { scroll-behavior: smooth; }
 body:has(.VPHome) .rp-wrap {
   display: none !important;
 }
+
+/* =============================================================
+   Navbar — force blur and transparency
+   ============================================================= */
+header.VPNav {
+  backdrop-filter:         blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+html.dark header.VPNav {
+  background: rgba(13, 13, 13, 0.4) !important;
+}
+
+html:not(.dark) header.VPNav {
+  background: rgba(255, 255, 255, 0.4) !important;
+}
