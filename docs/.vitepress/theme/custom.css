@@ -343,3 +343,44 @@ html:not(.dark) .VPScreenMenuGroupSection,
 html:not(.dark) .VPScreenMenuLink {
   background: rgba(0, 0, 0, 0.03) !important;
 }
+
+/* =============================================================
+   Mobile nav screen — main container
+   ============================================================= */
+.VPNavScreen {
+  backdrop-filter:         blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+}
+
+.dark .VPNavScreen {
+  background: rgba(13, 13, 13, 0.65) !important;
+}
+
+html:not(.dark) .VPNavScreen {
+  background: rgba(255, 255, 255, 0.65) !important;
+}
+
+/* Nav items — Главная, Контент */
+.VPNavScreenMenuLink,
+.VPNavScreenMenuGroup {
+  background:    rgba(255, 255, 255, 0.04) !important;
+  border-radius: 12px !important;
+  overflow:      hidden;
+}
+
+html:not(.dark) .VPNavScreenMenuLink,
+html:not(.dark) .VPNavScreenMenuGroup {
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Тема */
+.VPNavScreenAppearance {
+  background:    rgba(255, 255, 255, 0.04) !important;
+  border-radius: 12px !important;
+  border:        1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html:not(.dark) .VPNavScreenAppearance {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border:     1px solid rgba(0, 0, 0, 0.08) !important;
+}
