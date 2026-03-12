@@ -274,78 +274,7 @@ html:not(.dark) .VPScreen {
 }
 
 /* =============================================================
-   Mobile menu — frosted glass (all possible VitePress containers)
-   ============================================================= */
-.VPNav .VPNavScreen,
-.VPNavScreen,
-.VPNavScreenMenu,
-.VPScreen,
-.VPScreenMenu {
-  backdrop-filter:         blur(6px) !important;
-  -webkit-backdrop-filter: blur(6px) !important;
-}
-
-.dark .VPNav .VPNavScreen,
-.dark .VPNavScreen,
-.dark .VPNavScreenMenu,
-.dark .VPScreen,
-.dark .VPScreenMenu {
-  background: rgba(13, 13, 13, 0.6) !important;
-}
-
-html:not(.dark) .VPNav .VPNavScreen,
-html:not(.dark) .VPNavScreen,
-html:not(.dark) .VPNavScreenMenu,
-html:not(.dark) .VPScreen,
-html:not(.dark) .VPScreenMenu {
-  background: rgba(255, 255, 255, 0.6) !important;
-}
-
-/* =============================================================
-   Mobile menu — nav items styling
-   ============================================================= */
-.VPScreenMenuItemAppearance,
-.VPScreenMenuItemTemplate {
-  backdrop-filter:         blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border-radius:           12px !important;
-  overflow:                hidden;
-}
-
-.dark .VPScreenMenuItemAppearance,
-.dark .VPScreenMenuItemTemplate {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border:     1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-html:not(.dark) .VPScreenMenuItemAppearance,
-html:not(.dark) .VPScreenMenuItemTemplate {
-  background: rgba(0, 0, 0, 0.04) !important;
-  border:     1px solid rgba(0, 0, 0, 0.08) !important;
-}
-
-/* Nav links — Главная, Контент */
-.VPScreenMenuGroupLink,
-.VPScreenMenuGroupSection,
-.VPScreenMenuLink {
-  border-radius: 12px !important;
-  overflow:      hidden;
-}
-
-.dark .VPScreenMenuGroupLink,
-.dark .VPScreenMenuGroupSection,
-.dark .VPScreenMenuLink {
-  background: rgba(255, 255, 255, 0.04) !important;
-}
-
-html:not(.dark) .VPScreenMenuGroupLink,
-html:not(.dark) .VPScreenMenuGroupSection,
-html:not(.dark) .VPScreenMenuLink {
-  background: rgba(0, 0, 0, 0.03) !important;
-}
-
-/* =============================================================
-   Mobile nav screen — main container
+   Mobile nav screen — frosted glass + styled items
    ============================================================= */
 .VPNavScreen {
   backdrop-filter:         blur(6px) !important;
@@ -353,34 +282,36 @@ html:not(.dark) .VPScreenMenuLink {
 }
 
 .dark .VPNavScreen {
-  background: rgba(13, 13, 13, 0.65) !important;
+  background: rgba(13, 13, 13, 0.75) !important;
 }
 
 html:not(.dark) .VPNavScreen {
-  background: rgba(255, 255, 255, 0.65) !important;
+  background: rgba(255, 255, 255, 0.75) !important;
 }
 
-/* Nav items — Главная, Контент */
+/* Главная, Контент */
 .VPNavScreenMenuLink,
 .VPNavScreenMenuGroup {
-  background:    rgba(255, 255, 255, 0.04) !important;
+  background:    rgba(255, 255, 255, 0.08) !important;
   border-radius: 12px !important;
+  border:        1px solid rgba(255, 255, 255, 0.1) !important;
   overflow:      hidden;
 }
 
 html:not(.dark) .VPNavScreenMenuLink,
 html:not(.dark) .VPNavScreenMenuGroup {
-  background: rgba(0, 0, 0, 0.04) !important;
+  background: rgba(0, 0, 0, 0.06) !important;
+  border:     1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
 /* Тема */
 .VPNavScreenAppearance {
-  background:    rgba(255, 255, 255, 0.04) !important;
+  background:    rgba(255, 255, 255, 0.08) !important;
   border-radius: 12px !important;
-  border:        1px solid rgba(255, 255, 255, 0.08) !important;
+  border:        1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 html:not(.dark) .VPNavScreenAppearance {
-  background: rgba(0, 0, 0, 0.04) !important;
+  background: rgba(0, 0, 0, 0.06) !important;
   border:     1px solid rgba(0, 0, 0, 0.08) !important;
 }
