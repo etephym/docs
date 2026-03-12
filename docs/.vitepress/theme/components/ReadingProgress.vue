@@ -129,7 +129,7 @@ const strokeOffset = (pct: number) => CIRCUM - (pct / 100) * CIRCUM
 }
 
 .rp-arc {
-  transition: stroke-dashoffset 0.15s linear;
+  transition: none;
 }
 
 .rp-label {
