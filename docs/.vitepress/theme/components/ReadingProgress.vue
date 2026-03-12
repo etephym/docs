@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
+import { useRoute } from 'vitepress'
 
 const progress = ref(0)
 const visible = ref(false)
@@ -12,6 +13,7 @@ const CIRCUM = 2 * Math.PI * RADIUS
 let idleTimer: ReturnType<typeof setTimeout> | null = null
 let total = 0
 let lastScroll = -1
+let recalcTimer: ReturnType<typeof setTimeout> | null = null
 
 function calcTotal() {
   const contentEl = document.querySelector('.vp-doc')
@@ -55,6 +57,13 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    scrollToTop()
+  }
+}
+
 onMounted(() => {
   calcTotal()
   window.addEventListener('scroll', update, { passive: true })
@@ -62,10 +71,19 @@ onMounted(() => {
   update()
 })
 
+watch(
+  () => route.path,
+  async () => {
+    await nextTick()
+    handleRouteChange()
+  },
+)
+
 onUnmounted(() => {
   window.removeEventListener('scroll', update)
   window.removeEventListener('resize', handleResize)
   if (idleTimer) clearTimeout(idleTimer)
+  if (recalcTimer) clearTimeout(recalcTimer)
 })
 
 const strokeOffset = (pct: number) => CIRCUM - (pct / 100) * CIRCUM
@@ -76,8 +94,11 @@ const strokeOffset = (pct: number) => CIRCUM - (pct / 100) * CIRCUM
     <div
       v-if="visible"
       class="rp-wrap"
-      :title="idle ? 'Наверх' : `${progress}% прочитано`"
+      role="button"
+      tabindex="0"
+      :title="idle ? idleLabel() : progressLabel()"
       @click="scrollToTop"
+      @keydown="handleKeydown"
     >
       <svg :width="SIZE" :height="SIZE" class="rp-ring">
         <circle
