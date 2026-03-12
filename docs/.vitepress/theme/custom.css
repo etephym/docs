@@ -35,7 +35,12 @@ html.dark {
 .dark .VPNav {
   border-bottom:   1px solid #1f1f1f;
   backdrop-filter: blur(12px);
-  background:      rgba(13, 13, 13, 0.85) !important;
+  background:      rgba(13, 13, 13, 0.4) !important;
+}
+
+.VPNav {
+  backdrop-filter: blur(12px);
+  background:      rgba(255, 255, 255, 0.4) !important;
 }
 
 
@@ -155,7 +160,6 @@ html.dark {
 
 /* =============================================================
    Badge component
-   Usage: <Badge type="tip" text="S+" />
    ============================================================= */
 .vp-badge.tip     { background: rgba(94,  234, 212, 0.12); color: #5eead4; border: 1px solid rgba(94,  234, 212, 0.25); }
 .vp-badge.warning { background: rgba(251, 191,  36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191,  36, 0.25); }
@@ -189,7 +193,6 @@ html { scroll-behavior: smooth; }
 
 /* =============================================================
    Heading highlight on sidebar anchor click — underline fade
-   Class is added/removed by HeadingHighlight in index.ts
    ============================================================= */
 .vp-doc .heading-highlighted {
   text-decoration:           underline;
@@ -205,113 +208,11 @@ html { scroll-behavior: smooth; }
   100% { text-decoration-color: rgba(84, 160, 255, 0.00); }
 }
 
+
 /* =============================================================
-   Hide reading progress circle on homepage
-   .VPHome is present only on the homepage layout
+   Hide reading progress on homepage
    ============================================================= */
 .VPHome ~ .rp-wrap,
 body:has(.VPHome) .rp-wrap {
   display: none !important;
-}
-
-/* =============================================================
-   Homepage hero — glow on name and tagline text
-   Matches the same animation as the logo glow
-   ============================================================= */
-.VPHero .name,
-.VPHero .text {
-  filter:    drop-shadow(0 0 8px rgba(255, 107, 107, 0.5))
-             drop-shadow(0 0 20px rgba(84, 160, 255, 0.3));
-  animation: hero-glow 4s ease-in-out infinite;
-}
-
-.VPHero .tagline {
-  filter:    drop-shadow(0 0 6px rgba(84, 160, 255, 0.3));
-  animation: hero-glow 4s ease-in-out infinite;
-}
-
-/* =============================================================
-   Hero name — animated gradient left to right
-   Uses @property for true gradient animation (Chrome/Edge)
-   ============================================================= */
-.VPHero .name {
-  background: linear-gradient(
-    90deg,
-    #ff6b6b, #54a0ff, #5f27cd, #ff6b6b
-  );
-  background-size:         200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip:         text;
-  animation:               name-slide 4s ease-in-out infinite;
-}
-
-@keyframes name-slide {
-  0%        { background-position: 0%   center; }
-  37.5%     { background-position: 100% center; }
-  50%        { background-position: 100% center; }
-  87.5%     { background-position: 0%   center; }
-  100%      { background-position: 0%   center; }
-}
-
-/* =============================================================
-   Navbar — more transparent
-   ============================================================= */
-.dark .VPNav {
-  background: rgba(13, 13, 13, 0.4) !important;
-}
-
-.VPNav {
-  background: rgba(255, 255, 255, 0.4) !important;
-}
-
-/* =============================================================
-   Navbar — force transparent background
-   ============================================================= */
-.dark .VPNav .VPNavBar,
-.dark .VPNavBar {
-  background-color: rgba(13, 13, 13, 0.3) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-}
-
-.VPNav .VPNavBar,
-.VPNavBar {
-  background-color: rgba(255, 255, 255, 0.3) !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-}
-
-.dark .VPNavBar .container,
-.VPNavBar .container {
-  background: transparent !important;
-}
-
-/* =============================================================
-   Doc pages — transparent content background
-   ============================================================= */
-.dark .VPDoc,
-.dark .VPContent,
-.dark #VPContent {
-  background: transparent !important;
-}
-
-.VPDoc,
-.VPContent,
-#VPContent {
-  background: transparent !important;
-}
-
-.dark html {
-  background-color: #0d0d0d !important;
-}
-
-html {
-  background-color: #f6f6f7 !important;
-}
-
-/* =============================================================
-   Navbar — blur for light theme too
-   ============================================================= */
-.VPNav .VPNavBar {
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
 }
