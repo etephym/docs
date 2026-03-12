@@ -253,3 +253,22 @@ body:has(.VPHome) .rp-wrap {
 html:not(.dark) .VPLocalNav {
   background: rgba(255, 255, 255, 0.4) !important;
 }
+
+/* =============================================================
+   Mobile menu drawer — subtle frosted glass
+   ============================================================= */
+.VPScreenMenu,
+.VPScreen {
+  backdrop-filter:         blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+}
+
+.dark .VPScreenMenu,
+.dark .VPScreen {
+  background: rgba(13, 13, 13, 0.6) !important;
+}
+
+html:not(.dark) .VPScreenMenu,
+html:not(.dark) .VPScreen {
+  background: rgba(255, 255, 255, 0.6) !important;
+}
