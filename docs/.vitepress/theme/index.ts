@@ -4,7 +4,7 @@
 
 import DefaultTheme from 'vitepress/theme'
 import { h, nextTick, onMounted, watch } from 'vue'
-import { useRoute } from 'vitepress'
+import { useData, useRoute } from 'vitepress'
 import type { EnhanceAppContext } from 'vitepress'
 import mediumZoom from 'medium-zoom'
 
@@ -25,8 +25,13 @@ import './custom.css'
 const ZoomSetup = {
   setup() {
     const route = useRoute()
-    const initZoom = () =>
-      mediumZoom('.vp-doc img', { background: 'rgba(0,0,0,0.85)' })
+    let zoom: ReturnType<typeof mediumZoom> | null = null
+
+    const initZoom = () => {
+      zoom?.detach()
+      zoom = mediumZoom('.vp-doc img', { background: 'rgba(0,0,0,0.85)' })
+    }
+
     onMounted(() => nextTick(initZoom))
     watch(() => route.path, () => nextTick(initZoom))
   },
@@ -58,8 +63,11 @@ const HeadingHighlight = {
 const ProgressWrapper = {
   setup() {
     const route = useRoute()
+    const { site } = useData()
+
     return () => {
-      const isHome = route.path === '/' || route.path === '/en/'
+      const base = site.value.base
+      const isHome = route.path === base || route.path === `${base}en/`
       return isHome ? null : h(ReadingProgress)
     }
   },

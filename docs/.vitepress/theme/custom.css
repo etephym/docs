@@ -208,15 +208,6 @@ html { scroll-behavior: smooth; }
   100% { text-decoration-color: rgba(84, 160, 255, 0.00); }
 }
 
-
-/* =============================================================
-   Hide reading progress on homepage
-   ============================================================= */
-.VPHome ~ .rp-wrap,
-body:has(.VPHome) .rp-wrap {
-  display: none !important;
-}
-
 /* =============================================================
    Navbar — force blur and transparency
    ============================================================= */
