@@ -232,3 +232,10 @@ html.dark header.VPNav {
 html:not(.dark) header.VPNav {
   background: rgba(255, 255, 255, 0.4) !important;
 }
+
+/* =============================================================
+   Navbar — override VitePress nav background variable
+   ============================================================= */
+:root {
+  --vp-nav-bg-color: transparent;
+}
