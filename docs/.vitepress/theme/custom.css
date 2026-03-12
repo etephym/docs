@@ -333,3 +333,16 @@ a.VPNavScreenMenuLink {
   padding-top:    10px !important;
   padding-bottom: 10px !important;
 }
+
+/* =============================================================
+   Mobile nav — reduce gap between menu items
+   ============================================================= */
+.VPNavScreenMenu .VPNavScreenMenuLink,
+.VPNavScreenMenu .VPNavScreenMenuGroup {
+  margin-bottom: 4px !important;
+}
+
+.VPNavScreen .container {
+  padding-top:    12px !important;
+  padding-bottom: 12px !important;
+}
