@@ -243,7 +243,6 @@ html:not(.dark) header.VPNav {
 /* =============================================================
    Homepage hero — glow on name and tagline text
    ============================================================= */
-.VPHero .name,
 .VPHero .text {
   filter:    drop-shadow(0 0 7px rgba(255, 107, 107, 0.45))
              drop-shadow(0 0 16px rgba(84, 160, 255, 0.3));
