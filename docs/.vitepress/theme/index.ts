@@ -17,76 +17,50 @@ import Copyright       from './components/Copyright.vue'
 import './custom.css'
 
 // =============================================================
-// Music Player — vanilla JS, fully outside Vue tree
-// Survives navigation, no SSR issues, no Teleport needed
+// Music Player — HTML5 Audio, vanilla JS, outside Vue tree
 // =============================================================
 function setupMusicPlayer() {
-  const VIDEO_ID = 'Rv0QsmjIQ_U'
-  let player: any = null
-  let playing     = false
-  let ready       = false
+  if (document.getElementById('mp-root')) return
 
-  // --- Build UI ---
+  const audio = new Audio('/shindo/Zerofuturism - a coldcore ambient playlist.mp3')
+  audio.loop   = true
+  audio.volume = 0.5
+  let playing  = false
+
   const wrap = document.createElement('div')
   wrap.id    = 'mp-root'
-  wrap.innerHTML = `
-    <div id="mp-widget">
-      <button id="mp-btn" title="Играть">
-        <svg id="mp-icon-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <polygon points="5,3 19,12 5,21"/>
-        </svg>
-        <span id="mp-icon-bars" style="display:none" class="mp-bars">
-          <span></span><span></span><span></span><span></span>
-        </span>
-      </button>
-      <div class="mp-info">
-        <span class="mp-title">Synthwave Mix</span>
-        <span id="mp-sub" class="mp-sub">Фоновая музыка</span>
-      </div>
-    </div>
-    <div id="yt-holder" style="display:none;position:absolute"></div>
-  `
+  wrap.innerHTML = [
+    '<div id="mp-widget">',
+    '  <button id="mp-btn" title="Играть">',
+    '    <svg id="mp-icon-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>',
+    '    <span id="mp-icon-bars" style="display:none" class="mp-bars"><span></span><span></span><span></span><span></span></span>',
+    '  </button>',
+    '  <div class="mp-info">',
+    '    <span class="mp-title">Synthwave Mix</span>',
+    '    <span id="mp-sub" class="mp-sub">Фоновая музыка</span>',
+    '  </div>',
+    '</div>',
+  ].join('')
   document.body.appendChild(wrap)
 
-  const btn      = document.getElementById('mp-btn')!
-  const sub      = document.getElementById('mp-sub')!
-  const iconPlay = document.getElementById('mp-icon-play')!
-  const iconBars = document.getElementById('mp-icon-bars')!
-  const widget   = document.getElementById('mp-widget')!
+  const btn      = document.getElementById('mp-btn')
+  const sub      = document.getElementById('mp-sub')
+  const iconPlay = document.getElementById('mp-icon-play')
+  const iconBars = document.getElementById('mp-icon-bars')
+  const widget   = document.getElementById('mp-widget')
 
-  function setPlaying(val: boolean) {
-    playing              = val
-    iconPlay.style.display = val ? 'none'         : 'block'
-    iconBars.style.display = val ? 'inline-flex'  : 'none'
-    sub.textContent        = val ? 'Играет...'    : 'Фоновая музыка'
+  function setPlaying(val) {
+    playing                = val
+    iconPlay.style.display = val ? 'none'        : 'block'
+    iconBars.style.display = val ? 'inline-flex' : 'none'
+    sub.textContent        = val ? 'Играет...'   : 'Фоновая музыка'
     widget.classList.toggle('playing', val)
   }
 
   btn.addEventListener('click', () => {
-    if (!ready || !player) return
-    if (playing) { player.pauseVideo(); setPlaying(false) }
-    else         { player.playVideo();  setPlaying(true)  }
+    if (playing) { audio.pause(); setPlaying(false) }
+    else         { audio.play().catch(() => {}); setPlaying(true) }
   })
-
-  // --- Load YouTube IFrame API ---
-  function initPlayer() {
-    player = new (window as any).YT.Player('yt-holder', {
-      videoId:    VIDEO_ID,
-      playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: VIDEO_ID, rel: 0 },
-      events: {
-        onReady: () => { ready = true },
-      },
-    })
-  }
-
-  if ((window as any).YT?.Player) {
-    initPlayer()
-  } else {
-    (window as any).onYouTubeIframeAPIReady = initPlayer
-    const s = document.createElement('script')
-    s.src   = 'https://www.youtube.com/iframe_api'
-    document.head.appendChild(s)
-  }
 }
 
 const ZoomSetup = {
