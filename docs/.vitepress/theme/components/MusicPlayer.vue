@@ -1,53 +1,56 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import { inBrowser } from 'vitepress'
+import { ref, onMounted } from 'vue'
 
 const VIDEO_ID = 'Rv0QsmjIQ_U'
-const playing  = ref(false)
-const ready    = ref(false)
-let   player: any = null
+
+// Module-level state — survives navigation between pages
+const playing = ref(false)
+const ready   = ref(false)
+let   player: any  = null
+let   apiLoaded    = false
 
 function initPlayer() {
-  const div = document.createElement('div')
-  div.id    = 'yt-player-el'
-  div.style.display = 'none'
+  if (player) return
+  const div    = document.createElement('div')
+  div.id       = 'yt-player-el'
+  div.style.cssText = 'display:none;position:absolute'
   document.body.appendChild(div)
 
   player = new (window as any).YT.Player('yt-player-el', {
-    videoId:     VIDEO_ID,
-    playerVars:  { autoplay: 0, controls: 0, loop: 1, playlist: VIDEO_ID, rel: 0 },
+    videoId:    VIDEO_ID,
+    playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: VIDEO_ID, rel: 0 },
     events: {
       onReady: () => { ready.value = true },
     },
   })
 }
 
-onMounted(() => {
-  if (!inBrowser) return
-  if ((window as any).YT?.Player) {
-    initPlayer()
-  } else {
-    ;(window as any).onYouTubeIframeAPIReady = initPlayer
-    const script = document.createElement('script')
-    script.src   = 'https://www.youtube.com/iframe_api'
-    document.head.appendChild(script)
-  }
-})
-
-onUnmounted(() => {
-  player?.destroy()
-  document.getElementById('yt-player-el')?.remove()
-})
+function loadAPI() {
+  if (apiLoaded) return
+  apiLoaded = true
+  if ((window as any).YT?.Player) { initPlayer(); return }
+  ;(window as any).onYouTubeIframeAPIReady = initPlayer
+  const s = document.createElement('script')
+  s.src   = 'https://www.youtube.com/iframe_api'
+  document.head.appendChild(s)
+}
 
 function toggle() {
   if (!player || !ready.value) return
   if (playing.value) { player.pauseVideo(); playing.value = false }
   else               { player.playVideo();  playing.value = true  }
 }
+
+// mounted guard — prevents SSR Teleport error
+const mounted = ref(false)
+onMounted(() => {
+  mounted.value = true
+  loadAPI()
+})
 </script>
 
 <template>
-  <Teleport to="body">
+  <Teleport to="body" v-if="mounted">
     <div class="mp-wrap">
       <div class="mp-widget" :class="{ playing }">
         <button class="mp-btn" @click="toggle" :title="playing ? 'Пауза' : 'Играть'">
@@ -73,6 +76,7 @@ function toggle() {
   bottom:   80px;
   left:     24px;
   z-index:  999;
+  pointer-events: none;
 }
 .mp-widget {
   display:                 flex;
@@ -87,6 +91,7 @@ function toggle() {
   box-shadow:              0 4px 24px rgba(0,0,0,0.35);
   transition:              box-shadow 0.3s ease, border-color 0.3s ease;
   user-select:             none;
+  pointer-events:          all;
 }
 .mp-widget.playing {
   border-color: rgba(84,160,255,0.3);
@@ -102,19 +107,19 @@ function toggle() {
   box-shadow:   0 4px 24px rgba(37,99,235,0.12);
 }
 .mp-btn {
-  display:      flex;
-  align-items:  center;
+  display:         flex;
+  align-items:     center;
   justify-content: center;
-  width:        36px;
-  height:       36px;
-  border-radius: 50%;
-  border:       none;
-  background:   rgba(84,160,255,0.15);
-  color:        #54a0ff;
-  cursor:       pointer;
-  flex-shrink:  0;
-  transition:   background 0.2s ease, transform 0.15s ease;
-  touch-action: manipulation;
+  width:           36px;
+  height:          36px;
+  border-radius:   50%;
+  border:          none;
+  background:      rgba(84,160,255,0.15);
+  color:           #54a0ff;
+  cursor:          pointer;
+  flex-shrink:     0;
+  transition:      background 0.2s ease, transform 0.15s ease;
+  touch-action:    manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 .mp-btn:hover  { background: rgba(84,160,255,0.28); transform: scale(1.08); }
@@ -125,7 +130,7 @@ function toggle() {
 .mp-bars span {
   display: block; width: 3px; border-radius: 2px;
   background: #54a0ff;
-  animation: bar-bounce 0.9s ease-in-out infinite;
+  animation:  bar-bounce 0.9s ease-in-out infinite;
 }
 :root:not(.dark) .mp-bars span { background: #2563eb; }
 .mp-bars span:nth-child(1) { height: 6px;  animation-delay: 0s;    }
