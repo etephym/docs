@@ -12,7 +12,6 @@ import ReadingTime     from './components/ReadingTime.vue'
 import ReadingProgress from './components/ReadingProgress.vue'
 import CopyHeadingLink from './components/CopyHeadingLink.vue'
 import MusicPlayer from './components/MusicPlayer.vue'
-import { ClientOnly } from 'vitepress'
 import RickRoll        from './components/RickRoll.vue'
 import Copyright       from './components/Copyright.vue'
 
@@ -74,7 +73,7 @@ export default {
       'layout-bottom': () => h('div', null, [
         h(ProgressWrapper),
         h(RickRoll),
-        h(ClientOnly, null, { default: () => h(MusicPlayer) }),
+        h(MusicPlayer),
       ]),
     })
   },
