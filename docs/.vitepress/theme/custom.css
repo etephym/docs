@@ -297,3 +297,15 @@ a.VPNavScreenMenuLink,
   padding-bottom: 7px !important;
   padding-left:   14px !important;
 }
+
+/* =============================================================
+   Mobile nav — fix group height (scoped to current VitePress build)
+   ============================================================= */
+.VPNavScreenMenuGroup[data-v-956364f9] {
+  height: 40px !important;
+}
+
+.VPNavScreenMenuGroup.open[data-v-956364f9] {
+  height: auto !important;
+  padding-bottom: 10px !important;
+}
