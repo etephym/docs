@@ -17,7 +17,7 @@ import Copyright       from './components/Copyright.vue'
 import './custom.css'
 
 // =============================================================
-// Music Player — HTML5 Audio, vanilla JS, outside Vue tree
+// Music Player — HTML5 Audio, draggable, vanilla JS
 // =============================================================
 function setupMusicPlayer() {
   if (document.getElementById('mp-root')) return
@@ -36,7 +36,7 @@ function setupMusicPlayer() {
     '    <span id="mp-icon-bars" style="display:none" class="mp-bars"><span></span><span></span><span></span><span></span></span>',
     '  </button>',
     '  <div class="mp-info">',
-    '    <span class="mp-title">Synthwave Mix</span>',
+    '    <span class="mp-title">Zerofuturism</span>',
     '    <span id="mp-sub" class="mp-sub">Фоновая музыка</span>',
     '  </div>',
     '</div>',
@@ -48,6 +48,7 @@ function setupMusicPlayer() {
   const iconPlay = document.getElementById('mp-icon-play')
   const iconBars = document.getElementById('mp-icon-bars')
   const widget   = document.getElementById('mp-widget')
+  const root     = document.getElementById('mp-root')
 
   function setPlaying(val) {
     playing                = val
@@ -57,7 +58,47 @@ function setupMusicPlayer() {
     widget.classList.toggle('playing', val)
   }
 
+  // --- Drag ---
+  let dragging = false
+  let didDrag  = false
+  let startX = 0, startY = 0, origLeft = 0, origTop = 0
+
+  function dragStart(clientX, clientY) {
+    const rect = root.getBoundingClientRect()
+    dragging = true
+    didDrag  = false
+    startX   = clientX
+    startY   = clientY
+    origLeft = rect.left
+    origTop  = rect.top
+    root.style.transition = 'none'
+    root.style.bottom = 'auto'
+    root.style.right  = 'auto'
+    root.style.left   = origLeft + 'px'
+    root.style.top    = origTop  + 'px'
+  }
+
+  function dragMove(clientX, clientY) {
+    if (!dragging) return
+    const dx = clientX - startX
+    const dy = clientY - startY
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) didDrag = true
+    root.style.left = Math.min(Math.max(0, origLeft + dx), window.innerWidth  - root.offsetWidth)  + 'px'
+    root.style.top  = Math.min(Math.max(0, origTop  + dy), window.innerHeight - root.offsetHeight) + 'px'
+  }
+
+  function dragEnd() { dragging = false; root.style.transition = '' }
+
+  widget.addEventListener('mousedown',   e => dragStart(e.clientX, e.clientY))
+  document.addEventListener('mousemove', e => dragMove(e.clientX, e.clientY))
+  document.addEventListener('mouseup',   () => dragEnd())
+
+  widget.addEventListener('touchstart', e => dragStart(e.touches[0].clientX, e.touches[0].clientY), { passive: true })
+  document.addEventListener('touchmove', e => dragMove(e.touches[0].clientX, e.touches[0].clientY), { passive: true })
+  document.addEventListener('touchend',  () => dragEnd())
+
   btn.addEventListener('click', () => {
+    if (didDrag) return
     if (playing) { audio.pause(); setPlaying(false) }
     else         { audio.play().catch(() => {}); setPlaying(true) }
   })
