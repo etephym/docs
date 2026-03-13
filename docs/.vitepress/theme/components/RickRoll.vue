@@ -2,8 +2,8 @@
 import { onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vitepress'
 
-const CLICKS_NEEDED = 10
-const RESET_DELAY   = 5000
+const CLICKS_NEEDED = 7
+const RESET_DELAY   = 10000
 const TARGET_URL    = 'https://youtu.be/dQw4w9WgXcQ?si=3-SKpSMGFYWdsQlA'
 
 const route = useRoute()
