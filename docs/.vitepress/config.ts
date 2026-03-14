@@ -45,6 +45,7 @@ const sharedHead = [
   ['link', { rel: 'icon', href: `${BASE_PATH}${logoPath.replace(/^\//, '')}` }],
   ['meta', { name: 'theme-color', content: '#0d0d0d' }],
   ['meta', { property: 'og:image', content: `${SITE_URL}${BASE_PATH}${logoPath.replace(/^\//, '')}` }],
+  ['meta', { property: 'og:url',   content: `${SITE_URL}${BASE_PATH}` }],
 ]
 
 const defaultLogo = {
