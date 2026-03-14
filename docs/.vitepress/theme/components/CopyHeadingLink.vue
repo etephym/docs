@@ -58,7 +58,8 @@ function init(): void {
 }
 
 onMounted(() => requestAnimationFrame(init))
-watch(() => route.path, () => requestAnimationFrame(init))
+watch(() => route.path,  () => requestAnimationFrame(init))
+watch(() => route.path.startsWith('/en/'), () => requestAnimationFrame(init))
 onUnmounted(cleanup)
 </script>
 
