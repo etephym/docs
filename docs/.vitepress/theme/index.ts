@@ -1,6 +1,6 @@
 import DefaultTheme from 'vitepress/theme'
 import { h, nextTick, onMounted, watch } from 'vue'
-import { useRoute } from 'vitepress'
+import { useRoute, withBase } from 'vitepress'
 import type { EnhanceAppContext } from 'vitepress'
 import mediumZoom from 'medium-zoom'
 
@@ -23,7 +23,7 @@ import './custom.css'
 function setupMusicPlayer(): void {
   if (document.getElementById('mp-root')) return
 
-  const audio = new Audio('/shindo/Zerofuturism - a coldcore ambient playlist.mp3')
+  const audio = new Audio(withBase('/Zerofuturism - a coldcore ambient playlist.mp3'))
   audio.loop   = true
   audio.volume = 0.5
   let playing  = false
@@ -50,6 +50,50 @@ function setupMusicPlayer(): void {
   const iconBars = document.getElementById('mp-icon-bars') as HTMLElement
   const widget   = document.getElementById('mp-widget')    as HTMLElement
   const root     = document.getElementById('mp-root')      as HTMLElement
+  const viewport = window.visualViewport
+
+  const getViewportRect = () => {
+    if (!viewport) {
+      return {
+        left: 0,
+        top: 0,
+        width: window.innerWidth,
+        height: window.innerHeight,
+      }
+    }
+
+    return {
+      left: viewport.offsetLeft,
+      top: viewport.offsetTop,
+      width: viewport.width,
+      height: viewport.height,
+    }
+  }
+
+  const clampToViewport = (left: number, top: number) => {
+    const rect = getViewportRect()
+    const maxLeft = rect.left + rect.width - root.offsetWidth
+    const maxTop = rect.top + rect.height - root.offsetHeight
+
+    return {
+      left: Math.min(Math.max(rect.left, left), Math.max(rect.left, maxLeft)),
+      top: Math.min(Math.max(rect.top, top), Math.max(rect.top, maxTop)),
+    }
+  }
+
+  const syncSafeOffset = (): void => {
+    const rect = getViewportRect()
+    const visualBottomGap = Math.max(window.innerHeight - rect.height - rect.top, 0)
+    root.style.setProperty('--mp-visual-bottom-gap', `${Math.round(visualBottomGap)}px`)
+
+    if (root.dataset.dragged === 'true') {
+      const styleLeft = parseFloat(root.style.left || '0')
+      const styleTop = parseFloat(root.style.top || '0')
+      const clamped = clampToViewport(styleLeft, styleTop)
+      root.style.left = `${clamped.left}px`
+      root.style.top = `${clamped.top}px`
+    }
+  }
 
   function setPlaying(val: boolean): void {
     playing                = val
@@ -80,6 +124,7 @@ function setupMusicPlayer(): void {
     root.style.right      = 'auto'
     root.style.left       = origLeft + 'px'
     root.style.top        = origTop  + 'px'
+    root.dataset.dragged  = 'true'
     root.classList.add('dragging')
   }
 
@@ -88,8 +133,9 @@ function setupMusicPlayer(): void {
     const dx = clientX - startX
     const dy = clientY - startY
     if (Math.abs(dx) > 3 || Math.abs(dy) > 3) didDrag = true
-    root.style.left = Math.min(Math.max(0, origLeft + dx), window.innerWidth  - root.offsetWidth)  + 'px'
-    root.style.top  = Math.min(Math.max(0, origTop  + dy), window.innerHeight - root.offsetHeight) + 'px'
+    const nextPos = clampToViewport(origLeft + dx, origTop + dy)
+    root.style.left = `${nextPos.left}px`
+    root.style.top = `${nextPos.top}px`
   }
 
   function dragEnd(): void {
@@ -114,11 +160,18 @@ function setupMusicPlayer(): void {
   }, { passive: false })
   document.addEventListener('touchend', () => dragEnd())
 
+  window.addEventListener('resize', syncSafeOffset, { passive: true })
+  window.addEventListener('orientationchange', syncSafeOffset, { passive: true })
+  viewport?.addEventListener('resize', syncSafeOffset)
+  viewport?.addEventListener('scroll', syncSafeOffset)
+
   btn.addEventListener('click', () => {
     if (didDrag) return
     if (playing) { audio.pause(); setPlaying(false) }
     else         { audio.play().catch(() => {}); setPlaying(true) }
   })
+
+  syncSafeOffset()
 }
 
 // =============================================================
