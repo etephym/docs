@@ -72,7 +72,10 @@ export default defineConfig({
       ],
 
       themeConfig: {
-        logo:      logoPath,
+        logo: {
+          dark:  logoPath,
+          light: '/logo2.png',
+        },
         siteTitle: 'Shindo Life',
 
         // Links removed — social icons already in top-right
@@ -199,7 +202,10 @@ export default defineConfig({
       description:   'Guides, tier lists and mechanics for Shindo Life by ETEPHYM',
 
       themeConfig: {
-        logo:      logoPath,
+        logo: {
+          dark:  logoPath,
+          light: '/logo2.png',
+        },
         siteTitle: 'Shindo Life',
 
         nav: [
