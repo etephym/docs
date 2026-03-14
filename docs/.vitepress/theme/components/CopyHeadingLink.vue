@@ -86,18 +86,18 @@ h3:hover .copy-heading-btn              { color: rgba(84,160,255,0.5); }
 .copy-heading-btn::after {
   content:        attr(data-copied);
   position:       absolute;
-  top:            -28px;
+  top:            -32px;
   left:           50%;
   transform:      translateX(-50%);
   background:     #0d0d0d;
-  border:         1px solid rgba(255,255,255,0.15);
+  border:         1px solid rgba(255,255,255,0.18);
   border-radius:  6px;
-  padding:        2px 8px;
-  font-size:      11px;
+  padding:        3px 10px;
+  font-size:      12px;
   font-weight:    600;
-  color:          #54a0ff;
+  color:          #ffffff;
   white-space:    nowrap;
-  box-shadow:     0 2px 8px rgba(0,0,0,0.4), 0 0 6px rgba(255,255,255,0.04);
+  box-shadow:     0 0 10px rgba(255,255,255,0.12), 0 2px 8px rgba(0,0,0,0.5);
   opacity:        0;
   pointer-events: none;
   transition:     opacity 0.2s ease;
@@ -105,9 +105,9 @@ h3:hover .copy-heading-btn              { color: rgba(84,160,255,0.5); }
 
 html:not(.dark) .copy-heading-btn::after {
   background:   #ffffff;
-  border-color: rgba(0,0,0,0.12);
-  color:        #2563eb;
-  box-shadow:   0 2px 8px rgba(0,0,0,0.1);
+  border-color: rgba(0,0,0,0.15);
+  color:        #0d0d0d;
+  box-shadow:   0 0 10px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.1);
 }
 .copy-heading-btn.copied::after         { opacity: 1; }
 </style>
