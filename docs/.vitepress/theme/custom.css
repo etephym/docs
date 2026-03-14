@@ -45,11 +45,11 @@ html:not(.dark) .VPSidebar {
 }
 
 @keyframes sidebar-aurora-dark {
-  0%   { border-right-color: rgba(255,255,255,0.04); box-shadow: 1px 0 6px rgba(255,255,255,0.03), 2px 0 14px rgba(255,255,255,0.02); }
-  25%  { border-right-color: rgba(255,255,255,0.18); box-shadow: 1px 0 10px rgba(255,255,255,0.10), 3px 0 22px rgba(200,220,255,0.07); }
-  50%  { border-right-color: rgba(220,230,255,0.22); box-shadow: 1px 0 14px rgba(210,225,255,0.13), 4px 0 28px rgba(180,200,255,0.08); }
-  75%  { border-right-color: rgba(255,255,255,0.12); box-shadow: 1px 0 8px rgba(255,255,255,0.07), 2px 0 18px rgba(255,255,255,0.04); }
-  100% { border-right-color: rgba(255,255,255,0.04); box-shadow: 1px 0 6px rgba(255,255,255,0.03), 2px 0 14px rgba(255,255,255,0.02); }
+  0%   { border-right-color: rgba(120,140,180,0.06); box-shadow: 1px 0 5px rgba(140,160,210,0.04), 2px 0 12px rgba(140,160,210,0.02); }
+  25%  { border-right-color: rgba(160,185,230,0.13); box-shadow: 1px 0 8px rgba(160,185,230,0.07), 3px 0 18px rgba(130,160,220,0.04); }
+  50%  { border-right-color: rgba(180,200,245,0.16); box-shadow: 1px 0 11px rgba(170,195,240,0.09), 4px 0 22px rgba(140,170,230,0.05); }
+  75%  { border-right-color: rgba(140,160,210,0.09); box-shadow: 1px 0 7px rgba(150,170,220,0.05), 2px 0 15px rgba(140,160,210,0.03); }
+  100% { border-right-color: rgba(120,140,180,0.06); box-shadow: 1px 0 5px rgba(140,160,210,0.04), 2px 0 12px rgba(140,160,210,0.02); }
 }
 
 @keyframes sidebar-aurora-light {
