@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
 
-const HOLD_DURATION = 2000
+const HOLD_DURATION = 1500
 const FROG_EMOJI    = '🐸'
 
 const route    = useRoute()
@@ -56,15 +56,15 @@ function spawnFrog(
     pointerEvents: 'none',
     userSelect:    'none',
     zIndex:        '99999',
-    transform:     'translate(-50%, -50%)',
+    transform:     'translate(-50%, -50%) scale(0)',
     willChange:    'transform, opacity',
   })
 
   document.body.appendChild(frog)
 
-  const gravity   = 0.18 + Math.random() * 0.1
-  const spin      = (Math.random() - 0.5) * 10
-  const totalTime = 1600 + Math.random() * 400
+  const gravity   = 0.15 + Math.random() * 0.08
+  const spin      = (Math.random() - 0.5) * 8
+  const totalTime = 1800 + Math.random() * 500
   let   vx        = velX
   let   vy        = velY
   let   x         = startX
@@ -89,26 +89,29 @@ function spawnFrog(
     }
 
     vy  += gravity
-    vx  *= 0.992
+    vx  *= 0.994
     x   += vx
     y   += vy
-    rot += spin * (1 - t * 0.5)  // spin slows down over time
+    rot += spin * (1 - t * 0.6)
 
-    // Smooth cubic fade — starts fading at 50%
-    const opacity = t < 0.5 ? 1 : 1 - Math.pow((t - 0.5) / 0.5, 1.5)
-    const scale   = t < 0.1 ? t * 10 : 1 - t * 0.3  // pop in, slowly shrink
+    // Smooth ease-in scale pop, then gentle shrink
+    const scale   = t < 0.08
+      ? (t / 0.08)             // pop in fast
+      : 1 - (t - 0.08) * 0.25  // very slow shrink
+
+    // Fade starts at 55%, cubic ease
+    const fade    = t < 0.55 ? 1 : 1 - Math.pow((t - 0.55) / 0.45, 2)
 
     frog.style.left      = `${x}px`
     frog.style.top       = `${y}px`
-    frog.style.opacity   = `${Math.max(0, opacity)}`
-    frog.style.transform = `translate(-50%, -50%) rotate(${rot}deg) scale(${Math.max(0.1, scale)})`
+    frog.style.opacity   = `${Math.max(0, fade)}`
+    frog.style.transform = `translate(-50%, -50%) rotate(${rot}deg) scale(${Math.max(0, scale)})`
 
     rafId = requestAnimationFrame(frame)
   }
 
   rafId = requestAnimationFrame(frame)
 
-  // Safety cleanup
   setTimeout(() => {
     cancelAnimationFrame(rafId)
     frog.remove()
@@ -128,20 +131,23 @@ function launchFirework(): void {
   const rx = rect.width  / 2
   const ry = rect.height / 2
 
-  const TOTAL_FROGS = 20
+  const TOTAL_FROGS = 26
 
   for (let i = 0; i < TOTAL_FROGS; i++) {
-    const angle  = (i / TOTAL_FROGS) * Math.PI * 2 + (Math.random() - 0.5) * 0.2
+    const angle  = (i / TOTAL_FROGS) * Math.PI * 2 + (Math.random() - 0.5) * 0.18
 
-    const startX = cx + Math.cos(angle) * rx
-    const startY = cy + Math.sin(angle) * ry
+    // Mix: some from exact border, some slightly inside/outside for depth
+    const radiusVariance = 0.85 + Math.random() * 0.3
+    const startX = cx + Math.cos(angle) * rx * radiusVariance
+    const startY = cy + Math.sin(angle) * ry * radiusVariance
 
-    const speed  = 8 + Math.random() * 6
+    // Speed variance — faster ones fly further
+    const speed  = 7 + Math.random() * 9
     const velX   = Math.cos(angle) * speed
-    const velY   = Math.sin(angle) * speed - (0.5 + Math.random() * 1.5)
+    const velY   = Math.sin(angle) * speed - (Math.random() * 2)
 
-    const size   = 20 + Math.random() * 16
-    const delay  = Math.random() * 40  // tiny jitter, barely noticeable
+    const size   = 18 + Math.random() * 18
+    const delay  = Math.random() * 30
 
     spawnFrog(startX, startY, velX, velY, size, delay)
   }
