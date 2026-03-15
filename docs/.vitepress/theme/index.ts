@@ -35,6 +35,7 @@ import './custom.css'
 // ---------------------------------------------------------------------------
 
 const ZoomSetup = {
+  name: 'ZoomSetup',
   setup() {
     const route = useRoute()
     let zoom: ReturnType<typeof mediumZoom> | null = null
@@ -56,6 +57,7 @@ const ZoomSetup = {
 // ---------------------------------------------------------------------------
 
 const HeadingHighlight = {
+  name: 'HeadingHighlight',
   setup() {
     const route = useRoute()
     let clearTimer: ReturnType<typeof setTimeout> | null = null
@@ -86,6 +88,7 @@ const HeadingHighlight = {
 // ---------------------------------------------------------------------------
 
 const ProgressWrapper = {
+  name: 'ProgressWrapper',
   setup() {
     const route = useRoute()
     return () => {

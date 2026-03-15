@@ -85,6 +85,7 @@ export function setupMusicPlayer(): void {
       const { left, top } = JSON.parse(saved) as { left: number; top: number }
       root.style.bottom = 'auto'
       root.style.right  = 'auto'
+      // Clamp to current viewport in case screen size changed since last visit
       root.style.left   = clamp(left, 0, window.innerWidth  - 200) + 'px'
       root.style.top    = clamp(top,  0, window.innerHeight - 80)  + 'px'
     }
@@ -181,6 +182,15 @@ export function setupMusicPlayer(): void {
     requestAnimationFrame(() => { didDrag = false })
   }
 
+  // ── Viewport resize — re-clamp widget position if it went off-screen ──────
+
+  function onResize(): void {
+    // Only re-clamp when the widget has been manually positioned (not CSS default)
+    if (!root.style.left) return
+    root.style.left = clamp(parseFloat(root.style.left), 0, window.innerWidth  - root.offsetWidth)  + 'px'
+    root.style.top  = clamp(parseFloat(root.style.top  || '0'), 0, window.innerHeight - root.offsetHeight) + 'px'
+  }
+
   // ── Mouse drag events ─────────────────────────────────────────────────────
 
   widget.addEventListener('mousedown', (e: MouseEvent) => {
@@ -211,6 +221,7 @@ export function setupMusicPlayer(): void {
 
   document.addEventListener('touchmove', onTouchMove, { passive: false })
   document.addEventListener('touchend',  onTouchEnd)
+  window.addEventListener('resize', onResize, { passive: true })
 
   // ── Locale observer — updates labels when the user switches language ───────
 
@@ -231,6 +242,7 @@ export function setupMusicPlayer(): void {
     document.removeEventListener('mouseup',   onMouseUp)
     document.removeEventListener('touchmove', onTouchMove)
     document.removeEventListener('touchend',  onTouchEnd)
+    window.removeEventListener('resize', onResize)
   })
   bodyObserver.observe(document.body, { childList: true })
 }

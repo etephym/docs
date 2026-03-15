@@ -4,13 +4,14 @@
 // ---------------------------------------------------------------------------
 
 import { computed } from 'vue'
-import { useData, useRoute } from 'vitepress'
+import { useData, useRoute, useRouter } from 'vitepress'
 
 // ---------------------------------------------------------------------------
-// Route & site data
+// Route, router & site data
 // ---------------------------------------------------------------------------
 
 const route    = useRoute()
+const router   = useRouter()
 const { site } = useData()
 
 // ---------------------------------------------------------------------------
@@ -43,7 +44,6 @@ const SEGMENT_MAP: Record<string, { ru: string; en: string }> = {
 function formatSegment(part: string): string {
   const entry = SEGMENT_MAP[part.toLowerCase()]
   if (entry) return isEn.value ? entry.en : entry.ru
-  // Fallback: decode percent-encoding, replace hyphens/underscores, capitalise
   const decoded = decodeURIComponent(part).replace(/[-_]+/g, ' ').trim()
   if (!decoded) return part
   return decoded.charAt(0).toUpperCase() + decoded.slice(1)
@@ -72,13 +72,26 @@ const crumbs = computed<Crumb[]>(() => {
 
   return result
 })
+
+// ---------------------------------------------------------------------------
+// Navigation — use vue-router to avoid full page reload on SPA
+// ---------------------------------------------------------------------------
+
+function navigate(e: MouseEvent, link: string): void {
+  e.preventDefault()
+  router.go(link)
+}
 </script>
 
 <template>
   <!-- Render only when there is more than just the home crumb -->
   <nav v-if="crumbs.length > 1" class="breadcrumb" aria-label="Breadcrumb">
     <span v-for="(crumb, i) in crumbs" :key="crumb.link">
-      <a v-if="i < crumbs.length - 1" :href="crumb.link">{{ crumb.text }}</a>
+      <a
+        v-if="i < crumbs.length - 1"
+        :href="crumb.link"
+        @click="navigate($event, crumb.link)"
+      >{{ crumb.text }}</a>
       <span v-else class="current" aria-current="page">{{ crumb.text }}</span>
       <span v-if="i < crumbs.length - 1" class="sep" aria-hidden="true">›</span>
     </span>
