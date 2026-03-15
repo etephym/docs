@@ -33,14 +33,25 @@ let active     = false
 // Helpers
 // ---------------------------------------------------------------------------
 
-/**
- * Returns true when the current page is a home page.
- * route.path includes the base prefix (e.g. '/shindo/' or '/shindo/en/'),
- * so we compare against base and base + 'en/' explicitly.
- */
 function checkIsHome(): boolean {
-  const base = site.value.base // '/shindo/'
+  const base = site.value.base
   return route.path === base || route.path === `${base}en/`
+}
+
+/**
+ * Opens the URL in a new tab using a temporary <a> element.
+ * More reliable than window.open on mobile browsers (Firefox Android),
+ * which may try to navigate the current tab instead of opening a new one.
+ */
+function openInNewTab(url: string): void {
+  const a = document.createElement('a')
+  a.href        = url
+  a.target      = '_blank'
+  a.rel         = 'noopener noreferrer'
+  a.style.display = 'none'
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
 }
 
 // ---------------------------------------------------------------------------
@@ -57,7 +68,7 @@ function onDocumentClick(e: MouseEvent): void {
 
   if (count >= CLICKS_NEEDED) {
     count = 0
-    window.open(TARGET_URL, '_blank', 'noopener,noreferrer')
+    openInNewTab(TARGET_URL)
   }
 }
 
