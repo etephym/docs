@@ -64,16 +64,12 @@ function update(): void {
   if (scrollY === lastScroll) return // skip if position hasn't changed
   lastScroll = scrollY
 
-  // Calculate percentage, clamped to [0, 100]
-  const pct = total <= 0 || scrollY <= 0
+  progress.value = total <= 0 || scrollY <= 0
     ? 0
     : scrollY >= total ? 100 : Math.round((scrollY / total) * 100)
 
-  // Guard every reactive write — Vue triggers a re-render on each assignment,
-  // so writing the same value on every scroll pixel causes unnecessary work
-  if (pct !== progress.value)               progress.value = pct
-  if ((scrollY > 100) !== visible.value)    visible.value  = scrollY > 100
-  if (idle.value)                           idle.value     = false
+  visible.value = scrollY > 100
+  idle.value    = false
 
   // Switch to arrow icon after 3 s of inactivity
   if (idleTimer) clearTimeout(idleTimer)
@@ -150,7 +146,7 @@ onUnmounted(() => {
           stroke-linecap="round"
           :stroke-dasharray="CIRCUM"
           :stroke-dashoffset="strokeOffset(progress)"
-          :transform="`rotate(-90, ${SIZE / 2}, ${SIZE / 2})`"
+          transform="rotate(-90, 24, 24)"
           class="rp-arc"
         />
       </svg>
@@ -196,7 +192,7 @@ html:not(.dark) .rp-wrap:hover  { box-shadow: 0 0 22px rgba(37,99,235,0.25); }
 
 /* ── SVG ring ────────────────────────────────────────────────────────────── */
 .rp-ring { position: absolute; inset: 0; overflow: visible; }
-.rp-arc  { transition: stroke-dashoffset 0.2s ease; } /* smooth arc animation */
+.rp-arc  { transition: none; }
 
 /* ── Percentage label ────────────────────────────────────────────────────── */
 .rp-label                   { font-size: 11px; font-weight: 600; color: #54a0ff; line-height: 1; }
