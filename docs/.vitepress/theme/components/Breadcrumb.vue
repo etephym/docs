@@ -53,19 +53,24 @@ function formatSegment(part: string): string {
 // ---------------------------------------------------------------------------
 
 const crumbs = computed<Crumb[]>(() => {
-  // Normalise base to always have a trailing slash
-  const base  = site.value.base.replace(/\/$/, '') + '/'
-  // Strip the base prefix, then split the remainder into segments
+  const base = site.value.base.replace(/\/$/, '') + '/'
+
+  // Strip the base prefix to get the locale-relative path
   const clean = route.path.startsWith(base)
     ? route.path.slice(base.length)
     : route.path.replace(/^\//, '')
 
-  // Filter out the bare 'en' locale prefix — it is a routing detail,
-  // not a meaningful page the user navigated to intentionally
-  const parts  = clean.split('/').filter(p => Boolean(p) && p !== 'en')
+  // Filter out the bare 'en' locale segment — it is a routing detail.
+  // We restore the locale prefix when building links (see accumulated below)
+  // so that EN breadcrumb links point to EN pages, not RU pages.
+  const parts = clean.split('/').filter(p => Boolean(p) && p !== 'en')
+
   const result: Crumb[] = [{ text: isEn.value ? 'Home' : 'Главная', link: base }]
 
-  let accumulated = base
+  // Prefix accumulated path with the locale segment when on EN pages
+  // so that Guide on /shindo/en/guide links to /shindo/en/guide/, not /shindo/guide/
+  let accumulated = base + (isEn.value ? 'en/' : '')
+
   for (const part of parts) {
     accumulated += part + '/'
     result.push({ text: formatSegment(part), link: accumulated })
@@ -75,7 +80,7 @@ const crumbs = computed<Crumb[]>(() => {
 })
 
 // ---------------------------------------------------------------------------
-// Navigation — use vue-router to avoid full page reload on SPA
+// Navigation — use VitePress router to avoid full page reload on SPA
 // ---------------------------------------------------------------------------
 
 function navigate(e: MouseEvent, link: string): void {
