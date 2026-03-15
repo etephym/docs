@@ -5,6 +5,7 @@
 
 import { computed } from 'vue'
 import { useData, useRoute, useRouter } from 'vitepress'
+import { isEnglishPath, normalizeBase } from '../utils/routing'
 
 // ---------------------------------------------------------------------------
 // Route, router & site data
@@ -24,7 +25,7 @@ interface Crumb { text: string; link: string }
 // Locale detection
 // ---------------------------------------------------------------------------
 
-const isEn = computed(() => route.path.includes('/en/'))
+const isEn = computed(() => isEnglishPath(route.path, site.value.base))
 
 // ---------------------------------------------------------------------------
 // Computed breadcrumb list
@@ -35,7 +36,7 @@ const isEn = computed(() => route.path.includes('/en/'))
 // ---------------------------------------------------------------------------
 
 const crumbs = computed<Crumb[]>(() => {
-  const base = site.value.base.replace(/\/$/, '') + '/'
+  const base = normalizeBase(site.value.base)
 
   // Strip the base prefix to get the locale-relative path
   const clean = route.path.startsWith(base)

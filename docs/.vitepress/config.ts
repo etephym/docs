@@ -318,7 +318,6 @@ export default defineConfig({
         ['meta', { property: 'og:locale',      content: 'en_US' }],
         ['meta', { property: 'og:title',       content: 'Shindo Life Docs' }],
         ['meta', { property: 'og:description', content: 'Guides, tier lists and mechanics for Shindo Life' }],
-        ['meta', { name: 'robots',             content: 'noindex' }],
       ],
       themeConfig: {
         logo:                DEFAULT_LOGO,
