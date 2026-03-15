@@ -47,43 +47,48 @@ function checkIsHome(): boolean {
 function launchFirework(): void {
   if (!target) return
 
-  const rect   = target.getBoundingClientRect()
-  // Use the center of the image element
-  const cx     = rect.left + rect.width  / 2
-  const cy     = rect.top  + rect.height / 2
+  const rect = target.getBoundingClientRect()
+  const cx   = rect.left + rect.width  / 2
+  const cy   = rect.top  + rect.height / 2
+  const rx   = rect.width  / 2
+  const ry   = rect.height / 2
 
   for (let i = 0; i < FROG_COUNT; i++) {
     const frog = document.createElement('span')
     frog.textContent  = FROG_EMOJI
     frog.setAttribute('aria-hidden', 'true')
 
-    // Random angle and distance for each frog
-    const angle    = (i / FROG_COUNT) * 2 * Math.PI + (Math.random() - 0.5) * 0.4
+    // Evenly distributed angles with slight randomness
+    const angle    = (i / FROG_COUNT) * 2 * Math.PI + (Math.random() - 0.5) * 0.3
+
+    // Start position: on the border of the image (ellipse perimeter)
+    const startX   = cx + Math.cos(angle) * rx
+    const startY   = cy + Math.sin(angle) * ry
+
+    // End position: burst outward from the border
     const distance = 80 + Math.random() * 120
     const dx       = Math.cos(angle) * distance
     const dy       = Math.sin(angle) * distance
-    const size     = 20 + Math.random() * 16
-    const delay    = Math.random() * 150
+
+    const size  = 20 + Math.random() * 16
+    const delay = Math.random() * 100
 
     Object.assign(frog.style, {
-      position:       'fixed',
-      left:           `${cx}px`,
-      top:            `${cy}px`,
-      fontSize:       `${size}px`,
-      lineHeight:     '1',
-      pointerEvents:  'none',
-      userSelect:     'none',
-      zIndex:         '99999',
-      transform:      'translate(-50%, -50%)',
-      // CSS custom properties for the keyframe animation
-      '--dx':         `${dx}px`,
-      '--dy':         `${dy}px`,
-      animation:      `frog-burst ${FROG_DURATION}ms ease-out ${delay}ms forwards`,
+      position:      'fixed',
+      left:          `${startX}px`,
+      top:           `${startY}px`,
+      fontSize:      `${size}px`,
+      lineHeight:    '1',
+      pointerEvents: 'none',
+      userSelect:    'none',
+      zIndex:        '99999',
+      transform:     'translate(-50%, -50%)',
+      '--dx':        `${dx}px`,
+      '--dy':        `${dy}px`,
+      animation:     `frog-burst ${FROG_DURATION}ms ease-out ${delay}ms forwards`,
     })
 
     document.body.appendChild(frog)
-
-    // Remove after animation completes
     setTimeout(() => frog.remove(), FROG_DURATION + delay + 50)
   }
 }
