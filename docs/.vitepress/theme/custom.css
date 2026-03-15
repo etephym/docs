@@ -402,34 +402,29 @@ html:not(.dark) .mp-bars span { background: #2563eb; }
 html:not(.dark) .VPMenu { background-color: rgba(255,255,255,0.92) !important; border-color: rgba(0,0,0,0.08) !important; }
 
 /* ---------------------------------------------------------------------------
-   Search button — blends into the glass navbar without fully disappearing
+   Search button — matches navbar background, slightly lighter to be visible
    --------------------------------------------------------------------------- */
 
-/* Override the VitePress CSS variable that drives the button background */
-:root {
-  --vp-local-search-bg: transparent;
-}
-
 .VPNavBarSearchButton {
-  background:    rgba(255,255,255,0.07) !important;
-  border:        1px solid rgba(255,255,255,0.12) !important;
+  background:    rgba(13,13,13,0.4) !important;
+  border:        1px solid rgba(255,255,255,0.08) !important;
   border-radius: 8px !important;
   box-shadow:    none !important;
   transition:    background 0.2s ease, border-color 0.2s ease !important;
 }
 
 .VPNavBarSearchButton:hover {
-  background:   rgba(255,255,255,0.14) !important;
-  border-color: rgba(255,255,255,0.22) !important;
+  background:   rgba(255,255,255,0.1) !important;
+  border-color: rgba(255,255,255,0.18) !important;
 }
 
 html:not(.dark) .VPNavBarSearchButton {
-  background:   rgba(0,0,0,0.05) !important;
-  border-color: rgba(0,0,0,0.12) !important;
+  background:   rgba(255,255,255,0.4) !important;
+  border-color: rgba(0,0,0,0.10) !important;
   box-shadow:   none !important;
 }
 
 html:not(.dark) .VPNavBarSearchButton:hover {
-  background:   rgba(0,0,0,0.09) !important;
+  background:   rgba(255,255,255,0.65) !important;
   border-color: rgba(0,0,0,0.18) !important;
 }
