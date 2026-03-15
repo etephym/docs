@@ -20,7 +20,6 @@ import 'vitepress-plugin-nprogress/lib/css/index.css'
 // ---------------------------------------------------------------------------
 
 import { setupMusicPlayer } from './musicPlayer'
-import { isHomePath } from './utils/routing'
 
 import Breadcrumb      from './components/Breadcrumb.vue'
 import ReadingTime     from './components/ReadingTime.vue'
@@ -28,6 +27,7 @@ import ReadingProgress from './components/ReadingProgress.vue'
 import CopyHeadingLink from './components/CopyHeadingLink.vue'
 import RickRoll        from './components/RickRoll.vue'
 import Copyright       from './components/Copyright.vue'
+import FrogFirework    from './components/FrogFirework.vue'
 
 import './custom.css'
 
@@ -93,7 +93,9 @@ const ProgressWrapper = {
     const route    = useRoute()
     const { site } = useData()
     return () => {
-      return isHomePath(route.path, site.value.base) ? null : h(ReadingProgress)
+      const base   = site.value.base
+      const isHome = route.path === base || route.path === `${base}en/`
+      return isHome ? null : h(ReadingProgress)
     }
   },
 }
@@ -116,7 +118,7 @@ export default {
           h(CopyHeadingLink),
         ]),
       'doc-after':     () => h(Copyright),
-      'layout-bottom': () => h('div', null, [h(ProgressWrapper), h(RickRoll)]),
+      'layout-bottom': () => h('div', null, [h(ProgressWrapper), h(RickRoll), h(FrogFirework)]),
     })
   },
 
