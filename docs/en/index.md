@@ -1,51 +1,51 @@
 ---
 layout: home
 
-title: Shindo Life Docs
-description: Guides, tier lists and mechanics for Shindo Life by ETEPHYM
+title: Rell Games Docs
+description: Guides and mechanics for Rell Games by ETEPHYM
 
 hero:
-  name: "Shindo Life"
+  name: "Rell Games"
   text: "Docs by ETEPHYM"
   tagline: All guides, tier lists and mechanics in one place
   image:
     dark: /logo.png
     light: /logo2.png
-    alt: Shindo Life
+    alt: Rell Games
   actions:
     - theme: brand
-      text: 📖 Read the Guide
-      link: /en/guide
+      text: 📖 Shindo Life
+      link: /en/shindo-life/guide
     - theme: alt
-      text: 💡 Tips & Tricks
-      link: /en/tips
+      text: 🌊 Rell Seas
+      link: /en/rell-seas/guide
     - theme: alt
       text: Discord
       link: https://discord.gg/cmCpgkb5zq
 
 features:
   - icon: ⚔️
-    title: Mentors & Races
-    details: Full breakdown of all mentors, passives and races. Tier lists and combo tips.
-    link: /en/guide#mentors
+    title: NEED TO BE EDIT
+    details: NEED TO BE EDIT
+    link: /en/shindo-life/guide
   - icon: 🧪
-    title: Elements & Kenjutsu
-    details: Tier lists for elements, kenjutsu, sub modes and sub abilities.
-    link: /en/guide#elements
+    title: NEED TO BE EDIT
+    details: NEED TO BE EDIT
+    link: /en/shindo-life/guide
   - icon: 💊
-    title: Heals & Items
-    details: Best heals, weapons, throwables and companions for every situation.
-    link: /en/guide#heals
+    title: NEED TO BE EDIT
+    details: NEED TO BE EDIT
+    link: /en/shindo-life/guide
   - icon: 💡
-    title: Tips & Tricks
-    details: Advanced tips, micro-mechanics and useful bugs to improve your gameplay.
-    link: /en/tips
+    title: NEED TO BE EDIT
+    details: NEED TO BE EDIT
+    link: /en/shindo-life/tips
   - icon: 📖
-    title: Terms
-    details: PB, BB, iFrame, Grab, Andodge — all terms explained clearly.
-    link: /en/guide#terms
+    title: NEED TO BE EDIT
+    details: NEED TO BE EDIT
+    link: /en/shindo-life/guide
   - icon: 🐛
-    title: Slot Bug
-    details: How to increase your skill slot count using your phone.
-    link: /en/guide#slot-bug
+    title: NEED TO BE EDIT
+    details: NEED TO BE EDIT
+    link: /en/shindo-life/guide
 ---
