@@ -12,7 +12,7 @@ import { useData, useRoute, useRouter } from 'vitepress'
 
 const route    = useRoute()
 const router   = useRouter()
-const { site } = useData()
+const { site, page } = useData()
 
 // ---------------------------------------------------------------------------
 // Types
@@ -27,29 +27,11 @@ interface Crumb { text: string; link: string }
 const isEn = computed(() => route.path.includes('/en/'))
 
 // ---------------------------------------------------------------------------
-// Segment label map — maps URL path segments to display names per locale
-// ---------------------------------------------------------------------------
-
-const SEGMENT_MAP: Record<string, { ru: string; en: string }> = {
-  guide: { ru: 'Гайд',           en: 'Guide'        },
-  tips:  { ru: 'Советы и фишки', en: 'Tips & Tricks' },
-}
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-/** Converts a raw URL path segment into a human-readable breadcrumb label. */
-function formatSegment(part: string): string {
-  const entry = SEGMENT_MAP[part.toLowerCase()]
-  if (entry) return isEn.value ? entry.en : entry.ru
-  const decoded = decodeURIComponent(part).replace(/[-_]+/g, ' ').trim()
-  if (!decoded) return part
-  return decoded.charAt(0).toUpperCase() + decoded.slice(1)
-}
-
-// ---------------------------------------------------------------------------
 // Computed breadcrumb list
+//
+// The label for the current (last) page is taken from page.title — the same
+// value that appears in the <title> tag — so it is always correct regardless
+// of the page name, and no manual SEGMENT_MAP is needed.
 // ---------------------------------------------------------------------------
 
 const crumbs = computed<Crumb[]>(() => {
@@ -68,12 +50,20 @@ const crumbs = computed<Crumb[]>(() => {
   const result: Crumb[] = [{ text: isEn.value ? 'Home' : 'Главная', link: base }]
 
   // Prefix accumulated path with the locale segment when on EN pages
-  // so that Guide on /shindo/en/guide links to /shindo/en/guide/, not /shindo/guide/
   let accumulated = base + (isEn.value ? 'en/' : '')
 
-  for (const part of parts) {
+  for (let i = 0; i < parts.length; i++) {
+    const part = parts[i]
     accumulated += part + '/'
-    result.push({ text: formatSegment(part), link: accumulated })
+
+    // For the last segment use the page's own title (from frontmatter) —
+    // it is always localised correctly and requires no manual mapping
+    const isLast = i === parts.length - 1
+    const label  = isLast
+      ? page.value.title
+      : part.charAt(0).toUpperCase() + part.slice(1).replace(/[-_]+/g, ' ')
+
+    result.push({ text: label, link: accumulated })
   }
 
   return result

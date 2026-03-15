@@ -17,11 +17,11 @@ const { page } = useData()
   <div v-if="page.filePath" class="copyright-block">
     <div class="copyright-inner">
       <span>
-        <a href="https://github.com/etephym/shindo">Shindo Life Docs</a>
+        <a href="https://github.com/etephym/shindo" target="_blank" rel="noopener noreferrer">Shindo Life Docs</a>
         © 2024–2026 by
-        <a href="https://github.com/ezrqq">ezrqq / lewisky</a>
+        <a href="https://github.com/ezrqq" target="_blank" rel="noopener noreferrer">ezrqq / lewisky</a>
         is licensed under
-        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a>
         <!-- CC license icons -->
         <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC" />
         <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="BY" />
