@@ -20,6 +20,7 @@ import 'vitepress-plugin-nprogress/lib/css/index.css'
 // ---------------------------------------------------------------------------
 
 import { setupMusicPlayer } from './musicPlayer'
+import { isHomePath } from './utils/routing'
 
 import Breadcrumb      from './components/Breadcrumb.vue'
 import ReadingTime     from './components/ReadingTime.vue'
@@ -92,9 +93,7 @@ const ProgressWrapper = {
     const route    = useRoute()
     const { site } = useData()
     return () => {
-      const base   = site.value.base
-      const isHome = route.path === base || route.path === `${base}en/`
-      return isHome ? null : h(ReadingProgress)
+      return isHomePath(route.path, site.value.base) ? null : h(ReadingProgress)
     }
   },
 }

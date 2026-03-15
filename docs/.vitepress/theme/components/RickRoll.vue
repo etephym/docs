@@ -5,6 +5,7 @@
 
 import { onMounted, onUnmounted, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
+import { isHomePath } from '../utils/routing'
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -34,8 +35,7 @@ let active     = false
 // ---------------------------------------------------------------------------
 
 function checkIsHome(): boolean {
-  const base = site.value.base
-  return route.path === base || route.path === `${base}en/`
+  return isHomePath(route.path, site.value.base)
 }
 
 /**

@@ -3,26 +3,21 @@
 // Imports
 // ---------------------------------------------------------------------------
 
-import { onMounted, onUnmounted, watch, ref } from 'vue'
-import { useRoute } from 'vitepress'
+import { computed, onMounted, onUnmounted, watch } from 'vue'
+import { useData, useRoute } from 'vitepress'
+import { isEnglishPath } from '../utils/routing'
 
 // ---------------------------------------------------------------------------
 // Route & locale
 // ---------------------------------------------------------------------------
 
 const route = useRoute()
+const { site } = useData()
 
-// Plain ref — updated explicitly on route change and on mount.
-// Cannot use computed(() => document.documentElement.lang) because computed
-// does not track DOM attributes — it would only run once and never update.
-const isEn = ref(false)
-
-function updateLocale(): void {
-  isEn.value = document.documentElement.lang === 'en-US'
-}
+const isEn = computed(() => isEnglishPath(route.path, site.value.base))
 
 // ---------------------------------------------------------------------------
-// Label helpers — called after updateLocale() so isEn.value is current
+// Label helpers — derived from current route locale
 // ---------------------------------------------------------------------------
 
 const labelCopy   = () => isEn.value ? 'Copy link'            : 'Скопировать ссылку'
@@ -112,9 +107,8 @@ function init(): void {
 // Lifecycle
 // ---------------------------------------------------------------------------
 
-onMounted(() => { updateLocale(); requestAnimationFrame(init) })
-// On route change: update locale first, then re-inject buttons with correct labels
-watch(() => route.path, () => { updateLocale(); requestAnimationFrame(init) })
+onMounted(() => { requestAnimationFrame(init) })
+watch(() => route.path, () => { requestAnimationFrame(init) })
 onUnmounted(cleanup)
 </script>
 

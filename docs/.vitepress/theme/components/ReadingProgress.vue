@@ -4,7 +4,8 @@
 // ---------------------------------------------------------------------------
 
 import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
-import { useRoute } from 'vitepress'
+import { useData, useRoute } from 'vitepress'
+import { isEnglishPath } from '../utils/routing'
 
 // ---------------------------------------------------------------------------
 // SVG ring constants — fixed values derived from the component size
@@ -27,7 +28,8 @@ const idle     = ref(false) // true after 3 s of no scrolling → shows arrow ic
 // ---------------------------------------------------------------------------
 
 const route = useRoute()
-const isEn  = computed(() => route.path.includes('/en/'))
+const { site } = useData()
+const isEn  = computed(() => isEnglishPath(route.path, site.value.base))
 
 /** Tooltip / aria-label text — switches between percentage and "back to top". */
 const titleLabel = computed(() =>
