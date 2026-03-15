@@ -62,9 +62,9 @@ function spawnFrog(
 
   document.body.appendChild(frog)
 
-  const gravity   = 0.35 + Math.random() * 0.2
-  const spin      = (Math.random() - 0.5) * 18   // degrees per frame
-  const totalTime = 1400 + Math.random() * 400    // ms
+  const gravity   = 0.18 + Math.random() * 0.1
+  const spin      = (Math.random() - 0.5) * 10
+  const totalTime = 1600 + Math.random() * 400
   let   vx        = velX
   let   vy        = velY
   let   x         = startX
@@ -88,20 +88,20 @@ function spawnFrog(
       return
     }
 
-    // Physics
     vy  += gravity
-    vx  *= 0.985   // air resistance
+    vx  *= 0.992
     x   += vx
     y   += vy
-    rot += spin
+    rot += spin * (1 - t * 0.5)  // spin slows down over time
 
-    // Fade out in last 40%
-    const opacity = t < 0.6 ? 1 : 1 - (t - 0.6) / 0.4
+    // Smooth cubic fade — starts fading at 50%
+    const opacity = t < 0.5 ? 1 : 1 - Math.pow((t - 0.5) / 0.5, 1.5)
+    const scale   = t < 0.1 ? t * 10 : 1 - t * 0.3  // pop in, slowly shrink
 
-    frog.style.left    = `${x}px`
-    frog.style.top     = `${y}px`
-    frog.style.opacity = `${opacity}`
-    frog.style.transform = `translate(-50%, -50%) rotate(${rot}deg) scale(${1 - t * 0.4})`
+    frog.style.left      = `${x}px`
+    frog.style.top       = `${y}px`
+    frog.style.opacity   = `${Math.max(0, opacity)}`
+    frog.style.transform = `translate(-50%, -50%) rotate(${rot}deg) scale(${Math.max(0.1, scale)})`
 
     rafId = requestAnimationFrame(frame)
   }
@@ -116,7 +116,7 @@ function spawnFrog(
 }
 
 // ---------------------------------------------------------------------------
-// Launch — 3 waves, frogs spawn from image border and fly far
+// Launch — single smooth burst, all frogs at once
 // ---------------------------------------------------------------------------
 
 function launchFirework(): void {
@@ -128,30 +128,22 @@ function launchFirework(): void {
   const rx = rect.width  / 2
   const ry = rect.height / 2
 
-  const WAVES         = 3
-  const FROGS_PER_WAVE = 10
+  const TOTAL_FROGS = 20
 
-  for (let wave = 0; wave < WAVES; wave++) {
-    for (let i = 0; i < FROGS_PER_WAVE; i++) {
-      // Evenly distributed + slight jitter
-      const angle  = (i / FROGS_PER_WAVE) * Math.PI * 2
-                   + (wave / WAVES) * (Math.PI / FROGS_PER_WAVE)
-                   + (Math.random() - 0.5) * 0.25
+  for (let i = 0; i < TOTAL_FROGS; i++) {
+    const angle  = (i / TOTAL_FROGS) * Math.PI * 2 + (Math.random() - 0.5) * 0.2
 
-      // Spawn exactly on the image border
-      const startX = cx + Math.cos(angle) * rx
-      const startY = cy + Math.sin(angle) * ry
+    const startX = cx + Math.cos(angle) * rx
+    const startY = cy + Math.sin(angle) * ry
 
-      // Initial velocity — strong outward burst
-      const speed  = 9 + Math.random() * 8
-      const velX   = Math.cos(angle) * speed
-      const velY   = Math.sin(angle) * speed - (1 + Math.random() * 2) // slight upward boost
+    const speed  = 8 + Math.random() * 6
+    const velX   = Math.cos(angle) * speed
+    const velY   = Math.sin(angle) * speed - (0.5 + Math.random() * 1.5)
 
-      const size   = 20 + Math.random() * 18
-      const delay  = wave * 200 + Math.random() * 80
+    const size   = 20 + Math.random() * 16
+    const delay  = Math.random() * 40  // tiny jitter, barely noticeable
 
-      spawnFrog(startX, startY, velX, velY, size, delay)
-    }
+    spawnFrog(startX, startY, velX, velY, size, delay)
   }
 }
 
