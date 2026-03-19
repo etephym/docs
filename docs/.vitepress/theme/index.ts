@@ -21,7 +21,6 @@ import 'vitepress-plugin-nprogress/lib/css/index.css'
 
 import { setupMusicPlayer } from './musicPlayer'
 
-import AnnouncementBar from './components/AnnouncementBar.vue'
 import Breadcrumb      from './components/Breadcrumb.vue'
 import ReadingTime     from './components/ReadingTime.vue'
 import ReadingProgress from './components/ReadingProgress.vue'
@@ -31,82 +30,6 @@ import Copyright       from './components/Copyright.vue'
 import FrogFirework    from './components/FrogFirework.vue'
 
 import './custom.css'
-
-// ---------------------------------------------------------------------------
-// Animated favicon — spinning glow ring on page load, settles after 1.5s
-// ---------------------------------------------------------------------------
-
-function setupAnimatedFavicon(base: string): void {
-  const canvas  = document.createElement('canvas')
-  canvas.width  = 32
-  canvas.height = 32
-  const ctx     = canvas.getContext('2d')
-  if (!ctx) return
-
-  const img = new Image()
-  img.src   = `${base}logo.png`
-
-  // Find or create the favicon link element
-  let link = document.querySelector<HTMLLinkElement>('link[rel="icon"]')
-  if (!link) {
-    link = document.createElement('link')
-    link.rel = 'icon'
-    document.head.appendChild(link)
-  }
-
-  let angle   = 0
-  let rafId   = 0
-  let elapsed = 0
-  let last    = performance.now()
-
-  function drawFrame(now: number): void {
-    const dt  = now - last
-    last      = now
-    elapsed  += dt
-    angle    += 0.07 * (dt / 16.67)
-
-    ctx!.clearRect(0, 0, 32, 32)
-
-    // Draw logo centered
-    if (img.complete && img.naturalWidth > 0) {
-      ctx!.save()
-      ctx!.beginPath()
-      ctx!.arc(16, 16, 13, 0, Math.PI * 2)
-      ctx!.clip()
-      ctx!.drawImage(img, 3, 3, 26, 26)
-      ctx!.restore()
-    }
-
-    // Draw spinning arc around it — fades out after 1s
-    const progress = Math.min(elapsed / 1500, 1)
-    const alpha    = 1 - progress
-
-    if (alpha > 0) {
-      ctx!.save()
-      ctx!.strokeStyle = `rgba(84,160,255,${alpha * 0.9})`
-      ctx!.lineWidth   = 2.5
-      ctx!.lineCap     = 'round'
-      ctx!.beginPath()
-      ctx!.arc(16, 16, 14, angle, angle + Math.PI * 1.2)
-      ctx!.stroke()
-      ctx!.restore()
-    }
-
-    link!.href = canvas.toDataURL()
-
-    if (elapsed < 1600) {
-      rafId = requestAnimationFrame(drawFrame)
-    } else {
-      // Restore real favicon
-      cancelAnimationFrame(rafId)
-      link!.href = `${base}logo.png`
-    }
-  }
-
-  img.onload = () => { rafId = requestAnimationFrame(drawFrame) }
-  // Fallback if already cached
-  if (img.complete) rafId = requestAnimationFrame(drawFrame)
-}
 
 // ---------------------------------------------------------------------------
 // Keyboard shortcut — '/' opens search, 'Escape' closes it
@@ -204,7 +127,6 @@ export default {
 
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      'layout-top': () => h(AnnouncementBar),
       'doc-before': () =>
         h('div', { class: 'doc-tools' }, [
           h(Breadcrumb),
@@ -224,9 +146,6 @@ export default {
     if (typeof window !== 'undefined') {
       requestAnimationFrame(setupMusicPlayer)
       setupKeyboardShortcuts()
-      // Animated favicon — runs once on first load
-      const base = (ctx.app.config.globalProperties.$site?.base) ?? '/rell-docs/'
-      setupAnimatedFavicon(base)
     }
   },
 }
