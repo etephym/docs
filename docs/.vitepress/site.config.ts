@@ -12,7 +12,7 @@
 export const GITHUB_USER = 'etephym'
 
 /** Repository name — also used as the URL base path */
-export const REPO_NAME = 'shindo'
+export const REPO_NAME = 'rell-docs'
 
 /** GitHub Pages hostname (change if using a custom domain) */
 export const SITE_HOSTNAME = 'https://etephym.github.io'

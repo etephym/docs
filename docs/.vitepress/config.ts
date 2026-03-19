@@ -126,6 +126,13 @@ const SEARCH: DefaultTheme.Config['search'] = {
 
 const sidebarRu: DefaultTheme.Sidebar = [
   {
+    text: '📌 Новости',
+    collapsed: false,
+    items: [
+      { text: 'Проблемы Shindo Life', link: '/news/shindo-issues', badge: { type: 'danger', text: 'Актуально' } },
+    ],
+  },
+  {
     text: '⚔️ Shindo Life 2',
     collapsed: false,
     items: [
@@ -144,6 +151,13 @@ const sidebarRu: DefaultTheme.Sidebar = [
 ]
 
 const sidebarEn: DefaultTheme.Sidebar = [
+  {
+    text: '📌 News',
+    collapsed: false,
+    items: [
+      { text: 'Shindo Life Issues', link: '/en/news/shindo-issues', badge: { type: 'danger', text: 'Active' } },
+    ],
+  },
   {
     text: '⚔️ Shindo Life 2',
     collapsed: false,
