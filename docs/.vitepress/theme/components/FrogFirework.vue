@@ -4,7 +4,8 @@ import { useData, useRoute } from 'vitepress'
 
 const HOLD_DURATION  = 1500
 const FROG_EMOJI     = '🐸'
-const MOVE_THRESHOLD = 8   // px — cancel hold if pointer moves more than this
+const MOVE_THRESHOLD = 8
+const TOTAL_FROGS    = 22
 
 const route    = useRoute()
 const { site } = useData()
@@ -13,8 +14,8 @@ let active     = false
 let holdTimer:  ReturnType<typeof setTimeout> | null = null
 let retryTimer: ReturnType<typeof setTimeout> | null = null
 let target:     HTMLElement | null = null
-let startX     = 0
-let startY     = 0
+let holdStartX = 0
+let holdStartY = 0
 
 function checkIsHome(): boolean {
   const base = site.value.base
@@ -22,7 +23,99 @@ function checkIsHome(): boolean {
 }
 
 // ---------------------------------------------------------------------------
-// Get the accurate bounding box of the VISIBLE hero image
+// Canvas — single fullscreen overlay, zero DOM per frame
+// ---------------------------------------------------------------------------
+
+interface Particle {
+  x: number; y: number
+  vx: number; vy: number
+  rot: number; spin: number
+  gravity: number
+  size: number
+  startTime: number
+  duration: number
+}
+
+let canvas:    HTMLCanvasElement | null = null
+let ctx:       CanvasRenderingContext2D | null = null
+let particles: Particle[] = []
+let loopId:    number | null = null
+let lastTime:  number = 0
+
+function createCanvas(): void {
+  if (canvas) return
+  canvas = document.createElement('canvas')
+  Object.assign(canvas.style, {
+    position:      'fixed',
+    inset:         '0',
+    width:         '100%',
+    height:        '100%',
+    pointerEvents: 'none',
+    zIndex:        '99999',
+  })
+  canvas.width  = window.innerWidth
+  canvas.height = window.innerHeight
+  ctx = canvas.getContext('2d')
+  document.body.appendChild(canvas)
+}
+
+function destroyCanvas(): void {
+  if (loopId !== null) { cancelAnimationFrame(loopId); loopId = null }
+  particles = []
+  canvas?.remove()
+  canvas = null
+  ctx    = null
+}
+
+function tick(now: number): void {
+  if (!ctx || !canvas) return
+  const dt = Math.min((now - lastTime) / 16.67, 2.5)
+  lastTime  = now
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+  let alive = false
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i]
+    const t = (now - p.startTime) / p.duration
+    if (t < 0) { alive = true; continue }
+    if (t >= 1) continue
+
+    alive  = true
+    p.vy  += p.gravity * dt
+    p.vx  *= Math.pow(0.993, dt)
+    p.x   += p.vx * dt
+    p.y   += p.vy * dt
+    p.rot += p.spin * (1 - t * 0.5) * dt
+
+    const scale = t < 0.08 ? t / 0.08 : Math.max(0, 1 - (t - 0.08) * 0.26)
+    const fade  = t < 0.55 ? 1 : Math.max(0, 1 - ((t - 0.55) / 0.45) ** 2)
+
+    ctx.save()
+    ctx.globalAlpha = fade
+    ctx.translate(p.x, p.y)
+    ctx.rotate(p.rot * Math.PI / 180)
+    ctx.scale(scale, scale)
+    ctx.font        = `${p.size}px serif`
+    ctx.textAlign   = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillText(FROG_EMOJI, 0, 0)
+    ctx.restore()
+  }
+
+  // Prune finished particles
+  particles = particles.filter(p => (now - p.startTime) / p.duration < 1)
+
+  if (alive) {
+    loopId = requestAnimationFrame(tick)
+  } else {
+    loopId = null
+    destroyCanvas()
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Image rect
 // ---------------------------------------------------------------------------
 
 function getImageRect(): DOMRect | null {
@@ -35,141 +128,63 @@ function getImageRect(): DOMRect | null {
 }
 
 // ---------------------------------------------------------------------------
-// Animate a single frog using rAF for smooth, physics-based motion
-// ---------------------------------------------------------------------------
-
-function spawnFrog(
-  startX:   number,
-  startY:   number,
-  velX:     number,
-  velY:     number,
-  size:     number,
-  delay:    number,
-): void {
-  const frog = document.createElement('span')
-  frog.textContent = FROG_EMOJI
-  frog.setAttribute('aria-hidden', 'true')
-
-  Object.assign(frog.style, {
-    position:      'fixed',
-    left:          `${startX}px`,
-    top:           `${startY}px`,
-    fontSize:      `${size}px`,
-    lineHeight:    '1',
-    pointerEvents: 'none',
-    userSelect:    'none',
-    zIndex:        '99999',
-    transform:     'translate(-50%, -50%) scale(0)',
-    willChange:    'transform, opacity',
-  })
-
-  document.body.appendChild(frog)
-
-  const gravity   = 0.15 + Math.random() * 0.08
-  const spin      = (Math.random() - 0.5) * 8
-  const totalTime = 1800 + Math.random() * 500
-  let   vx        = velX
-  let   vy        = velY
-  let   x         = startX
-  let   y         = startY
-  let   rot       = 0
-  let   startTime: number | null = null
-  let   rafId:     number
-
-  function frame(now: number): void {
-    if (startTime === null) startTime = now
-    const elapsed = now - startTime
-
-    if (elapsed < delay) {
-      rafId = requestAnimationFrame(frame)
-      return
-    }
-
-    const t = (elapsed - delay) / totalTime
-    if (t >= 1) {
-      frog.remove()
-      return
-    }
-
-    vy  += gravity
-    vx  *= 0.994
-    x   += vx
-    y   += vy
-    rot += spin * (1 - t * 0.6)
-
-    // Smooth ease-in scale pop, then gentle shrink
-    const scale   = t < 0.08
-      ? (t / 0.08)             // pop in fast
-      : 1 - (t - 0.08) * 0.25  // very slow shrink
-
-    // Fade starts at 55%, cubic ease
-    const fade    = t < 0.55 ? 1 : 1 - Math.pow((t - 0.55) / 0.45, 2)
-
-    frog.style.left      = `${x}px`
-    frog.style.top       = `${y}px`
-    frog.style.opacity   = `${Math.max(0, fade)}`
-    frog.style.transform = `translate(-50%, -50%) rotate(${rot}deg) scale(${Math.max(0, scale)})`
-
-    rafId = requestAnimationFrame(frame)
-  }
-
-  rafId = requestAnimationFrame(frame)
-
-  setTimeout(() => {
-    cancelAnimationFrame(rafId)
-    frog.remove()
-  }, totalTime + delay + 200)
-}
-
-// ---------------------------------------------------------------------------
-// Launch — single smooth burst, all frogs at once
+// Launch
 // ---------------------------------------------------------------------------
 
 function launchFirework(): void {
   const rect = getImageRect()
   if (!rect) return
 
+  const mobile = window.innerWidth < 768
   const cx = rect.left + rect.width  / 2
   const cy = rect.top  + rect.height / 2
   const rx = rect.width  / 2
   const ry = rect.height / 2
 
-  const TOTAL_FROGS = 26
+  const speedScale   = mobile ? 0.38 : 1.0
+  const gravityScale = mobile ? 0.45 : 1.0
+  const now          = performance.now()
+
+  createCanvas()
 
   for (let i = 0; i < TOTAL_FROGS; i++) {
-    const angle  = (i / TOTAL_FROGS) * Math.PI * 2 + (Math.random() - 0.5) * 0.18
+    const angle = (i / TOTAL_FROGS) * Math.PI * 2 + (Math.random() - 0.5) * 0.18
+    const rv    = 0.88 + Math.random() * 0.24
+    const speed = (7 + Math.random() * 8) * speedScale
 
-    // Mix: some from exact border, some slightly inside/outside for depth
-    const radiusVariance = 0.85 + Math.random() * 0.3
-    const startX = cx + Math.cos(angle) * rx * radiusVariance
-    const startY = cy + Math.sin(angle) * ry * radiusVariance
+    particles.push({
+      x:         cx + Math.cos(angle) * rx * rv,
+      y:         cy + Math.sin(angle) * ry * rv,
+      vx:        Math.cos(angle) * speed,
+      vy:        Math.sin(angle) * speed - Math.random() * 1.5 * speedScale,
+      rot:       0,
+      spin:      (Math.random() - 0.5) * 7,
+      gravity:   (0.14 + Math.random() * 0.07) * gravityScale,
+      size:      18 + Math.random() * 16,
+      startTime: now + Math.random() * 25,
+      duration:  1800 + Math.random() * 500,
+    })
+  }
 
-    // Speed variance — faster ones fly further
-    const speed  = 7 + Math.random() * 9
-    const velX   = Math.cos(angle) * speed
-    const velY   = Math.sin(angle) * speed - (Math.random() * 2)
-
-    const size   = 18 + Math.random() * 18
-    const delay  = Math.random() * 30
-
-    spawnFrog(startX, startY, velX, velY, size, delay)
+  if (loopId === null) {
+    lastTime = now
+    loopId   = requestAnimationFrame(tick)
   }
 }
 
 // ---------------------------------------------------------------------------
-// Context menu prevention (hero only)
+// Context menu
 // ---------------------------------------------------------------------------
 
 const onContextMenu = (e: Event) => e.preventDefault()
 
 // ---------------------------------------------------------------------------
-// Hold detection
+// Hold logic
 // ---------------------------------------------------------------------------
 
 function startHold(x: number, y: number): void {
   if (!active) return
-  startX = x
-  startY = y
+  holdStartX = x; holdStartY = y
   if (holdTimer) clearTimeout(holdTimer)
   holdTimer = setTimeout(() => { holdTimer = null; launchFirework() }, HOLD_DURATION)
 }
@@ -180,16 +195,14 @@ function cancelHold(): void {
 
 function checkMove(x: number, y: number): void {
   if (!holdTimer) return
-  const dx = x - startX
-  const dy = y - startY
-  if (Math.sqrt(dx * dx + dy * dy) > MOVE_THRESHOLD) cancelHold()
+  if (Math.hypot(x - holdStartX, y - holdStartY) > MOVE_THRESHOLD) cancelHold()
 }
 
 const onMouseDown  = (e: MouseEvent) => { if (e.button === 0) startHold(e.clientX, e.clientY) }
 const onMouseMove  = (e: MouseEvent) => checkMove(e.clientX, e.clientY)
 const onMouseUp    = () => cancelHold()
 const onMouseLeave = () => cancelHold()
-const onTouchStart = (e: TouchEvent) => { startHold(e.touches[0].clientX, e.touches[0].clientY) }
+const onTouchStart = (e: TouchEvent) => startHold(e.touches[0].clientX, e.touches[0].clientY)
 const onTouchMove  = (e: TouchEvent) => checkMove(e.touches[0].clientX, e.touches[0].clientY)
 const onTouchEnd   = () => cancelHold()
 
@@ -200,7 +213,6 @@ const onTouchEnd   = () => cancelHold()
 function attach(): void {
   detach()
   if (!active) return
-
   function tryAttach(n: number): void {
     const el = document.querySelector<HTMLElement>('.VPHero .image-container')
     if (el) {
@@ -217,24 +229,23 @@ function attach(): void {
     }
     if (n > 0) retryTimer = setTimeout(() => tryAttach(n - 1), 50)
   }
-
   tryAttach(20)
 }
 
 function detach(): void {
   if (retryTimer) { clearTimeout(retryTimer); retryTimer = null }
   cancelHold()
-  if (target) {
-    target.removeEventListener('contextmenu', onContextMenu)
-    target.removeEventListener('mousedown',   onMouseDown)
-    target.removeEventListener('mousemove',   onMouseMove)
-    target.removeEventListener('mouseup',     onMouseUp)
-    target.removeEventListener('mouseleave',  onMouseLeave)
-    target.removeEventListener('touchstart',  onTouchStart)
-    target.removeEventListener('touchmove',   onTouchMove)
-    target.removeEventListener('touchend',    onTouchEnd)
-    target = null
-  }
+  destroyCanvas()
+  if (!target) return
+  target.removeEventListener('contextmenu', onContextMenu)
+  target.removeEventListener('mousedown',   onMouseDown)
+  target.removeEventListener('mousemove',   onMouseMove)
+  target.removeEventListener('mouseup',     onMouseUp)
+  target.removeEventListener('mouseleave',  onMouseLeave)
+  target.removeEventListener('touchstart',  onTouchStart)
+  target.removeEventListener('touchmove',   onTouchMove)
+  target.removeEventListener('touchend',    onTouchEnd)
+  target = null
 }
 
 function activate(): void {
