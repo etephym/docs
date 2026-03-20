@@ -219,11 +219,13 @@ export default defineConfig({
         siteTitle:           'Shindo Life',
         nav: [
           { text: '🏠 Главная', link: '/' },
+          { text: '📌 О проекте', link: '/about' },
           {
             text: '⚔️ Shindo Life 2',
             items: [
-              { text: '📖 Гайд',           link: '/shindo-life/guide' },
-              { text: '💡 Советы и фишки', link: '/shindo-life/tips'  },
+              { text: '🔴 Проблемы Shindo Life', link: '/news/shindo-issues' },
+              { text: '📖 Гайд',                 link: '/shindo-life/guide'  },
+              { text: '💡 Советы и фишки',       link: '/shindo-life/tips'   },
             ],
           },
           {
@@ -289,11 +291,13 @@ export default defineConfig({
         siteTitle:           'Shindo Life',
         nav: [
           { text: '🏠 Home', link: '/en/' },
+          { text: '📌 About', link: '/en/about' },
           {
             text: '⚔️ Shindo Life 2',
             items: [
-              { text: '📖 Guide',         link: '/en/shindo-life/guide' },
-              { text: '💡 Tips & Tricks', link: '/en/shindo-life/tips'  },
+              { text: '🔴 Shindo Life Issues', link: '/en/news/shindo-issues' },
+              { text: '📖 Guide',              link: '/en/shindo-life/guide'  },
+              { text: '💡 Tips & Tricks',      link: '/en/shindo-life/tips'   },
             ],
           },
           {
