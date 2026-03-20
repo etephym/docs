@@ -34,7 +34,7 @@ outline: [2, 3]
 ---
 
 4. Использование уязвимости:
-```lua
+```luau
 game:GetService("Players").LocalPlayer.startevent:FireServer("band","\128")"
 
 local tpsrv = game:GetService("TeleportService")
