@@ -7,7 +7,7 @@ description: Гайды и механики по играм Rell Games от ETEP
 hero:
   name: "Rell Games"
   text: "Docs by ETEPHYM"
-  tagline: Все гайды, тир-листы и механики в одном месте
+  tagline: NEED TO BE EDIT
   image:
     dark: /logo.png
     light: /logo2.png
