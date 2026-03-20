@@ -15,10 +15,10 @@ hero:
   actions:
     - theme: brand
       text: 📖 Shindo Life
-      link: /shindo-life/guide
+      link: /ru/shindo-life/guide
     - theme: alt
       text: 🌊 Rell Seas
-      link: /rell-seas/guide
+      link: /ru/rell-seas/guide
     - theme: alt
       text: Discord
       link: https://discord.gg/cmCpgkb5zq
@@ -27,25 +27,25 @@ features:
   - icon: ⚔️
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
-    link: /shindo-life/guide
+    link: /ru/shindo-life/guide
   - icon: 🧪
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
-    link: /shindo-life/guide
+    link: /ru/shindo-life/guide
   - icon: 💊
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
-    link: /shindo-life/guide
+    link: /ru/shindo-life/guide
   - icon: 💡
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
-    link: /shindo-life/tips
+    link: /ru/shindo-life/tips
   - icon: 📖
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
-    link: /shindo-life/guide
+    link: /ru/shindo-life/guide
   - icon: 🐛
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
-    link: /shindo-life/guide
+    link: /ru/shindo-life/guide
 ---

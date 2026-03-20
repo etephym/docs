@@ -39,7 +39,7 @@ features:
   - icon: 💡
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
-    link: /en/shindo-life/tips
+    link: /shindo-life/tips
   - icon: 📖
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
