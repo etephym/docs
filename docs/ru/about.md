@@ -4,6 +4,9 @@ description: О проекте Rell Games Docs
 outline: false
 ---
 
+> Coming soon...
+> template:
+
 # О проекте
 
 **Rell Games Docs** — неофициальная документация по играм Rell Games, созданная сообществом.
