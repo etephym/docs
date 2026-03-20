@@ -1,4 +1,4 @@
-import { AUDIO_SRC } from '../site.config'
+import { AUDIO_SRC, PRIMARY_LOCALE } from '../site.config'
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -25,7 +25,10 @@ function getLabels(isRu: boolean): Labels {
 
 /** True when the visitor is on the Russian locale (no /en/ in path). */
 function isRuLocale(): boolean {
-  return window.location.pathname.includes('/ru/')
+  // RU is primary = at root (no prefix); RU is secondary = under /ru/
+  return PRIMARY_LOCALE === 'ru'
+    ? !window.location.pathname.includes('/en/')
+    : window.location.pathname.includes('/ru/')
 }
 
 /** Clamps a number between min and max. */

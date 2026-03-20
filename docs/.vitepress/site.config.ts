@@ -18,8 +18,24 @@ export const REPO_NAME = 'rell-docs'
 export const SITE_HOSTNAME = 'https://etephym.github.io'
 
 // ---------------------------------------------------------------------------
+// Locale priority
+// ---------------------------------------------------------------------------
+
+/**
+ * The primary locale is served at the root URL (no prefix in the address bar).
+ * The secondary locale gets its own prefix (e.g. /ru/ or /en/).
+ *
+ * To swap priorities (e.g. make Russian the main language):
+ *   Change 'en' → 'ru'
+ *   That's it — no files need to be moved.
+ */
+export const PRIMARY_LOCALE: 'en' | 'ru' = 'en'
+
+// ---------------------------------------------------------------------------
 // Derived constants — no need to touch these
 // ---------------------------------------------------------------------------
+
+export const SECONDARY_LOCALE = PRIMARY_LOCALE === 'en' ? 'ru' : 'en'
 
 export const BASE_PATH = `/${REPO_NAME}/`
 export const FULL_URL  = `${SITE_HOSTNAME}${BASE_PATH}`
