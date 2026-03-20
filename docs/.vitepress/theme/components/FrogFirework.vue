@@ -63,6 +63,12 @@ function createCanvas(): void {
   })
   resizeCanvas()
   ctx = canvas.getContext('2d')
+  if (ctx) {
+    // These properties persist on the context — set once, not per-particle
+    ctx.textAlign    = 'center'
+    ctx.textBaseline = 'middle'
+  }
+  canvas.setAttribute('aria-hidden', 'true')
   document.body.appendChild(canvas)
   window.addEventListener('resize', resizeCanvas, { passive: true })
 }
@@ -125,8 +131,6 @@ function tick(now: number): void {
       ctx.font = `${p.size}px serif`
       lastSize = p.size
     }
-    ctx.textAlign    = 'center'
-    ctx.textBaseline = 'middle'
     ctx.fillText(FROG_EMOJI, 0, 0)
     ctx.restore()
   }
@@ -197,8 +201,11 @@ function launchFirework(): void {
     })
   }
 
-  // Sort by size so font only changes when necessary in the loop
-  particles.sort((a, b) => a.size - b.size)
+  // Sort only the newly added slice so the font-change optimization works
+  // without disturbing in-flight particles from a previous burst
+  const newSlice = particles.slice(-TOTAL_FROGS)
+  newSlice.sort((a, b) => a.size - b.size)
+  particles.splice(-TOTAL_FROGS, TOTAL_FROGS, ...newSlice)
 
   if (loopId === null) {
     lastTime = now

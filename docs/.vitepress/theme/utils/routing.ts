@@ -9,11 +9,13 @@ export function normalizeBase(base: string): string {
 
 /** Returns true when the current path is under the English (/en/) locale. */
 export function isEnglishPath(path: string, base: string): boolean {
-  return path.startsWith(`${normalizeBase(base)}en/`)
+  const nb = normalizeBase(base)
+  // Match both /en/ (with trailing slash) and /en (direct entry without slash)
+  return path.startsWith(`${nb}en/`) || path === `${nb}en`
 }
 
 /** Returns true when the current path is a home page (root or /en/). */
 export function isHomePath(path: string, base: string): boolean {
   const nb = normalizeBase(base)
-  return path === nb || path === `${nb}en/`
+  return path === nb || path === `${nb}en/` || path === `${nb}en`
 }

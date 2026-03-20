@@ -61,7 +61,7 @@ const crumbs = computed<Crumb[]>(() => {
     // it is always localised correctly and requires no manual mapping
     const isLast = i === parts.length - 1
     const label  = isLast
-      ? page.value.title
+      ? (page.value.title || part.charAt(0).toUpperCase() + part.slice(1).replace(/[-_]+/g, ' '))
       : part.charAt(0).toUpperCase() + part.slice(1).replace(/[-_]+/g, ' ')
 
     result.push({ text: label, link: accumulated })

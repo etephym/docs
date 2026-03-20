@@ -29,15 +29,13 @@ const labelCopied = () => isEn.value ? 'Copied!'              : 'Скопиро�
 // ---------------------------------------------------------------------------
 
 interface Handler { el: HTMLElement; fn: () => void }
-let handlers:    Handler[] = []
-let copiedTimer: ReturnType<typeof setTimeout> | null = null
+let handlers: Handler[] = []
 
 // ---------------------------------------------------------------------------
 // Cleanup — removes all injected buttons and detaches their listeners
 // ---------------------------------------------------------------------------
 
 function cleanup(): void {
-  if (copiedTimer) { clearTimeout(copiedTimer); copiedTimer = null }
   for (const { el, fn } of handlers) el.removeEventListener('click', fn)
   handlers = []
   document.querySelectorAll('.copy-heading-btn').forEach(el => el.remove())
@@ -86,14 +84,16 @@ function init(): void {
         `<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>` +
       `</svg>`
 
+    // Each button has its own timer in the closure — concurrent clicks work independently
+    let btnTimer: ReturnType<typeof setTimeout> | null = null
     const fn = async () => {
       const ok = await copyText(`${base}#${id}`)
       if (!ok) return
       btn.classList.add('copied')
-      if (copiedTimer) clearTimeout(copiedTimer)
-      copiedTimer = setTimeout(() => {
+      if (btnTimer) clearTimeout(btnTimer)
+      btnTimer = setTimeout(() => {
         btn.classList.remove('copied')
-        copiedTimer = null
+        btnTimer = null
       }, 1800)
     }
 
@@ -108,7 +108,7 @@ function init(): void {
 // ---------------------------------------------------------------------------
 
 onMounted(() => { requestAnimationFrame(init) })
-watch(() => route.path, () => { requestAnimationFrame(init) })
+watch(() => route.path.split('#')[0], () => { requestAnimationFrame(init) })
 onUnmounted(cleanup)
 </script>
 

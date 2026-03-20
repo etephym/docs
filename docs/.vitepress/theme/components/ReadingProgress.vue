@@ -81,9 +81,10 @@ function update(): void {
 /** Recalculates on viewport resize (e.g. rotating phone, opening DevTools). */
 function onResize(): void { calcTotal(); update() }
 
-/** Smooth-scrolls back to the top of the page. */
+/** Scrolls back to the top of the page, respecting prefers-reduced-motion. */
 function scrollToTop(): void {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' })
 }
 
 // ---------------------------------------------------------------------------

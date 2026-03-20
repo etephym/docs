@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# English locale is a translation mirror — exclude from indexing
+Disallow: /rell-docs/en/
+
+Sitemap: https://etephym.github.io/rell-docs/sitemap.xml

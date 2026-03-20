@@ -28,8 +28,8 @@ function goHome(): void {
       }}
     </blockquote>
     <div class="action">
-      <!-- Use button instead of <a href="#"> for correct accessibility semantics -->
-      <button class="link" @click="goHome">
+      <!-- Named class nf-btn avoids conflict with VitePress internal .NotFound .link selector -->
+      <button class="nf-btn" @click="goHome">
         {{ isRu ? '← Вернуться на главную' : '← Back to home' }}
       </button>
     </div>
@@ -37,21 +37,21 @@ function goHome(): void {
 </template>
 
 <style scoped>
-.link {
-  display:          inline-block;
-  border:           1px solid var(--vp-c-brand);
-  border-radius:    20px;
-  padding:          3px 16px;
-  font-size:        14px;
-  font-weight:      500;
-  color:            var(--vp-c-brand);
-  background:       transparent;
-  cursor:           pointer;
-  text-decoration:  none;
-  transition:       border-color 0.25s, color 0.25s, background-color 0.25s;
+.nf-btn {
+  display:         inline-block;
+  border:          1px solid var(--vp-c-brand);
+  border-radius:   20px;
+  padding:         3px 16px;
+  font-size:       14px;
+  font-weight:     500;
+  color:           var(--vp-c-brand);
+  background:      transparent;
+  cursor:          pointer;
+  text-decoration: none;
+  transition:      border-color 0.25s, color 0.25s, background-color 0.25s;
 }
-.link:hover {
-  background:   var(--vp-c-brand);
-  color:        var(--vp-c-white);
+.nf-btn:hover {
+  background: var(--vp-c-brand);
+  color:      var(--vp-c-white);
 }
 </style>

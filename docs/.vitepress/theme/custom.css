@@ -1,6 +1,6 @@
-/* =============================================================
-   Custom Styles — Shindo Life Docs
-   ============================================================= */
+/* =============================================================================
+   Custom Styles — Rell Games Docs
+   ============================================================================= */
 
 /* ---------------------------------------------------------------------------
    CSS variables — dark palette overrides
@@ -20,8 +20,8 @@
   --vp-c-gutter:     #080808;
 }
 
-/* Disable browser bounce/overscroll effect (Chrome) */
-html, body { overscroll-behavior: none; }
+/* Allow vertical pull-to-refresh on mobile; block only horizontal bounce */
+html, body { overscroll-behavior-x: none; }
 
 /* Explicit dark background on <html> prevents flash of white on load */
 html.dark { background-color: #0d0d0d; }
@@ -30,7 +30,7 @@ html.dark { background-color: #0d0d0d; }
    Navbar — sticky with frosted-glass backdrop
    --------------------------------------------------------------------------- */
 
-/* Sticky positioning + pre-hydration border to prevent flash */
+/* Sticky positioning + base border that prevents a flash before hydration */
 .VPNav { position: sticky; top: 0; border-bottom: 1px solid #1f1f1f; }
 
 /* Pseudo-element carries the blur so it doesn't affect child stacking contexts */
@@ -43,15 +43,15 @@ html.dark { background-color: #0d0d0d; }
   z-index: -1;
 }
 
-.dark .VPNav           { border-bottom: 1px solid #1f1f1f; background: rgba(13,13,13,0.4) !important; }
-html:not(.dark) .VPNav { background: rgba(255,255,255,0.4) !important; }
-
+.dark .VPNav           { background: rgba(13,13,13,0.4) !important; }
+html:not(.dark) .VPNav { background: rgba(255,255,255,0.4) !important; border-bottom-color: rgba(0,0,0,0.1); }
 
 /* ---------------------------------------------------------------------------
    Sidebar — frosted glass with animated aurora border
    --------------------------------------------------------------------------- */
 
-.VPSidebar { min-height: 100dvh; }
+/* dvh fallback for browsers that don't support the unit (iOS < 15.4) */
+.VPSidebar { min-height: 100vh; min-height: 100dvh; }
 
 /* Override VitePress default backgrounds for all sidebar states */
 .dark .VPSidebar,
@@ -79,11 +79,11 @@ html:not(.dark) .VPSidebar {
 }
 
 @keyframes sidebar-aurora-light {
-  0%   { border-right-color: rgba(0,0,0,0.05);    box-shadow: 1px 0 6px rgba(0,0,0,0.03),    2px 0 14px rgba(0,0,0,0.02); }
-  25%  { border-right-color: rgba(0,0,0,0.14);    box-shadow: 1px 0 10px rgba(0,0,0,0.07),   3px 0 20px rgba(0,0,0,0.04); }
+  0%   { border-right-color: rgba(0,0,0,0.05);     box-shadow: 1px 0 6px rgba(0,0,0,0.03),     2px 0 14px rgba(0,0,0,0.02); }
+  25%  { border-right-color: rgba(0,0,0,0.14);     box-shadow: 1px 0 10px rgba(0,0,0,0.07),    3px 0 20px rgba(0,0,0,0.04); }
   50%  { border-right-color: rgba(80,80,100,0.18); box-shadow: 1px 0 14px rgba(60,60,90,0.09), 4px 0 26px rgba(60,60,90,0.05); }
-  75%  { border-right-color: rgba(0,0,0,0.09);    box-shadow: 1px 0 8px rgba(0,0,0,0.05),    2px 0 16px rgba(0,0,0,0.03); }
-  100% { border-right-color: rgba(0,0,0,0.05);    box-shadow: 1px 0 6px rgba(0,0,0,0.03),    2px 0 14px rgba(0,0,0,0.02); }
+  75%  { border-right-color: rgba(0,0,0,0.09);     box-shadow: 1px 0 8px rgba(0,0,0,0.05),     2px 0 16px rgba(0,0,0,0.03); }
+  100% { border-right-color: rgba(0,0,0,0.05);     box-shadow: 1px 0 6px rgba(0,0,0,0.03),     2px 0 14px rgba(0,0,0,0.02); }
 }
 
 /* ---------------------------------------------------------------------------
@@ -96,36 +96,6 @@ html:not(.dark) .VPSidebar {
 }
 .dark .VPLocalNav           { border-bottom: 1px solid #1f1f1f !important; background: rgba(13,13,13,0.4) !important; }
 html:not(.dark) .VPLocalNav { background: rgba(255,255,255,0.4) !important; }
-
-/* ── Nav screen menu items — glass cards ────────────────────────────────── */
-.VPNavScreenMenuLink,
-.VPNavScreenMenuGroup,
-.VPNavScreenAppearance {
-  background:    rgba(255,255,255,0.04) !important;
-  border-radius: 12px !important;
-  border:        1px solid rgba(255,255,255,0.06) !important;
-  margin-bottom: 4px !important;
-}
-
-html:not(.dark) .VPNavScreenMenuLink,
-html:not(.dark) .VPNavScreenMenuGroup,
-html:not(.dark) .VPNavScreenAppearance {
-  background: rgba(0,0,0,0.06) !important;
-  border:     1px solid rgba(0,0,0,0.08) !important;
-}
-
-/* ── Menu item padding ───────────────────────────────────────────────────── */
-a.VPNavScreenMenuLink,
-.VPNavScreenMenuGroup .button,
-.VPNavScreenMenuGroupLink {
-  padding-top:    7px !important;
-  padding-bottom: 7px !important;
-  padding-left:   14px !important;
-}
-
-/* ── Collapsed / expanded group height ───────────────────────────────────── */
-.VPNavScreenMenuGroup      { height: 40px !important; }
-.VPNavScreenMenuGroup.open { height: auto !important; padding-bottom: 10px !important; }
 
 /* ---------------------------------------------------------------------------
    Logo — animated colour glow in the navbar
@@ -175,7 +145,7 @@ a.VPNavScreenMenuLink,
   66%     { filter: drop-shadow(0 0 10px rgba(95,39,205,0.55))  drop-shadow(0 0 20px rgba(255,202,87,0.4)); }
 }
 
-/* ── Hero name — animated rainbow gradient text ───────────────────────────── */
+/* ── Hero name — animated rainbow gradient text ──────────────────────────── */
 .VPHero .name {
   background: linear-gradient(270deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff, #5f27cd, #ff6b6b);
   background-size: 400% 400%;
@@ -197,6 +167,7 @@ a.VPNavScreenMenuLink,
 .VPHero .tagline { filter: drop-shadow(0 0 6px rgba(84,160,255,0.35)); animation: hero-glow 4s ease-in-out infinite; }
 
 /* ── Hero image — manual light/dark switching via CSS ───────────────────── */
+/* Note: these class names (.dark/.light) are VitePress internal and may change between versions */
 .VPHero .image-container .dark  { display: block; }
 .VPHero .image-container .light { display: none; }
 html:not(.dark) .VPHero .image-container .dark  { display: none; }
@@ -212,6 +183,10 @@ html:not(.dark) .VPHero .image-container .light { display: block; }
     animation-iteration-count: 1 !important;
     transition-duration:       0.01ms !important;
   }
+  /* Suppress sidebar continuous animation */
+  .VPSidebar { animation: none !important; }
+  /* Restore instant scroll for users who prefer no motion */
+  html { scroll-behavior: auto !important; }
 }
 
 /* ---------------------------------------------------------------------------
@@ -258,14 +233,15 @@ html      { scroll-behavior: smooth; }
 .vp-doc a { transition: color 0.2s; }
 
 /* ---------------------------------------------------------------------------
-   Heading highlight — flashes a blue underline on the hash-targeted heading
+   Heading highlight — flashes a blue underline on the hash-targeted heading.
+   Animation starts fully opaque and fades to transparent over 2.5s.
    --------------------------------------------------------------------------- */
 
 .vp-doc .heading-highlighted {
-  text-decoration:          underline;
-  text-underline-offset:    5px;
+  text-decoration:           underline;
+  text-underline-offset:     5px;
   text-decoration-thickness: 2px;
-  text-decoration-color:    rgba(84,160,255,0); /* start transparent, animated to opaque */
+  text-decoration-color:     rgba(84,160,255,0);
   animation: heading-flash 2.5s cubic-bezier(0.4,0,0.2,1) forwards;
 }
 
@@ -276,7 +252,8 @@ html      { scroll-behavior: smooth; }
 }
 
 /* ---------------------------------------------------------------------------
-   Reading progress — hidden on the home page via :has()
+   Reading progress — hidden on the home page via :has().
+   JS guard in ProgressWrapper provides fallback for browsers without :has().
    --------------------------------------------------------------------------- */
 
 body:has(.VPHome) .rp-wrap { display: none !important; }
@@ -431,9 +408,8 @@ html:not(.dark) .VPNavBarSearchButton:hover {
   }
 }
 
-
 /* ---------------------------------------------------------------------------
-   Mobile nav overlay — darker, blurrier backdrop
+   Mobile nav overlay — full-screen backdrop when hamburger menu is open
    --------------------------------------------------------------------------- */
 
 .VPNavScreen {
@@ -444,4 +420,32 @@ html:not(.dark) .VPNavBarSearchButton:hover {
 .dark .VPNavScreen           { background: rgba(8,8,8,0.88) !important; }
 html:not(.dark) .VPNavScreen { background: rgba(255,255,255,0.88) !important; }
 
+/* ── Nav screen menu items — glass cards ────────────────────────────────── */
+.VPNavScreenMenuLink,
+.VPNavScreenMenuGroup,
+.VPNavScreenAppearance {
+  background:    rgba(255,255,255,0.04) !important;
+  border-radius: 12px !important;
+  border:        1px solid rgba(255,255,255,0.06) !important;
+  margin-bottom: 4px !important;
+}
 
+html:not(.dark) .VPNavScreenMenuLink,
+html:not(.dark) .VPNavScreenMenuGroup,
+html:not(.dark) .VPNavScreenAppearance {
+  background: rgba(0,0,0,0.06) !important;
+  border:     1px solid rgba(0,0,0,0.08) !important;
+}
+
+/* ── Menu item padding ───────────────────────────────────────────────────── */
+a.VPNavScreenMenuLink,
+.VPNavScreenMenuGroup .button,
+.VPNavScreenMenuGroupLink {
+  padding-top:    7px !important;
+  padding-bottom: 7px !important;
+  padding-left:   14px !important;
+}
+
+/* ── Collapsed / expanded group height ───────────────────────────────────── */
+.VPNavScreenMenuGroup      { height: 40px !important; }
+.VPNavScreenMenuGroup.open { height: auto !important; padding-bottom: 10px !important; }

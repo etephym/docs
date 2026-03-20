@@ -34,10 +34,6 @@ let active     = false
 // Helpers
 // ---------------------------------------------------------------------------
 
-function checkIsHome(): boolean {
-  return isHomePath(route.path, site.value.base)
-}
-
 /**
  * Opens the URL in a new tab using a temporary <a> element.
  * More reliable than window.open on mobile browsers (Firefox Android),
@@ -77,7 +73,7 @@ function onDocumentClick(e: MouseEvent): void {
 // ---------------------------------------------------------------------------
 
 function activate(): void {
-  active = checkIsHome()
+  active = isHomePath(route.path, site.value.base)
   if (!active) {
     count = 0
     if (resetTimer) { clearTimeout(resetTimer); resetTimer = null }

@@ -34,15 +34,19 @@ const FOOTER_MESSAGE =
   ` <span class="footer-cc-icons">${CC_ICONS}</span>`
 
 // ---------------------------------------------------------------------------
-// Inline script — forces dark mode on first visit before Vue hydrates
+// Inline script — forces dark mode on first visit before Vue hydrates.
+// Wrapped in try/catch to handle iOS Safari private browsing where
+// localStorage access throws a SecurityError.
 // ---------------------------------------------------------------------------
 
 const DARK_THEME_SCRIPT =
-  `(function(){var k='vitepress-theme-appearance';` +
-  `if(!localStorage.getItem(k))localStorage.setItem(k,'dark');})()`
+  `(function(){try{var k='vitepress-theme-appearance';` +
+  `if(!localStorage.getItem(k))localStorage.setItem(k,'dark');}catch(e){}})()`
 
 // ---------------------------------------------------------------------------
-// Head tags — shared between locales (theme-independent)
+// Head tags — shared between locales (theme-independent).
+// Note: VitePress deduplicates head tags by content, so spreading SHARED_HEAD
+// into both locales does not cause double-execution.
 // ---------------------------------------------------------------------------
 
 const SHARED_HEAD = [
@@ -114,9 +118,9 @@ const sidebarRu: DefaultTheme.Sidebar = [
     text: '⚔️ Shindo Life 2',
     collapsed: false,
     items: [
-      { text: 'Проблемы Shindo Life', link: '/news/shindo-issues', badge: { type: 'danger', text: 'Актуально' } },
-      { text: 'Гайд',                 link: '/shindo-life/guide',  badge: { type: 'tip',    text: 'Читать'    } },
-      { text: 'Советы и фишки',       link: '/shindo-life/tips',   badge: { type: 'warning', text: 'Важно'   } },
+      { text: 'Проблемы Shindo Life', link: '/news/shindo-issues', badge: { type: 'danger',  text: 'Актуально' } },
+      { text: 'Гайд',                 link: '/shindo-life/guide',  badge: { type: 'tip',     text: 'Читать'    } },
+      { text: 'Советы и фишки',       link: '/shindo-life/tips',   badge: { type: 'warning', text: 'Важно'     } },
     ],
   },
   {
@@ -162,10 +166,30 @@ const sidebarEn: DefaultTheme.Sidebar = [
 
 export default defineConfig({
   base:        BASE_PATH,
-  appearance:  true,
   cleanUrls:   true,
   lastUpdated: true,
-  sitemap: { hostname: SITE_HOSTNAME }, // bare hostname — VitePress appends base automatically
+
+  // ---------------------------------------------------------------------------
+  // Rewrites — map section index pages to their first content page.
+  // This eliminates the need for runtime redirect scripts and avoids
+  // any blank-page flash on breadcrumb intermediate links.
+  // ---------------------------------------------------------------------------
+  rewrites: {
+    'shindo-life/index.md':    'shindo-life/guide.md',
+    'rell-seas/index.md':      'rell-seas/guide.md',
+    'news/index.md':           'news/shindo-issues.md',
+    'en/shindo-life/index.md': 'en/shindo-life/guide.md',
+    'en/rell-seas/index.md':   'en/rell-seas/guide.md',
+    'en/news/index.md':        'en/news/shindo-issues.md',
+  },
+
+  // sitemap.hostname must be the bare origin — VitePress appends base automatically.
+  // transformItems filters out EN locale pages (they carry robots=noindex anyway).
+  sitemap: {
+    hostname: SITE_HOSTNAME,
+    transformItems: items => items.filter(item => !item.url.startsWith('en/')),
+  },
+
   markdown: {
     lineNumbers: true,
     image: { lazyLoading: true },
@@ -190,6 +214,7 @@ export default defineConfig({
         ['meta', { property: 'og:locale',      content: 'ru_RU' }],
         ['meta', { property: 'og:title',       content: 'Rell Games Docs' }],
         ['meta', { property: 'og:description', content: 'Гайды, тир-листы и механики игр Rell Games' }],
+        ['link', { rel: 'canonical',           href: FULL_URL }],
       ],
       themeConfig: {
         logo:                DEFAULT_LOGO,
@@ -261,6 +286,7 @@ export default defineConfig({
         ['meta', { property: 'og:title',       content: 'Rell Games Docs' }],
         ['meta', { property: 'og:description', content: 'Guides, tier lists and mechanics for Rell Games' }],
         ['meta', { name: 'robots',             content: 'noindex' }],
+        ['link', { rel: 'canonical',           href: `${FULL_URL}en/` }],
       ],
       themeConfig: {
         logo:                DEFAULT_LOGO,
