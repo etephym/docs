@@ -30,7 +30,8 @@ html.dark { background-color: #0d0d0d; }
    Navbar — sticky with frosted-glass backdrop
    --------------------------------------------------------------------------- */
 
-.VPNav { position: sticky; top: 0; }
+/* Sticky positioning + pre-hydration border to prevent flash */
+.VPNav { position: sticky; top: 0; border-bottom: 1px solid #1f1f1f; }
 
 /* Pseudo-element carries the blur so it doesn't affect child stacking contexts */
 .VPNav::before {
@@ -45,8 +46,6 @@ html.dark { background-color: #0d0d0d; }
 .dark .VPNav           { border-bottom: 1px solid #1f1f1f; background: rgba(13,13,13,0.4) !important; }
 html:not(.dark) .VPNav { background: rgba(255,255,255,0.4) !important; }
 
-/* Prevent white border flash before Vue hydration adds .dark class */
-.VPNav { border-bottom: 1px solid #1f1f1f; }
 
 /* ---------------------------------------------------------------------------
    Sidebar — frosted glass with animated aurora border
@@ -97,17 +96,6 @@ html:not(.dark) .VPSidebar {
 }
 .dark .VPLocalNav           { border-bottom: 1px solid #1f1f1f !important; background: rgba(13,13,13,0.4) !important; }
 html:not(.dark) .VPLocalNav { background: rgba(255,255,255,0.4) !important; }
-
-/* ---------------------------------------------------------------------------
-   VPNavScreen — full-screen mobile navigation overlay
-   --------------------------------------------------------------------------- */
-
-.VPNavScreen {
-  backdrop-filter: blur(6px) !important;
-  -webkit-backdrop-filter: blur(6px) !important;
-}
-.dark .VPNavScreen           { background: rgba(13,13,13,0.75) !important; }
-html:not(.dark) .VPNavScreen { background: rgba(255,255,255,0.75) !important; }
 
 /* ── Nav screen menu items — glass cards ────────────────────────────────── */
 .VPNavScreenMenuLink,
@@ -443,6 +431,12 @@ html:not(.dark) .VPNavBarSearchButton:hover {
   }
 }
 
+/* Hide the Ctrl K shortcut hint inside the search button */
+.VPNavBarSearchButton kbd,
+.VPNavBarSearchButton .meta-key {
+  display: none !important;
+}
+
 /* ---------------------------------------------------------------------------
    Mobile nav overlay — darker, blurrier backdrop
    --------------------------------------------------------------------------- */
@@ -455,12 +449,4 @@ html:not(.dark) .VPNavBarSearchButton:hover {
 .dark .VPNavScreen           { background: rgba(8,8,8,0.88) !important; }
 html:not(.dark) .VPNavScreen { background: rgba(255,255,255,0.88) !important; }
 
-/* ---------------------------------------------------------------------------
-   Keyboard shortcut hint in search button
-   --------------------------------------------------------------------------- */
 
-.VPNavBarSearchButton .DocSearch-Button-Key,
-.search-keyboard-hint {
-  font-size: 11px;
-  opacity:   0.6;
-}

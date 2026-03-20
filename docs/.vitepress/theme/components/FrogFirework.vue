@@ -1,14 +1,27 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
+import { isHomePath } from '../utils/routing'
+
+// ---------------------------------------------------------------------------
+// Constants
+// ---------------------------------------------------------------------------
 
 const HOLD_DURATION  = 1500
 const FROG_EMOJI     = '🐸'
 const MOVE_THRESHOLD = 8
 const TOTAL_FROGS    = 22
 
+// ---------------------------------------------------------------------------
+// Route & site
+// ---------------------------------------------------------------------------
+
 const route    = useRoute()
 const { site } = useData()
+
+// ---------------------------------------------------------------------------
+// State
+// ---------------------------------------------------------------------------
 
 let active     = false
 let holdTimer:  ReturnType<typeof setTimeout> | null = null
@@ -17,13 +30,8 @@ let target:     HTMLElement | null = null
 let holdStartX = 0
 let holdStartY = 0
 
-function checkIsHome(): boolean {
-  const base = site.value.base
-  return route.path === base || route.path === `${base}en/`
-}
-
 // ---------------------------------------------------------------------------
-// Canvas — single fullscreen overlay, zero DOM per frame
+// Canvas particle system — single draw call per frame, zero DOM per frame
 // ---------------------------------------------------------------------------
 
 interface Particle {
@@ -36,11 +44,11 @@ interface Particle {
   duration: number
 }
 
-let canvas:    HTMLCanvasElement | null = null
-let ctx:       CanvasRenderingContext2D | null = null
+let canvas:   HTMLCanvasElement | null = null
+let ctx:      CanvasRenderingContext2D | null = null
 let particles: Particle[] = []
-let loopId:    number | null = null
-let lastTime:  number = 0
+let loopId:   number | null = null
+let lastTime: number = 0
 
 function createCanvas(): void {
   if (canvas) return
@@ -53,19 +61,30 @@ function createCanvas(): void {
     pointerEvents: 'none',
     zIndex:        '99999',
   })
-  canvas.width  = window.innerWidth
-  canvas.height = window.innerHeight
+  resizeCanvas()
   ctx = canvas.getContext('2d')
   document.body.appendChild(canvas)
+  window.addEventListener('resize', resizeCanvas, { passive: true })
+}
+
+function resizeCanvas(): void {
+  if (!canvas) return
+  canvas.width  = window.innerWidth
+  canvas.height = window.innerHeight
 }
 
 function destroyCanvas(): void {
+  window.removeEventListener('resize', resizeCanvas)
   if (loopId !== null) { cancelAnimationFrame(loopId); loopId = null }
   particles = []
   canvas?.remove()
   canvas = null
   ctx    = null
 }
+
+// ---------------------------------------------------------------------------
+// Particle loop — frame-rate independent via delta time
+// ---------------------------------------------------------------------------
 
 function tick(now: number): void {
   if (!ctx || !canvas) return
@@ -74,7 +93,12 @@ function tick(now: number): void {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  let alive = false
+  // Set font once per frame — all frogs use serif, size varies per particle
+  // but setting font per-particle triggers expensive shaping; grouped sizes
+  // would need sorting. Acceptable trade-off: set inside loop but only when size changes.
+  let lastSize = -1
+  let alive    = false
+
   for (let i = 0; i < particles.length; i++) {
     const p = particles[i]
     const t = (now - p.startTime) / p.duration
@@ -96,15 +120,23 @@ function tick(now: number): void {
     ctx.translate(p.x, p.y)
     ctx.rotate(p.rot * Math.PI / 180)
     ctx.scale(scale, scale)
-    ctx.font        = `${p.size}px serif`
-    ctx.textAlign   = 'center'
+    // Only update font when size actually changes — avoids re-shaping every frame
+    if (p.size !== lastSize) {
+      ctx.font = `${p.size}px serif`
+      lastSize = p.size
+    }
+    ctx.textAlign    = 'center'
     ctx.textBaseline = 'middle'
     ctx.fillText(FROG_EMOJI, 0, 0)
     ctx.restore()
   }
 
-  // Prune finished particles
-  particles = particles.filter(p => (now - p.startTime) / p.duration < 1)
+  // Prune finished particles — splice in-place to avoid per-frame allocation
+  for (let i = particles.length - 1; i >= 0; i--) {
+    if ((now - particles[i].startTime) / particles[i].duration >= 1) {
+      particles.splice(i, 1)
+    }
+  }
 
   if (alive) {
     loopId = requestAnimationFrame(tick)
@@ -115,7 +147,7 @@ function tick(now: number): void {
 }
 
 // ---------------------------------------------------------------------------
-// Image rect
+// Image rect helper — finds the currently visible hero image
 // ---------------------------------------------------------------------------
 
 function getImageRect(): DOMRect | null {
@@ -128,19 +160,18 @@ function getImageRect(): DOMRect | null {
 }
 
 // ---------------------------------------------------------------------------
-// Launch
+// Firework launch
 // ---------------------------------------------------------------------------
 
 function launchFirework(): void {
   const rect = getImageRect()
   if (!rect) return
 
-  const mobile = window.innerWidth < 768
-  const cx = rect.left + rect.width  / 2
-  const cy = rect.top  + rect.height / 2
-  const rx = rect.width  / 2
-  const ry = rect.height / 2
-
+  const mobile       = window.innerWidth < 768
+  const cx           = rect.left + rect.width  / 2
+  const cy           = rect.top  + rect.height / 2
+  const rx           = rect.width  / 2
+  const ry           = rect.height / 2
   const speedScale   = mobile ? 0.38 : 1.0
   const gravityScale = mobile ? 0.45 : 1.0
   const now          = performance.now()
@@ -160,11 +191,14 @@ function launchFirework(): void {
       rot:       0,
       spin:      (Math.random() - 0.5) * 7,
       gravity:   (0.14 + Math.random() * 0.07) * gravityScale,
-      size:      18 + Math.random() * 16,
+      size:      Math.round(18 + Math.random() * 16), // rounded to reduce unique font sizes
       startTime: now + Math.random() * 25,
       duration:  1800 + Math.random() * 500,
     })
   }
+
+  // Sort by size so font only changes when necessary in the loop
+  particles.sort((a, b) => a.size - b.size)
 
   if (loopId === null) {
     lastTime = now
@@ -173,18 +207,19 @@ function launchFirework(): void {
 }
 
 // ---------------------------------------------------------------------------
-// Context menu
+// Context menu prevention — hero image only
 // ---------------------------------------------------------------------------
 
 const onContextMenu = (e: Event) => e.preventDefault()
 
 // ---------------------------------------------------------------------------
-// Hold logic
+// Hold detection
 // ---------------------------------------------------------------------------
 
 function startHold(x: number, y: number): void {
   if (!active) return
-  holdStartX = x; holdStartY = y
+  holdStartX = x
+  holdStartY = y
   if (holdTimer) clearTimeout(holdTimer)
   holdTimer = setTimeout(() => { holdTimer = null; launchFirework() }, HOLD_DURATION)
 }
@@ -207,12 +242,13 @@ const onTouchMove  = (e: TouchEvent) => checkMove(e.touches[0].clientX, e.touche
 const onTouchEnd   = () => cancelHold()
 
 // ---------------------------------------------------------------------------
-// Attach / detach
+// Attach / detach listeners to the hero image container
 // ---------------------------------------------------------------------------
 
 function attach(): void {
   detach()
   if (!active) return
+
   function tryAttach(n: number): void {
     const el = document.querySelector<HTMLElement>('.VPHero .image-container')
     if (el) {
@@ -229,6 +265,7 @@ function attach(): void {
     }
     if (n > 0) retryTimer = setTimeout(() => tryAttach(n - 1), 50)
   }
+
   tryAttach(20)
 }
 
@@ -248,8 +285,12 @@ function detach(): void {
   target = null
 }
 
+// ---------------------------------------------------------------------------
+// Lifecycle
+// ---------------------------------------------------------------------------
+
 function activate(): void {
-  active = checkIsHome()
+  active = isHomePath(route.path, site.value.base)
   attach()
 }
 

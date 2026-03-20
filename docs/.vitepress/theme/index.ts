@@ -20,6 +20,7 @@ import 'vitepress-plugin-nprogress/lib/css/index.css'
 // ---------------------------------------------------------------------------
 
 import { setupMusicPlayer } from './musicPlayer'
+import { isHomePath } from './utils/routing'
 
 import Breadcrumb      from './components/Breadcrumb.vue'
 import ReadingTime     from './components/ReadingTime.vue'
@@ -33,25 +34,28 @@ import NotFound        from './components/NotFound.vue'
 import './custom.css'
 
 // ---------------------------------------------------------------------------
-// Keyboard shortcut — '/' opens search, 'Escape' closes it
+// Keyboard shortcut — '/' opens local search when not in an input field
 // ---------------------------------------------------------------------------
 
-function setupKeyboardShortcuts(): void {
-  window.addEventListener('keydown', (e: KeyboardEvent) => {
+let keydownHandler: ((e: KeyboardEvent) => void) | null = null
+
+function setupKeyboardShortcuts(): () => void {
+  keydownHandler = (e: KeyboardEvent) => {
     if (e.key !== '/') return
     const el = document.activeElement as HTMLElement
-    if (
-      el?.tagName === 'INPUT'    ||
-      el?.tagName === 'TEXTAREA' ||
-      el?.isContentEditable
-    ) return
+    if (el?.tagName === 'INPUT' || el?.tagName === 'TEXTAREA' || el?.isContentEditable) return
     e.preventDefault()
     document.querySelector<HTMLButtonElement>('.VPNavBarSearchButton')?.click()
-  })
+  }
+  window.addEventListener('keydown', keydownHandler)
+  // Returns cleanup function
+  return () => {
+    if (keydownHandler) window.removeEventListener('keydown', keydownHandler)
+  }
 }
 
 // ---------------------------------------------------------------------------
-// ZoomSetup
+// ZoomSetup — attaches medium-zoom to doc images; re-initialises on navigation
 // ---------------------------------------------------------------------------
 
 const ZoomSetup = {
@@ -73,7 +77,7 @@ const ZoomSetup = {
 }
 
 // ---------------------------------------------------------------------------
-// HeadingHighlight
+// HeadingHighlight — underlines the hash-target heading for 2.5s after jump
 // ---------------------------------------------------------------------------
 
 const HeadingHighlight = {
@@ -103,7 +107,7 @@ const HeadingHighlight = {
 }
 
 // ---------------------------------------------------------------------------
-// ProgressWrapper
+// ProgressWrapper — renders ReadingProgress only on non-home pages
 // ---------------------------------------------------------------------------
 
 const ProgressWrapper = {
@@ -111,11 +115,7 @@ const ProgressWrapper = {
   setup() {
     const route    = useRoute()
     const { site } = useData()
-    return () => {
-      const base   = site.value.base
-      const isHome = route.path === base || route.path === `${base}en/`
-      return isHome ? null : h(ReadingProgress)
-    }
+    return () => isHomePath(route.path, site.value.base) ? null : h(ReadingProgress)
   },
 }
 
@@ -145,8 +145,8 @@ export default {
 
   enhanceApp(ctx: EnhanceAppContext) {
     DefaultTheme.enhanceApp(ctx)
-    vitepressNprogress(ctx)
     if (typeof window !== 'undefined') {
+      vitepressNprogress(ctx)
       requestAnimationFrame(setupMusicPlayer)
       setupKeyboardShortcuts()
     }

@@ -1,8 +1,4 @@
 <script setup lang="ts">
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import { useData } from 'vitepress'
 
 // ---------------------------------------------------------------------------
@@ -17,12 +13,11 @@ const { page } = useData()
   <div v-if="page.filePath" class="copyright-block">
     <div class="copyright-inner">
       <span>
-        <a href="https://github.com/etephym/shindo" target="_blank" rel="noopener noreferrer">Shindo Life Docs</a>
+        <a href="https://github.com/etephym/rell-docs" target="_blank" rel="noopener noreferrer">Rell Games Docs</a>
         © 2024–2026 by
         <a href="https://github.com/ezrqq" target="_blank" rel="noopener noreferrer">ezrqq / lewisky</a>
         is licensed under
         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a>
-        <!-- CC license icons -->
         <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC" />
         <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="BY" />
         <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="NC" />
@@ -33,21 +28,18 @@ const { page } = useData()
 </template>
 
 <style scoped>
-/* ── Outer wrapper — sits below the doc content with a divider ───────────── */
 .copyright-block {
   margin-top:  48px;
   padding-top: 20px;
   border-top:  1px solid var(--vp-c-divider);
 }
 
-/* ── Inner text ──────────────────────────────────────────────────────────── */
 .copyright-inner {
   font-size:   13px;
   color:       var(--vp-c-text-2);
   line-height: 1.6;
 }
 
-/* ── Links ───────────────────────────────────────────────────────────────── */
 .copyright-inner a {
   color:                 var(--vp-c-text-2);
   text-decoration:       underline;
@@ -55,7 +47,6 @@ const { page } = useData()
 }
 .copyright-inner a:hover { color: var(--vp-c-brand); }
 
-/* ── CC icons — displayed inline next to the license name ───────────────── */
 .copyright-inner img {
   display:        inline-block;
   max-width:      1em;

@@ -2,6 +2,7 @@ import { defineConfig, type DefaultTheme } from 'vitepress'
 import {
   BASE_PATH,
   FULL_URL,
+  SITE_HOSTNAME,
   GITHUB_REPO_URL,
   EDIT_LINK,
   DISCORD_URL,
@@ -22,14 +23,9 @@ const SOCIAL_LINKS: DefaultTheme.SocialLink[] = [
 // Footer — CC license icons generated from an array to avoid repetition
 // ---------------------------------------------------------------------------
 
-const CC_ICONS = [
-  { file: 'cc', alt: 'CC' },
-  { file: 'by', alt: 'BY' },
-  { file: 'nc', alt: 'NC' },
-  { file: 'sa', alt: 'SA' },
-].map(({ file, alt }) =>
-  `<img src="https://mirrors.creativecommons.org/presskit/icons/${file}.svg" alt="${alt}" width="18" height="18">`
-).join('')
+const CC_ICONS = (['cc', 'by', 'nc', 'sa'] as const)
+  .map(file => `<img src="https://mirrors.creativecommons.org/presskit/icons/${file}.svg" alt="${file.toUpperCase()}" width="18" height="18">`)
+  .join('')
 
 const FOOTER_MESSAGE =
   '<a href="https://github.com/ezrqq" target="_blank" rel="noopener noreferrer">ezrqq / lewisky</a>' +
@@ -67,52 +63,34 @@ const DEFAULT_LOGO = {
 } satisfies DefaultTheme.ThemeableImage
 
 // ---------------------------------------------------------------------------
-// Search — configured once in the root locale with per-locale translations.
-// Using themeConfig.search.options.locales is the correct VitePress pattern
-// for i18n; putting search in each locale's themeConfig causes only the last
-// one to apply.
+// Search — configured once at top-level themeConfig with per-locale translations.
+// Placing search inside locales[x].themeConfig causes only one locale to apply.
 // ---------------------------------------------------------------------------
 
 const SEARCH: DefaultTheme.Config['search'] = {
   provider: 'local',
   options: {
     miniSearch: { searchOptions: { fuzzy: 0.2, prefix: true } },
-    // Russian translations (root locale / default)
     translations: {
-      button: {
-        buttonText:      'Поиск',
-        buttonAriaLabel: 'Поиск',
-      },
+      button: { buttonText: 'Поиск', buttonAriaLabel: 'Поиск' },
       modal: {
         displayDetails:   'Подробный список',
         resetButtonTitle: 'Сбросить',
         backButtonTitle:  'Закрыть',
         noResultsText:    'Ничего не найдено по запросу',
-        footer: {
-          selectText:   'Выбрать',
-          navigateText: 'Навигация',
-          closeText:    'Закрыть',
-        },
+        footer: { selectText: 'Выбрать', navigateText: 'Навигация', closeText: 'Закрыть' },
       },
     },
-    // English translations via locales subkey
     locales: {
       en: {
         translations: {
-          button: {
-            buttonText:      'Search',
-            buttonAriaLabel: 'Search',
-          },
+          button: { buttonText: 'Search', buttonAriaLabel: 'Search' },
           modal: {
             displayDetails:   'Show detailed list',
             resetButtonTitle: 'Reset',
             backButtonTitle:  'Close',
             noResultsText:    'No results for',
-            footer: {
-              selectText:   'Select',
-              navigateText: 'Navigate',
-              closeText:    'Close',
-            },
+            footer: { selectText: 'Select', navigateText: 'Navigate', closeText: 'Close' },
           },
         },
       },
@@ -137,8 +115,8 @@ const sidebarRu: DefaultTheme.Sidebar = [
     collapsed: false,
     items: [
       { text: 'Проблемы Shindo Life', link: '/news/shindo-issues', badge: { type: 'danger', text: 'Актуально' } },
-      { text: 'Гайд',           link: '/shindo-life/guide', badge: { type: 'tip',     text: 'Читать' } },
-      { text: 'Советы и фишки', link: '/shindo-life/tips',  badge: { type: 'warning', text: 'Важно'  } },
+      { text: 'Гайд',                 link: '/shindo-life/guide',  badge: { type: 'tip',    text: 'Читать'    } },
+      { text: 'Советы и фишки',       link: '/shindo-life/tips',   badge: { type: 'warning', text: 'Важно'   } },
     ],
   },
   {
@@ -164,8 +142,8 @@ const sidebarEn: DefaultTheme.Sidebar = [
     collapsed: false,
     items: [
       { text: 'Shindo Life Issues', link: '/en/news/shindo-issues', badge: { type: 'danger', text: 'Active' } },
-      { text: 'Guide',         link: '/en/shindo-life/guide', badge: { type: 'info', text: 'Soon' } },
-      { text: 'Tips & Tricks', link: '/en/shindo-life/tips',  badge: { type: 'info', text: 'Soon' } },
+      { text: 'Guide',              link: '/en/shindo-life/guide',   badge: { type: 'info',   text: 'Soon'   } },
+      { text: 'Tips & Tricks',      link: '/en/shindo-life/tips',    badge: { type: 'info',   text: 'Soon'   } },
     ],
   },
   {
@@ -187,14 +165,13 @@ export default defineConfig({
   appearance:  true,
   cleanUrls:   true,
   lastUpdated: true,
-  metaChunk:   true,
-  sitemap: { hostname: FULL_URL },
+  sitemap: { hostname: SITE_HOSTNAME }, // bare hostname — VitePress appends base automatically
   markdown: {
     lineNumbers: true,
     image: { lazyLoading: true },
   },
 
-  // Search must be at top-level themeConfig — VitePress ignores it inside locales
+  // Search must be at top-level themeConfig — ignored inside locales
   themeConfig: {
     search: SEARCH,
   },
@@ -204,19 +181,19 @@ export default defineConfig({
     root: {
       label:         'Русский',
       lang:          'ru-RU',
-      title:         'Shindo Life Docs',
-      titleTemplate: ':title · Shindo Life',
-      description:   'Гайды, тир-листы и механики Shindo Life от ETEPHYM',
+      title:         'Rell Games Docs',
+      titleTemplate: ':title · Rell Games',
+      description:   'Гайды, тир-листы и механики игр Rell Games от ETEPHYM',
       head: [
         ...SHARED_HEAD,
         ['meta', { property: 'og:url',         content: FULL_URL }],
         ['meta', { property: 'og:locale',      content: 'ru_RU' }],
-        ['meta', { property: 'og:title',       content: 'Shindo Life Docs' }],
-        ['meta', { property: 'og:description', content: 'Гайды, тир-листы и механики Shindo Life' }],
+        ['meta', { property: 'og:title',       content: 'Rell Games Docs' }],
+        ['meta', { property: 'og:description', content: 'Гайды, тир-листы и механики игр Rell Games' }],
       ],
       themeConfig: {
         logo:                DEFAULT_LOGO,
-        siteTitle:           'Shindo Life',
+        siteTitle:           'Rell Games',
         nav: [
           { text: '🏠 Главная', link: '/' },
           { text: '📌 О проекте', link: '/about' },
@@ -253,7 +230,7 @@ export default defineConfig({
           linkText:  '← Вернуться на главную',
           code:      '404',
         },
-        docFooter:            { prev: '← Предыдущая', next: 'Следующая →' },
+        docFooter:   { prev: '← Предыдущая', next: 'Следующая →' },
         lastUpdated: {
           text:          'Обновлено',
           formatOptions: { dateStyle: 'long', timeStyle: 'short' },
@@ -264,9 +241,8 @@ export default defineConfig({
         },
         footer: {
           message:   FOOTER_MESSAGE,
-          copyright: 'Shindo Life Docs © 2024–2026',
+          copyright: 'Rell Games Docs © 2024–2026',
         },
-
       },
     },
 
@@ -275,20 +251,20 @@ export default defineConfig({
       label:         'English',
       lang:          'en-US',
       link:          '/en/',
-      title:         'Shindo Life Docs',
-      titleTemplate: ':title · Shindo Life',
-      description:   'Guides, tier lists and mechanics for Shindo Life by ETEPHYM',
+      title:         'Rell Games Docs',
+      titleTemplate: ':title · Rell Games',
+      description:   'Guides, tier lists and mechanics for Rell Games by ETEPHYM',
       head: [
         ...SHARED_HEAD,
         ['meta', { property: 'og:url',         content: `${FULL_URL}en/` }],
         ['meta', { property: 'og:locale',      content: 'en_US' }],
-        ['meta', { property: 'og:title',       content: 'Shindo Life Docs' }],
-        ['meta', { property: 'og:description', content: 'Guides, tier lists and mechanics for Shindo Life' }],
+        ['meta', { property: 'og:title',       content: 'Rell Games Docs' }],
+        ['meta', { property: 'og:description', content: 'Guides, tier lists and mechanics for Rell Games' }],
         ['meta', { name: 'robots',             content: 'noindex' }],
       ],
       themeConfig: {
         logo:                DEFAULT_LOGO,
-        siteTitle:           'Shindo Life',
+        siteTitle:           'Rell Games',
         nav: [
           { text: '🏠 Home', link: '/en/' },
           { text: '📌 About', link: '/en/about' },
@@ -325,7 +301,7 @@ export default defineConfig({
           linkText:  '← Back to home',
           code:      '404',
         },
-        docFooter:            { prev: '← Previous', next: 'Next →' },
+        docFooter:   { prev: '← Previous', next: 'Next →' },
         lastUpdated: {
           text:          'Updated',
           formatOptions: { dateStyle: 'long', timeStyle: 'short' },
@@ -336,9 +312,8 @@ export default defineConfig({
         },
         footer: {
           message:   FOOTER_MESSAGE,
-          copyright: 'Shindo Life Docs © 2024–2026',
+          copyright: 'Rell Games Docs © 2024–2026',
         },
-
       },
     },
   },

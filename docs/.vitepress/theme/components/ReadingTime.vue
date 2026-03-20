@@ -1,10 +1,7 @@
 <script setup lang="ts">
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import { nextTick, onMounted, ref, watch, computed } from 'vue'
-import { useRoute } from 'vitepress'
+import { useData, useRoute } from 'vitepress'
+import { isEnglishPath } from '../utils/routing'
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -25,8 +22,9 @@ const readingTime = ref(0)
 // ---------------------------------------------------------------------------
 
 const route = useRoute()
+const { site } = useData()
 
-const isEn       = computed(() => route.path.includes('/en/'))
+const isEn       = computed(() => isEnglishPath(route.path, site.value.base))
 const labelWords = computed(() => isEn.value ? 'words'    : 'слов')
 const labelMin   = computed(() => isEn.value ? 'min read' : 'мин. чтения')
 
@@ -42,7 +40,7 @@ function calculate(): void {
     return
   }
 
-  // Clone the element to strip UI-only nodes (copy buttons etc.) before counting
+  // Clone to strip UI-only nodes (copy buttons etc.) before counting
   const clone = el.cloneNode(true) as HTMLElement
   clone.querySelectorAll('.copy-heading-btn').forEach(b => b.remove())
 
@@ -51,7 +49,7 @@ function calculate(): void {
   readingTime.value = Math.max(1, Math.ceil(words / WORDS_PER_MINUTE))
 }
 
-/** Waits for Vue + browser paint before measuring, so content is fully rendered. */
+/** Waits for Vue + browser paint before measuring so content is fully rendered. */
 function scheduleCalculate(): void {
   nextTick(() => requestAnimationFrame(calculate))
 }
@@ -61,13 +59,11 @@ function scheduleCalculate(): void {
 // ---------------------------------------------------------------------------
 
 onMounted(scheduleCalculate)
-watch(() => route.path, scheduleCalculate) // recalculate on SPA navigation
+watch(() => route.path, scheduleCalculate)
 </script>
 
 <template>
-  <!-- Hidden when word count is zero (e.g. home page or empty doc) -->
   <div v-if="wordCount > 0" class="reading-meta">
-    <!-- Word count with book icon -->
     <span class="meta-item">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
@@ -78,7 +74,6 @@ watch(() => route.path, scheduleCalculate) // recalculate on SPA navigation
 
     <span class="sep" aria-hidden="true">·</span>
 
-    <!-- Reading time with clock icon -->
     <span class="meta-item">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <circle cx="12" cy="12" r="10"/>
@@ -90,7 +85,6 @@ watch(() => route.path, scheduleCalculate) // recalculate on SPA navigation
 </template>
 
 <style scoped>
-/* ── Container ───────────────────────────────────────────────────────────── */
 .reading-meta {
   display:       inline-flex;
   align-items:   center;
@@ -104,9 +98,6 @@ watch(() => route.path, scheduleCalculate) // recalculate on SPA navigation
   border:        1px solid var(--vp-c-divider);
 }
 
-/* ── Individual stat item (icon + text) ──────────────────────────────────── */
 .meta-item { display: flex; align-items: center; gap: 5px; }
-
-/* ── Dot separator ───────────────────────────────────────────────────────── */
-.sep { opacity: 0.3; }
+.sep       { opacity: 0.3; }
 </style>

@@ -71,7 +71,7 @@ function update(): void {
     : scrollY >= total ? 100 : Math.round((scrollY / total) * 100)
 
   visible.value = scrollY > 100
-  idle.value    = false
+  if (idle.value) idle.value = false
 
   // Switch to arrow icon after 3 s of inactivity
   if (idleTimer) clearTimeout(idleTimer)
