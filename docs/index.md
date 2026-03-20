@@ -2,12 +2,12 @@
 layout: home
 
 title: Rell Games Docs
-description: Гайды и механики по играм Rell Games от ETEPHYM
+description: Guides and mechanics for Rell Games by ETEPHYM
 
 hero:
   name: "Rell Games"
   text: "Docs by ETEPHYM"
-  tagline: Все гайды, тир-листы и механики в одном месте
+  tagline: All guides, tier lists and mechanics in one place
   image:
     dark: /logo.png
     light: /logo2.png
@@ -15,10 +15,10 @@ hero:
   actions:
     - theme: brand
       text: 📖 Shindo Life
-      link: /shindo-life/guide
+      link: /en/shindo-life/guide
     - theme: alt
       text: 🌊 Rell Seas
-      link: /rell-seas/guide
+      link: /en/rell-seas/guide
     - theme: alt
       text: Discord
       link: https://discord.gg/cmCpgkb5zq
@@ -27,25 +27,25 @@ features:
   - icon: ⚔️
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
-    link: /shindo-life/guide
+    link: /en/shindo-life/guide
   - icon: 🧪
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
-    link: /shindo-life/guide
+    link: /en/shindo-life/guide
   - icon: 💊
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
-    link: /shindo-life/guide
+    link: /en/shindo-life/guide
   - icon: 💡
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
-    link: /shindo-life/tips
+    link: /en/shindo-life/tips
   - icon: 📖
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
-    link: /shindo-life/guide
+    link: /en/shindo-life/guide
   - icon: 🐛
     title: NEED TO BE EDIT
     details: NEED TO BE EDIT
-    link: /shindo-life/guide
+    link: /en/shindo-life/guide
 ---

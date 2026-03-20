@@ -35,8 +35,7 @@ const FOOTER_MESSAGE =
 
 // ---------------------------------------------------------------------------
 // Inline script — forces dark mode on first visit before Vue hydrates.
-// Wrapped in try/catch to handle iOS Safari private browsing where
-// localStorage access throws a SecurityError.
+// Wrapped in try/catch for iOS Safari private browsing compatibility.
 // ---------------------------------------------------------------------------
 
 const DARK_THEME_SCRIPT =
@@ -45,8 +44,7 @@ const DARK_THEME_SCRIPT =
 
 // ---------------------------------------------------------------------------
 // Head tags — shared between locales (theme-independent).
-// Note: VitePress deduplicates head tags by content, so spreading SHARED_HEAD
-// into both locales does not cause double-execution.
+// VitePress deduplicates head tags by content — no double-execution.
 // ---------------------------------------------------------------------------
 
 const SHARED_HEAD = [
@@ -76,25 +74,25 @@ const SEARCH: DefaultTheme.Config['search'] = {
   options: {
     miniSearch: { searchOptions: { fuzzy: 0.2, prefix: true } },
     translations: {
-      button: { buttonText: 'Поиск', buttonAriaLabel: 'Поиск' },
+      button: { buttonText: 'Search', buttonAriaLabel: 'Search' },
       modal: {
-        displayDetails:   'Подробный список',
-        resetButtonTitle: 'Сбросить',
-        backButtonTitle:  'Закрыть',
-        noResultsText:    'Ничего не найдено по запросу',
-        footer: { selectText: 'Выбрать', navigateText: 'Навигация', closeText: 'Закрыть' },
+        displayDetails:   'Show detailed list',
+        resetButtonTitle: 'Reset',
+        backButtonTitle:  'Close',
+        noResultsText:    'No results for',
+        footer: { selectText: 'Select', navigateText: 'Navigate', closeText: 'Close' },
       },
     },
     locales: {
-      en: {
+      ru: {
         translations: {
-          button: { buttonText: 'Search', buttonAriaLabel: 'Search' },
+          button: { buttonText: 'Поиск', buttonAriaLabel: 'Поиск' },
           modal: {
-            displayDetails:   'Show detailed list',
-            resetButtonTitle: 'Reset',
-            backButtonTitle:  'Close',
-            noResultsText:    'No results for',
-            footer: { selectText: 'Select', navigateText: 'Navigate', closeText: 'Close' },
+            displayDetails:   'Подробный список',
+            resetButtonTitle: 'Сбросить',
+            backButtonTitle:  'Закрыть',
+            noResultsText:    'Ничего не найдено по запросу',
+            footer: { selectText: 'Выбрать', navigateText: 'Навигация', closeText: 'Закрыть' },
           },
         },
       },
@@ -106,56 +104,56 @@ const SEARCH: DefaultTheme.Config['search'] = {
 // Sidebars
 // ---------------------------------------------------------------------------
 
-const sidebarRu: DefaultTheme.Sidebar = [
-  {
-    text: '📌 Закреплено',
-    collapsed: false,
-    items: [
-      { text: 'О проекте', link: '/about' },
-    ],
-  },
-  {
-    text: '⚔️ Shindo Life 2',
-    collapsed: false,
-    items: [
-      { text: 'Проблемы Shindo Life', link: '/news/shindo-issues', badge: { type: 'danger',  text: 'Актуально' } },
-      { text: 'Гайд',                 link: '/shindo-life/guide',  badge: { type: 'tip',     text: 'Читать'    } },
-      { text: 'Советы и фишки',       link: '/shindo-life/tips',   badge: { type: 'warning', text: 'Важно'     } },
-    ],
-  },
-  {
-    text: '🌊 Rell Seas',
-    collapsed: false,
-    items: [
-      { text: 'Гайд',           link: '/rell-seas/guide', badge: { type: 'tip',  text: 'Скоро' } },
-      { text: 'Советы и фишки', link: '/rell-seas/tips',  badge: { type: 'info', text: 'Скоро' } },
-    ],
-  },
-]
-
 const sidebarEn: DefaultTheme.Sidebar = [
   {
     text: '📌 Pinned',
     collapsed: false,
     items: [
-      { text: 'About', link: '/en/about' },
+      { text: 'About', link: '/about' },
     ],
   },
   {
     text: '⚔️ Shindo Life 2',
     collapsed: false,
     items: [
-      { text: 'Shindo Life Issues', link: '/en/news/shindo-issues', badge: { type: 'danger', text: 'Active' } },
-      { text: 'Guide',              link: '/en/shindo-life/guide',   badge: { type: 'info',   text: 'Soon'   } },
-      { text: 'Tips & Tricks',      link: '/en/shindo-life/tips',    badge: { type: 'info',   text: 'Soon'   } },
+      { text: 'Shindo Life Issues', link: '/news/shindo-issues', badge: { type: 'danger', text: 'Active'  } },
+      { text: 'Guide',              link: '/shindo-life/guide',  badge: { type: 'tip',    text: 'Read'    } },
+      { text: 'Tips & Tricks',      link: '/shindo-life/tips',   badge: { type: 'warning', text: 'Important' } },
     ],
   },
   {
     text: '🌊 Rell Seas',
     collapsed: false,
     items: [
-      { text: 'Guide',         link: '/en/rell-seas/guide', badge: { type: 'info', text: 'Soon' } },
-      { text: 'Tips & Tricks', link: '/en/rell-seas/tips',  badge: { type: 'info', text: 'Soon' } },
+      { text: 'Guide',         link: '/rell-seas/guide', badge: { type: 'tip',  text: 'Soon' } },
+      { text: 'Tips & Tricks', link: '/rell-seas/tips',  badge: { type: 'info', text: 'Soon' } },
+    ],
+  },
+]
+
+const sidebarRu: DefaultTheme.Sidebar = [
+  {
+    text: '📌 Закреплено',
+    collapsed: false,
+    items: [
+      { text: 'О проекте', link: '/ru/about' },
+    ],
+  },
+  {
+    text: '⚔️ Shindo Life 2',
+    collapsed: false,
+    items: [
+      { text: 'Проблемы Shindo Life', link: '/ru/news/shindo-issues', badge: { type: 'danger',  text: 'Актуально' } },
+      { text: 'Гайд',                 link: '/ru/shindo-life/guide',  badge: { type: 'tip',     text: 'Читать'    } },
+      { text: 'Советы и фишки',       link: '/ru/shindo-life/tips',   badge: { type: 'warning', text: 'Важно'     } },
+    ],
+  },
+  {
+    text: '🌊 Rell Seas',
+    collapsed: false,
+    items: [
+      { text: 'Гайд',           link: '/ru/rell-seas/guide', badge: { type: 'tip',  text: 'Скоро' } },
+      { text: 'Советы и фишки', link: '/ru/rell-seas/tips',  badge: { type: 'info', text: 'Скоро' } },
     ],
   },
 ]
@@ -171,23 +169,22 @@ export default defineConfig({
 
   // ---------------------------------------------------------------------------
   // Rewrites — map section index pages to their first content page.
-  // This eliminates the need for runtime redirect scripts and avoids
-  // any blank-page flash on breadcrumb intermediate links.
+  // Eliminates runtime redirect scripts and blank-page flash.
   // ---------------------------------------------------------------------------
   rewrites: {
     'shindo-life/index.md':    'shindo-life/guide.md',
     'rell-seas/index.md':      'rell-seas/guide.md',
     'news/index.md':           'news/shindo-issues.md',
-    'en/shindo-life/index.md': 'en/shindo-life/guide.md',
-    'en/rell-seas/index.md':   'en/rell-seas/guide.md',
-    'en/news/index.md':        'en/news/shindo-issues.md',
+    'ru/shindo-life/index.md': 'ru/shindo-life/guide.md',
+    'ru/rell-seas/index.md':   'ru/rell-seas/guide.md',
+    'ru/news/index.md':        'ru/news/shindo-issues.md',
   },
 
-  // sitemap.hostname must be the bare origin — VitePress appends base automatically.
-  // transformItems filters out EN locale pages (they carry robots=noindex anyway).
+  // sitemap.hostname must be bare origin — VitePress appends base automatically.
+  // transformItems filters RU locale pages (secondary, noindex).
   sitemap: {
     hostname: SITE_HOSTNAME,
-    transformItems: items => items.filter(item => !item.url.startsWith('en/')),
+    transformItems: items => items.filter(item => !item.url.startsWith('ru/')),
   },
 
   markdown: {
@@ -201,110 +198,39 @@ export default defineConfig({
   },
 
   locales: {
-    // Russian — root locale (no /ru/ prefix)
+    // English — root locale (primary, no prefix)
     root: {
-      label:         'Русский',
-      lang:          'ru-RU',
-      title:         'Rell Games Docs',
-      titleTemplate: ':title · Rell Games',
-      description:   'Гайды, тир-листы и механики игр Rell Games от ETEPHYM',
-      head: [
-        ...SHARED_HEAD,
-        ['meta', { property: 'og:url',         content: FULL_URL }],
-        ['meta', { property: 'og:locale',      content: 'ru_RU' }],
-        ['meta', { property: 'og:title',       content: 'Rell Games Docs' }],
-        ['meta', { property: 'og:description', content: 'Гайды, тир-листы и механики игр Rell Games' }],
-      ],
-      themeConfig: {
-        logo:                DEFAULT_LOGO,
-        siteTitle:           'Rell Games',
-        nav: [
-          { text: '🏠 Главная', link: '/' },
-          { text: '📌 О проекте', link: '/about' },
-          {
-            text: '⚔️ Shindo Life 2',
-            items: [
-              { text: '🔴 Проблемы Shindo Life', link: '/news/shindo-issues' },
-              { text: '📖 Гайд',                 link: '/shindo-life/guide'  },
-              { text: '💡 Советы и фишки',       link: '/shindo-life/tips'   },
-            ],
-          },
-          {
-            text: '🌊 Rell Seas',
-            items: [
-              { text: '📖 Гайд',           link: '/rell-seas/guide' },
-              { text: '💡 Советы и фишки', link: '/rell-seas/tips'  },
-            ],
-          },
-        ],
-        sidebar:              sidebarRu,
-        socialLinks:          SOCIAL_LINKS,
-        outline:              { level: [2, 3], label: 'На этой странице' },
-        returnToTopLabel:     '↑ Наверх',
-        sidebarMenuLabel:     'Меню',
-        darkModeSwitchLabel:  'Тема',
-        lightModeSwitchTitle: 'Светлая тема',
-        darkModeSwitchTitle:  'Тёмная тема',
-        langMenuLabel:        'Сменить язык',
-        externalLinkIcon:     true,
-        notFound: {
-          title:     '🐸 Страница не найдена',
-          quote:     'Похоже, эта страница потерялась в тумане войны. Жаба тоже не знает где она.',
-          linkLabel: 'На главную',
-          linkText:  '← Вернуться на главную',
-          code:      '404',
-        },
-        docFooter:   { prev: '← Предыдущая', next: 'Следующая →' },
-        lastUpdated: {
-          text:          'Обновлено',
-          formatOptions: { dateStyle: 'long', timeStyle: 'short' },
-        },
-        editLink: {
-          pattern: EDIT_LINK,
-          text:    'Редактировать на GitHub',
-        },
-        footer: {
-          message:   FOOTER_MESSAGE,
-          copyright: 'Rell Games Docs © 2024–2026',
-        },
-      },
-    },
-
-    // English — served under /en/
-    en: {
       label:         'English',
       lang:          'en-US',
-      link:          '/en/',
       title:         'Rell Games Docs',
       titleTemplate: ':title · Rell Games',
       description:   'Guides, tier lists and mechanics for Rell Games by ETEPHYM',
       head: [
         ...SHARED_HEAD,
-        ['meta', { property: 'og:url',         content: `${FULL_URL}en/` }],
+        ['meta', { property: 'og:url',         content: FULL_URL }],
         ['meta', { property: 'og:locale',      content: 'en_US' }],
         ['meta', { property: 'og:title',       content: 'Rell Games Docs' }],
         ['meta', { property: 'og:description', content: 'Guides, tier lists and mechanics for Rell Games' }],
-        ['meta', { name: 'robots',             content: 'noindex' }],
       ],
       themeConfig: {
         logo:                DEFAULT_LOGO,
         siteTitle:           'Rell Games',
         nav: [
-          { text: '🏠 Home', link: '/en/' },
-          { text: '📌 About', link: '/en/about' },
+          { text: '🏠 Home', link: '/' },
+          { text: '📌 About', link: '/about' },
           {
             text: '⚔️ Shindo Life 2',
             items: [
-              { text: '🔴 Shindo Life Issues', link: '/en/news/shindo-issues' },
-              { text: '📖 Guide',              link: '/en/shindo-life/guide'  },
-              { text: '💡 Tips & Tricks',      link: '/en/shindo-life/tips'   },
+              { text: '🔴 Shindo Life Issues', link: '/news/shindo-issues' },
+              { text: '📖 Guide',              link: '/shindo-life/guide'  },
+              { text: '💡 Tips & Tricks',      link: '/shindo-life/tips'   },
             ],
           },
           {
             text: '🌊 Rell Seas',
             items: [
-              { text: '📖 Guide',         link: '/en/rell-seas/guide' },
-              { text: '💡 Tips & Tricks', link: '/en/rell-seas/tips'  },
+              { text: '📖 Guide',         link: '/rell-seas/guide' },
+              { text: '💡 Tips & Tricks', link: '/rell-seas/tips'  },
             ],
           },
         ],
@@ -333,6 +259,77 @@ export default defineConfig({
         editLink: {
           pattern: EDIT_LINK,
           text:    'Edit this page on GitHub',
+        },
+        footer: {
+          message:   FOOTER_MESSAGE,
+          copyright: 'Rell Games Docs © 2024–2026',
+        },
+      },
+    },
+
+    // Russian — secondary locale under /ru/
+    ru: {
+      label:         'Русский',
+      lang:          'ru-RU',
+      link:          '/ru/',
+      title:         'Rell Games Docs',
+      titleTemplate: ':title · Rell Games',
+      description:   'Гайды, тир-листы и механики игр Rell Games от ETEPHYM',
+      head: [
+        ...SHARED_HEAD,
+        ['meta', { property: 'og:url',         content: `${FULL_URL}ru/` }],
+        ['meta', { property: 'og:locale',      content: 'ru_RU' }],
+        ['meta', { property: 'og:title',       content: 'Rell Games Docs' }],
+        ['meta', { property: 'og:description', content: 'Гайды, тир-листы и механики игр Rell Games' }],
+        ['meta', { name: 'robots',             content: 'noindex' }],
+      ],
+      themeConfig: {
+        logo:                DEFAULT_LOGO,
+        siteTitle:           'Rell Games',
+        nav: [
+          { text: '🏠 Главная', link: '/ru/' },
+          { text: '📌 О проекте', link: '/ru/about' },
+          {
+            text: '⚔️ Shindo Life 2',
+            items: [
+              { text: '🔴 Проблемы Shindo Life', link: '/ru/news/shindo-issues' },
+              { text: '📖 Гайд',                 link: '/ru/shindo-life/guide'  },
+              { text: '💡 Советы и фишки',       link: '/ru/shindo-life/tips'   },
+            ],
+          },
+          {
+            text: '🌊 Rell Seas',
+            items: [
+              { text: '📖 Гайд',           link: '/ru/rell-seas/guide' },
+              { text: '💡 Советы и фишки', link: '/ru/rell-seas/tips'  },
+            ],
+          },
+        ],
+        sidebar:              sidebarRu,
+        socialLinks:          SOCIAL_LINKS,
+        outline:              { level: [2, 3], label: 'На этой странице' },
+        returnToTopLabel:     '↑ Наверх',
+        sidebarMenuLabel:     'Меню',
+        darkModeSwitchLabel:  'Тема',
+        lightModeSwitchTitle: 'Светлая тема',
+        darkModeSwitchTitle:  'Тёмная тема',
+        langMenuLabel:        'Change language',
+        externalLinkIcon:     true,
+        notFound: {
+          title:     '🐸 Страница не найдена',
+          quote:     'Похоже, эта страница потерялась в тумане войны. Жаба тоже не знает где она.',
+          linkLabel: 'На главную',
+          linkText:  '← Вернуться на главную',
+          code:      '404',
+        },
+        docFooter:   { prev: '← Предыдущая', next: 'Следующая →' },
+        lastUpdated: {
+          text:          'Обновлено',
+          formatOptions: { dateStyle: 'long', timeStyle: 'short' },
+        },
+        editLink: {
+          pattern: EDIT_LINK,
+          text:    'Редактировать на GitHub',
         },
         footer: {
           message:   FOOTER_MESSAGE,

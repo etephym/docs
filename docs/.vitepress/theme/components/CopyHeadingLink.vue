@@ -5,7 +5,7 @@
 
 import { computed, onMounted, onUnmounted, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
-import { isEnglishPath } from '../utils/routing'
+import { isRussianPath } from '../utils/routing'
 
 // ---------------------------------------------------------------------------
 // Route & locale
@@ -14,15 +14,15 @@ import { isEnglishPath } from '../utils/routing'
 const route = useRoute()
 const { site } = useData()
 
-const isEn = computed(() => isEnglishPath(route.path, site.value.base))
+const isRu = computed(() => isRussianPath(route.path, site.value.base))
 
 // ---------------------------------------------------------------------------
 // Label helpers — derived from current route locale
 // ---------------------------------------------------------------------------
 
-const labelCopy   = () => isEn.value ? 'Copy link'            : 'Скопировать ссылку'
-const labelAria   = () => isEn.value ? 'Copy link to heading' : 'Скопировать ссылку на заголовок'
-const labelCopied = () => isEn.value ? 'Copied!'              : 'Скопировано!'
+const labelCopy   = () => isRu.value ? 'Скопировать ссылку'            : 'Copy link'
+const labelAria   = () => isRu.value ? 'Скопировать ссылку на заголовок' : 'Copy link to heading'
+const labelCopied = () => isRu.value ? 'Скопировано!'              : 'Copied!'
 
 // ---------------------------------------------------------------------------
 // Handler registry — tracks buttons so they can be removed on cleanup

@@ -5,7 +5,7 @@
 
 import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
 import { useData, useRoute } from 'vitepress'
-import { isEnglishPath } from '../utils/routing'
+import { isRussianPath } from '../utils/routing'
 
 // ---------------------------------------------------------------------------
 // SVG ring constants — fixed values derived from the component size
@@ -29,13 +29,13 @@ const idle     = ref(false) // true after 3 s of no scrolling → shows arrow ic
 
 const route = useRoute()
 const { site } = useData()
-const isEn  = computed(() => isEnglishPath(route.path, site.value.base))
+const isRu  = computed(() => isRussianPath(route.path, site.value.base))
 
 /** Tooltip / aria-label text — switches between percentage and "back to top". */
 const titleLabel = computed(() =>
   idle.value
-    ? (isEn.value ? 'Back to top' : 'Наверх')
-    : `${progress.value}% ${isEn.value ? 'read' : 'прочитано'}`
+    ? (isRu.value ? 'Наверх' : 'Back to top')
+    : `${progress.value}% ${isRu.value ? 'прочитано' : 'read'}`
 )
 
 // ---------------------------------------------------------------------------

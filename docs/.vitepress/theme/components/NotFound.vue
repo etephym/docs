@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useData, useRoute, useRouter } from 'vitepress'
-import { isEnglishPath, normalizeBase } from '../utils/routing'
+import { isRussianPath, normalizeBase } from '../utils/routing'
 
 // ---------------------------------------------------------------------------
 // Locale & navigation
 // ---------------------------------------------------------------------------
 
-const { site, lang } = useData()
+const { site } = useData()
 const route  = useRoute()
 const router = useRouter()
-const isRu   = computed(() => lang.value === 'ru-RU')
+const isRu   = computed(() => isRussianPath(route.path, normalizeBase(site.value.base)))
 
 function goHome(): void {
   const base = normalizeBase(site.value.base)
-  router.go(isEnglishPath(route.path, base) ? `${base}en/` : base)
+  router.go(isRussianPath(route.path, base) ? `${base}ru/` : base)
 }
 </script>
 

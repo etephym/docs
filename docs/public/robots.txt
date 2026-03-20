@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# English locale is a translation mirror — exclude from indexing
-Disallow: /rell-docs/en/
+# Russian locale is secondary — exclude from indexing
+Disallow: /rell-docs/ru/
 
 Sitemap: https://etephym.github.io/rell-docs/sitemap.xml

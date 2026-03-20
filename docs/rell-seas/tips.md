@@ -1,9 +1,9 @@
 ---
-title: Советы и фишки — Rell Seas
-description: Советы и фишки по Rell Seas от ETEPHYM.
+title: Tips & Tricks — Rell Seas
+description: Rell Seas tips & tricks by ETEPHYM.
 outline: [2, 3]
 ---
 
-# Советы и фишки — Rell Seas
+# Tips & Tricks — Rell Seas
 
-> Скоро...
+> Coming soon...

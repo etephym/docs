@@ -25,7 +25,7 @@ function getLabels(isRu: boolean): Labels {
 
 /** True when the visitor is on the Russian locale (no /en/ in path). */
 function isRuLocale(): boolean {
-  return !window.location.pathname.includes('/en/')
+  return window.location.pathname.includes('/ru/')
 }
 
 /** Clamps a number between min and max. */

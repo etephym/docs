@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { nextTick, onMounted, ref, watch, computed } from 'vue'
 import { useData, useRoute } from 'vitepress'
-import { isEnglishPath } from '../utils/routing'
+import { isRussianPath } from '../utils/routing'
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -24,9 +24,9 @@ const readingTime = ref(0)
 const route = useRoute()
 const { site } = useData()
 
-const isEn       = computed(() => isEnglishPath(route.path, site.value.base))
-const labelWords = computed(() => isEn.value ? 'words'    : 'слов')
-const labelMin   = computed(() => isEn.value ? 'min read' : 'мин. чтения')
+const isRu       = computed(() => isRussianPath(route.path, site.value.base))
+const labelWords = computed(() => isRu.value ? 'слов'    : 'words')
+const labelMin   = computed(() => isRu.value ? 'мин. чтения' : 'min read')
 
 // ---------------------------------------------------------------------------
 // Word count calculation

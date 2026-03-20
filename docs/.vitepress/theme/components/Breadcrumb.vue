@@ -5,7 +5,7 @@
 
 import { computed } from 'vue'
 import { useData, useRoute, useRouter } from 'vitepress'
-import { isEnglishPath, normalizeBase } from '../utils/routing'
+import { isRussianPath, normalizeBase } from '../utils/routing'
 
 // ---------------------------------------------------------------------------
 // Route, router & site data
@@ -25,7 +25,7 @@ interface Crumb { text: string; link: string }
 // Locale detection
 // ---------------------------------------------------------------------------
 
-const isEn = computed(() => isEnglishPath(route.path, site.value.base))
+const isRu = computed(() => isRussianPath(route.path, site.value.base))
 
 // ---------------------------------------------------------------------------
 // Computed breadcrumb list
@@ -46,12 +46,12 @@ const crumbs = computed<Crumb[]>(() => {
   // Filter out the bare 'en' locale segment — it is a routing detail.
   // We restore the locale prefix when building links (see accumulated below)
   // so that EN breadcrumb links point to EN pages, not RU pages.
-  const parts = clean.split('/').filter(p => Boolean(p) && p !== 'en')
+  const parts = clean.split('/').filter(p => Boolean(p) && p !== 'ru')
 
-  const result: Crumb[] = [{ text: isEn.value ? 'Home' : 'Главная', link: base }]
+  const result: Crumb[] = [{ text: isRu.value ? 'Главная' : 'Home', link: base }]
 
-  // Prefix accumulated path with the locale segment when on EN pages
-  let accumulated = base + (isEn.value ? 'en/' : '')
+  // Prefix accumulated path with the locale segment when on RU pages
+  let accumulated = base + (isRu.value ? 'ru/' : '')
 
   for (let i = 0; i < parts.length; i++) {
     const part = parts[i]

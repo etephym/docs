@@ -1,9 +1,9 @@
 ---
-title: Гайд — Rell Seas
-description: Гайд по Rell Seas от ETEPHYM.
+title: Guide — Rell Seas
+description: Rell Seas guide by ETEPHYM.
 outline: [2, 3]
 ---
 
-# Гайд — Rell Seas
+# Guide — Rell Seas
 
-> Скоро...
+> Coming soon...

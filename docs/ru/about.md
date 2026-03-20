@@ -1,43 +1,43 @@
 ---
-title: About
-description: About the Rell Games Docs project
+title: О проекте
+description: О проекте Rell Games Docs
 outline: false
 ---
 
-# About
+# О проекте
 
-**Rell Games Docs** is an unofficial community documentation site for Rell Games — guides, tier lists and mechanics, made by players for players.
+**Rell Games Docs** — неофициальная документация по играм Rell Games, созданная сообществом.
 
-## What's here
+## Что здесь есть
 
-- Shindo Life 2 mechanics guides
-- Tier lists and tips
-- Current news and game issues
+- Гайды по механикам Shindo Life 2
+- Тир-листы и советы
+- Актуальные новости и проблемы игр
 
-## Authors
+## Авторы
 
-Created and maintained by **[etephym / lewisky](https://github.com/ezrqq)**.
+Создано и поддерживается **[etephym / lewisky](https://github.com/ezrqq)**.
 
-## Contact
+## Контакты
 
-- Discord: [Server](https://discord.gg/cmCpgkb5zq)
+- Discord: [Сервер](https://discord.gg/cmCpgkb5zq)
 - Telegram: [@etephym](https://t.me/etephym)
 - GitHub: [etephym/rell-docs](https://github.com/etephym/rell-docs)
 
-## License
+## Лицензия
 
-Content is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+Контент распространяется под лицензией [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ---
 
 <div class="community-block">
   <div class="community-inner">
     <div class="community-text">
-      <p class="community-title">💬 Join the community</p>
-      <p class="community-desc">Ask questions, share knowledge, and stay up to date with the latest game news on our Discord server.</p>
+      <p class="community-title">💬 Присоединяйся к сообществу</p>
+      <p class="community-desc">Задавай вопросы, делись знаниями и следи за новостями игр в нашем Discord сервере.</p>
     </div>
     <a href="https://discord.gg/cmCpgkb5zq" target="_blank" rel="noopener noreferrer" class="community-btn">
-      Join Discord →
+      Войти в Discord →
     </a>
   </div>
 </div>
