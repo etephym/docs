@@ -6,13 +6,11 @@ outline: false
 
 # About
 
-**Rell Games Docs** is an unofficial community documentation site for Rell Games — guides, tier lists and mechanics, made by players for players.
+> Coming soon...
 
 ## What's here
 
-- Shindo Life 2 mechanics guides
-- Tier lists and tips
-- Current news and game issues
+> Coming soon...
 
 ## Authors
 
