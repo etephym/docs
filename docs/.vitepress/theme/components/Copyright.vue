@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
 
-// ---------------------------------------------------------------------------
-// Page data — used to hide the block on non-doc pages (e.g. home, 404)
-// ---------------------------------------------------------------------------
-
 const { page, lang } = useData()
 </script>
 
@@ -24,7 +20,6 @@ const { page, lang } = useData()
         <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="NC" />
         <img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" alt="SA" />
       </span>
-      <!-- English (default) -->
       <span v-else>
         <a href="https://github.com/etephym/rell-docs" target="_blank" rel="noopener noreferrer">RELL Games Docs</a>
         © 2024–2026 by
