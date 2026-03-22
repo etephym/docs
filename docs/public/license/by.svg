@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-labelledby="title">
+  <title>BY</title>
+  <circle cx="12" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+  <path d="M7 20c0-2.8 2.2-5 5-5s5 2.2 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+</svg>
