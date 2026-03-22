@@ -1,58 +1,26 @@
-// =============================================================================
-// Site Configuration — edit this file to customise your fork
-// =============================================================================
-// All deployment-specific values live here. Nothing else needs to change when
-// you rename the repo, move to a different host, or fork the project.
+// Core site constants. Keep deployment metadata in one place.
 
-// ---------------------------------------------------------------------------
-// Deployment
-// ---------------------------------------------------------------------------
-
-/** GitHub username or organisation that owns the repository */
+/** GitHub username or organisation. */
 export const GITHUB_USER = 'etephym'
 
-/** Repository name — also used as the URL base path */
+/** Repository name and GitHub Pages sub-path. */
 export const REPO_NAME = 'rell-docs'
 
-/** GitHub Pages hostname — bare origin, no trailing slash */
-export const SITE_HOSTNAME = 'https://etephym.github.io'
+/** Set a host here when switching the site to a custom domain. */
+export const CUSTOM_DOMAIN = ''
 
-// ---------------------------------------------------------------------------
-// Locale priority
-// ---------------------------------------------------------------------------
+/** GitHub Pages origin, without the repository base. */
+export const SITE_HOSTNAME = CUSTOM_DOMAIN ? `https://${CUSTOM_DOMAIN}` : 'https://etephym.github.io'
 
-/**
- * The primary locale is served at the root URL (no prefix in the address bar).
- * The secondary locale gets its own prefix (e.g. /ru/ or /en/).
- *
- * To swap priorities (e.g. make Russian the main language):
- *   Change 'en' → 'ru'
- *   That's it — no files need to be moved.
- */
-export const PRIMARY_LOCALE: 'en' | 'ru' = 'en'
-
-// ---------------------------------------------------------------------------
-// Derived constants — no need to touch these
-// ---------------------------------------------------------------------------
-
-export const SECONDARY_LOCALE = PRIMARY_LOCALE === 'en' ? 'ru' : 'en'
-
-export const BASE_PATH = `/${REPO_NAME}/`
-export const FULL_URL  = `${SITE_HOSTNAME}${BASE_PATH}`
+export const BASE_PATH = CUSTOM_DOMAIN ? '/' : `/${REPO_NAME}/`
+export const FULL_URL  = BASE_PATH === '/' ? `${SITE_HOSTNAME}/` : `${SITE_HOSTNAME}${BASE_PATH}`
+export const SITEMAP_HOSTNAME = FULL_URL
 
 export const GITHUB_REPO_URL = `https://github.com/${GITHUB_USER}/${REPO_NAME}`
 export const EDIT_LINK       = `${GITHUB_REPO_URL}/edit/main/docs/:path`
 
-// ---------------------------------------------------------------------------
-// Social links shown in the navbar
-// ---------------------------------------------------------------------------
-
 export const DISCORD_URL  = 'https://discord.gg/cmCpgkb5zq'
 export const TELEGRAM_URL = 'https://t.me/etephym'
 
-// ---------------------------------------------------------------------------
-// Music player
-// ---------------------------------------------------------------------------
-
-/** Path to the background audio file inside /public — spaces are URL-encoded */
+/** Public audio asset path. */
 export const AUDIO_SRC = `${BASE_PATH}${encodeURIComponent('Zerofuturism - a coldcore ambient playlist.mp3')}`

@@ -14,12 +14,13 @@
   },
   "homepage": "https://etephym.github.io/rell-docs/",
   "scripts": {
-    "dev":          "vitepress dev docs",
-    "build":        "vitepress build docs",
+    "dev":          "node scripts/sync-domain-config.mjs && vitepress dev docs",
+    "build":        "node scripts/sync-domain-config.mjs && vitepress build docs",
     "preview":      "vitepress preview docs",
-    "docs:dev":     "vitepress dev docs",
-    "docs:build":   "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:dev":     "node scripts/sync-domain-config.mjs && vitepress dev docs",
+    "docs:build":   "node scripts/sync-domain-config.mjs && vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "docs:verify":  "npm run docs:build && node scripts/verify-dist.mjs"
   },
   "devDependencies": {
     "vitepress":                  "^2.0.0-alpha.16",
