@@ -18,6 +18,7 @@ export const EDIT_LINK       = `${GITHUB_REPO_URL}/edit/main/docs/:path`
 
 export const DISCORD_URL  = 'https://discord.gg/cmCpgkb5zq'
 export const TELEGRAM_URL = 'https://t.me/etephym'
+export const LICENSE_ICON_PATH = `${BASE_PATH}license`
 
 /** Public audio asset path. */
 export const AUDIO_SRC = `${BASE_PATH}${encodeURIComponent('Zerofuturism - a coldcore ambient playlist.mp3')}`

@@ -3,18 +3,14 @@ import { readFileSync } from 'node:fs'
 const sitemap = readFileSync('docs/.vitepress/dist/sitemap.xml', 'utf8')
 const ruHome = readFileSync('docs/.vitepress/dist/ru/index.html', 'utf8')
 const enHome = readFileSync('docs/.vitepress/dist/index.html', 'utf8')
-const packageJson = JSON.parse(readFileSync('package.json', 'utf8'))
 
 const failures = []
-const baseUrl = packageJson.homepage.endsWith('/') ? packageJson.homepage : `${packageJson.homepage}/`
-const expectedAboutUrl = new URL('about', baseUrl).toString()
-const legacyAboutUrl = 'https://etephym.github.io/about</loc>'
 
-if (sitemap.includes(legacyAboutUrl)) {
+if (sitemap.includes('https://etephym.github.io/about</loc>')) {
   failures.push('sitemap.xml still contains URLs without /rell-docs/ base')
 }
 
-if (!sitemap.includes(expectedAboutUrl)) {
+if (!sitemap.includes('https://etephym.github.io/rell-docs/about')) {
   failures.push('sitemap.xml is missing the expected base-prefixed URLs')
 }
 

@@ -3,10 +3,12 @@ import {
   BASE_PATH,
   FULL_URL,
   SITEMAP_HOSTNAME,
+  SITE_HOSTNAME,
   GITHUB_REPO_URL,
   EDIT_LINK,
   DISCORD_URL,
   TELEGRAM_URL,
+  LICENSE_ICON_PATH,
 } from './site.config'
 
 const SOCIAL_LINKS: DefaultTheme.SocialLink[] = [
@@ -16,7 +18,7 @@ const SOCIAL_LINKS: DefaultTheme.SocialLink[] = [
 ]
 
 const CC_ICONS = (['cc', 'by', 'nc', 'sa'] as const)
-  .map(icon => `<img src="https://mirrors.creativecommons.org/presskit/icons/${icon}.svg" alt="${icon.toUpperCase()}" width="18" height="18">`)
+  .map(icon => `<img src="${LICENSE_ICON_PATH}/${icon}.svg" alt="${icon.toUpperCase()}" width="18" height="18">`)
   .join('')
 
 const FOOTER_MESSAGE =
