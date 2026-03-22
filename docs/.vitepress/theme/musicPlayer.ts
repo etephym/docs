@@ -1,5 +1,4 @@
-import { AUDIO_SRC, BASE_PATH } from '../site.config'
-import { isRussianPath } from './utils/routing'
+import { AUDIO_SRC } from '../site.config'
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -24,9 +23,9 @@ function getLabels(isRu: boolean): Labels {
     : { idle: 'Background music', playing: 'Playing...', play: 'Play', pause: 'Pause' }
 }
 
-/** Resolves labels from the current route. */
+/** True when the visitor is on the Russian locale (no /en/ in path). */
 function isRuLocale(): boolean {
-  return isRussianPath(window.location.pathname, BASE_PATH)
+  return window.location.pathname.includes('/ru/')
 }
 
 /** Clamps a number between min and max. */
