@@ -449,3 +449,27 @@ a.VPNavScreenMenuLink,
 /* ── Collapsed / expanded group height ───────────────────────────────────── */
 .VPNavScreenMenuGroup      { height: 40px !important; }
 .VPNavScreenMenuGroup.open { height: auto !important; padding-bottom: 10px !important; }
+
+/* ---------------------------------------------------------------------------
+   Sidebar icons — inline SVG injected via config.ts text fields
+   --------------------------------------------------------------------------- */
+
+.sb-icon {
+  display:        inline-flex;
+  align-items:    center;
+  justify-content: center;
+  width:          1em;
+  height:         1em;
+  margin-right:   0.45em;
+  vertical-align: middle;
+  flex-shrink:    0;
+  position:       relative;
+  top:            -0.05em;
+  color:          var(--vp-c-text-2);
+  transition:     color 0.2s ease;
+}
+
+/* Active link — icon inherits the brand colour */
+.vp-sidebar .is-active .sb-icon,
+.vp-sidebar a:hover .sb-icon { color: var(--vp-c-brand); }
+

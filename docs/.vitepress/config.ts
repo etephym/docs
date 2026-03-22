@@ -111,24 +111,24 @@ const sidebarEn: DefaultTheme.Sidebar = [
     text: '📌 Pinned',
     collapsed: false,
     items: [
-      { text: 'About', link: '/about' },
+      { text: '<span class="sb-icon sb-icon-about"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256"><path fill="currentColor" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m0 192a88 88 0 1 1 88-88a88.1 88.1 0 0 1-88 88m16-40a8 8 0 0 1-8 8a16 16 0 0 1-16-16v-40a8 8 0 0 1 0-16a16 16 0 0 1 16 16v40a8 8 0 0 1 8 8m-32-92a12 12 0 1 1 12 12a12 12 0 0 1-12-12"/></svg></span> About', link: '/about' },
     ],
   },
   {
     text: '⚔️ Shindo Life 2',
     collapsed: false,
     items: [
-      { text: 'Shindo Life Issues', link: '/news/shindo-issues',  badge: { type: 'danger',  text: 'Active'    } },
-      { text: 'Guide',              link: '/shindo-life/guide',   badge: { type: 'tip',     text: 'Read'      } },
-      { text: 'Tips & Tricks',      link: '/shindo-life/tips',    badge: { type: 'warning', text: 'Important' } },
+      { text: '<span class="sb-icon sb-icon-issues"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.17 12l-4.58-4.59L16 6l6 6-3.59 3.59L17 14.17 19.17 12zM1.39 4.22l4.19 4.19L2 12l6 6 1.41-1.41L4.83 12 7 9.83 19.78 22.61l1.41-1.41L2.81 2.81 1.39 4.22z"/></svg></span> Shindo Life Issues', link: '/news/shindo-issues',  badge: { type: 'danger',  text: 'Active'    } },
+      { text: '<span class="sb-icon sb-icon-guide"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg></span> Guide',              link: '/shindo-life/guide',   badge: { type: 'tip',     text: 'Read'      } },
+      { text: '<span class="sb-icon sb-icon-tips"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 20h4c0 1.1-.9 2-2 2s-2-.9-2-2zm-2-1h8v-2H5v2zm11.5-9.5c0 3.82-2.66 5.86-3.77 6.5H5.27C4.16 15.36 1.5 13.32 1.5 9.5 1.5 5.36 4.86 2 9 2s7.5 3.36 7.5 7.5zm4.87-2.13L20 8l1.37.63L22 10l.63-1.37L24 8l-1.37-.63L22 6l-.63 1.37zM19 6l.94-2.06L22 3l-2.06-.94L19 0l-.94 2.06L16 3l2.06.94L19 6z"/></svg></span> Tips & Tricks',      link: '/shindo-life/tips',    badge: { type: 'warning', text: 'Important' } },
     ],
   },
   {
     text: '🌊 Rell Seas',
     collapsed: false,
     items: [
-      { text: 'Guide',         link: '/rell-seas/guide', badge: { type: 'tip',  text: 'Soon' } },
-      { text: 'Tips & Tricks', link: '/rell-seas/tips',  badge: { type: 'info', text: 'Soon' } },
+      { text: '<span class="sb-icon sb-icon-guide"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg></span> Guide',         link: '/rell-seas/guide', badge: { type: 'tip',  text: 'Soon' } },
+      { text: '<span class="sb-icon sb-icon-tips"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 20h4c0 1.1-.9 2-2 2s-2-.9-2-2zm-2-1h8v-2H5v2zm11.5-9.5c0 3.82-2.66 5.86-3.77 6.5H5.27C4.16 15.36 1.5 13.32 1.5 9.5 1.5 5.36 4.86 2 9 2s7.5 3.36 7.5 7.5zm4.87-2.13L20 8l1.37.63L22 10l.63-1.37L24 8l-1.37-.63L22 6l-.63 1.37zM19 6l.94-2.06L22 3l-2.06-.94L19 0l-.94 2.06L16 3l2.06.94L19 6z"/></svg></span> Tips & Tricks', link: '/rell-seas/tips',  badge: { type: 'info', text: 'Soon' } },
     ],
   },
 ]
@@ -139,24 +139,24 @@ const sidebarRu: DefaultTheme.Sidebar = [
     text: '📌 Закреплено',
     collapsed: false,
     items: [
-      { text: 'О проекте', link: '/ru/about' },
+      { text: '<span class="sb-icon sb-icon-about"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256"><path fill="currentColor" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m0 192a88 88 0 1 1 88-88a88.1 88.1 0 0 1-88 88m16-40a8 8 0 0 1-8 8a16 16 0 0 1-16-16v-40a8 8 0 0 1 0-16a16 16 0 0 1 16 16v40a8 8 0 0 1 8 8m-32-92a12 12 0 1 1 12 12a12 12 0 0 1-12-12"/></svg></span> О проекте', link: '/ru/about' },
     ],
   },
   {
     text: '⚔️ Shindo Life 2',
     collapsed: false,
     items: [
-      { text: 'Проблемы Shindo Life', link: '/ru/news/shindo-issues',  badge: { type: 'danger',  text: 'Актуально' } },
-      { text: 'Гайд',                 link: '/ru/shindo-life/guide',   badge: { type: 'tip',     text: 'Читать'    } },
-      { text: 'Советы и фишки',       link: '/ru/shindo-life/tips',    badge: { type: 'warning', text: 'Важно'     } },
+      { text: '<span class="sb-icon sb-icon-issues"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.17 12l-4.58-4.59L16 6l6 6-3.59 3.59L17 14.17 19.17 12zM1.39 4.22l4.19 4.19L2 12l6 6 1.41-1.41L4.83 12 7 9.83 19.78 22.61l1.41-1.41L2.81 2.81 1.39 4.22z"/></svg></span> Проблемы Shindo Life', link: '/ru/news/shindo-issues',  badge: { type: 'danger',  text: 'Актуально' } },
+      { text: '<span class="sb-icon sb-icon-guide"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg></span> Гайд',                 link: '/ru/shindo-life/guide',   badge: { type: 'tip',     text: 'Читать'    } },
+      { text: '<span class="sb-icon sb-icon-tips"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 20h4c0 1.1-.9 2-2 2s-2-.9-2-2zm-2-1h8v-2H5v2zm11.5-9.5c0 3.82-2.66 5.86-3.77 6.5H5.27C4.16 15.36 1.5 13.32 1.5 9.5 1.5 5.36 4.86 2 9 2s7.5 3.36 7.5 7.5zm4.87-2.13L20 8l1.37.63L22 10l.63-1.37L24 8l-1.37-.63L22 6l-.63 1.37zM19 6l.94-2.06L22 3l-2.06-.94L19 0l-.94 2.06L16 3l2.06.94L19 6z"/></svg></span> Советы и фишки',       link: '/ru/shindo-life/tips',    badge: { type: 'warning', text: 'Важно'     } },
     ],
   },
   {
     text: '🌊 Rell Seas',
     collapsed: false,
     items: [
-      { text: 'Гайд',           link: '/ru/rell-seas/guide', badge: { type: 'tip',  text: 'Скоро' } },
-      { text: 'Советы и фишки', link: '/ru/rell-seas/tips',  badge: { type: 'info', text: 'Скоро' } },
+      { text: '<span class="sb-icon sb-icon-guide"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg></span> Гайд',           link: '/ru/rell-seas/guide', badge: { type: 'tip',  text: 'Скоро' } },
+      { text: '<span class="sb-icon sb-icon-tips"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 20h4c0 1.1-.9 2-2 2s-2-.9-2-2zm-2-1h8v-2H5v2zm11.5-9.5c0 3.82-2.66 5.86-3.77 6.5H5.27C4.16 15.36 1.5 13.32 1.5 9.5 1.5 5.36 4.86 2 9 2s7.5 3.36 7.5 7.5zm4.87-2.13L20 8l1.37.63L22 10l.63-1.37L24 8l-1.37-.63L22 6l-.63 1.37zM19 6l.94-2.06L22 3l-2.06-.94L19 0l-.94 2.06L16 3l2.06.94L19 6z"/></svg></span> Советы и фишки', link: '/ru/rell-seas/tips',  badge: { type: 'info', text: 'Скоро' } },
     ],
   },
 ]
