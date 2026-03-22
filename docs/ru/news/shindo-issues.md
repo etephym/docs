@@ -6,7 +6,7 @@ outline: [2, 3]
 
 # Проблемы Shindo
 
-> Актуально с **~01.03.2025** · by lewisky
+> Актуально с **~01.03.2025** · by [lewisky](https://github.com/ezrqq) and [Wh1teSlash](https://github.com/Wh1teSlash)
 
 ---
 
