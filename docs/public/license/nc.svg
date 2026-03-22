@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-labelledby="title">
+  <title>NC</title>
+  <circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="2"/>
+  <path d="M7 17 17 7" fill="none" stroke="currentColor" stroke-width="2"/>
+  <text x="12" y="15" text-anchor="middle" font-size="7" font-family="Arial, sans-serif" fill="currentColor">NC</text>
+</svg>

@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
-
-// ---------------------------------------------------------------------------
-// Page data — used to hide the block on non-doc pages (e.g. home, 404)
-// ---------------------------------------------------------------------------
+import { LICENSE_ICON_PATH } from '../../site.config'
 
 const { page, lang } = useData()
 </script>
@@ -19,22 +16,21 @@ const { page, lang } = useData()
         <a href="https://github.com/ezrqq" target="_blank" rel="noopener noreferrer">ezrqq / lewisky</a>
         — лицензия
         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a>
-        <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC" />
-        <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="BY" />
-        <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="NC" />
-        <img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" alt="SA" />
+        <img :src="`${LICENSE_ICON_PATH}/cc.svg`" alt="CC" />
+        <img :src="`${LICENSE_ICON_PATH}/by.svg`" alt="BY" />
+        <img :src="`${LICENSE_ICON_PATH}/nc.svg`" alt="NC" />
+        <img :src="`${LICENSE_ICON_PATH}/sa.svg`" alt="SA" />
       </span>
-      <!-- English (default) -->
       <span v-else>
         <a href="https://github.com/etephym/rell-docs" target="_blank" rel="noopener noreferrer">RELL Games Docs</a>
         © 2024–2026 by
         <a href="https://github.com/ezrqq" target="_blank" rel="noopener noreferrer">ezrqq / lewisky</a>
         is licensed under
         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a>
-        <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC" />
-        <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="BY" />
-        <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="NC" />
-        <img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" alt="SA" />
+        <img :src="`${LICENSE_ICON_PATH}/cc.svg`" alt="CC" />
+        <img :src="`${LICENSE_ICON_PATH}/by.svg`" alt="BY" />
+        <img :src="`${LICENSE_ICON_PATH}/nc.svg`" alt="NC" />
+        <img :src="`${LICENSE_ICON_PATH}/sa.svg`" alt="SA" />
       </span>
     </div>
   </div>
