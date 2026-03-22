@@ -1,20 +1,20 @@
 ---
 layout: home
 
-title: Rell Games Docs
-description: Guides and mechanics for Rell Games by ETEPHYM
+title: RELL Games Docs
+description: Guides and mechanics for RELL Games by ETEPHYM
 
 hero:
-  name: "Rell Games"
+  name: "RELL Games"
   text: "Docs by ETEPHYM"
   tagline: All guides, tier lists and mechanics in one place
   image:
     dark: /logo.png
     light: /logo2.png
-    alt: Rell Games
+    alt: RELL Games
   actions:
     - theme: brand
-      text: 📖 Shindo Life
+      text: ⚔️ Shindo Life
       link: /shindo-life/guide
     - theme: alt
       text: 🌊 Rell Seas
