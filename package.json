@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "medium-zoom": "^1.1.0",
-    "vitepress": "^1.6.4",
+    "vitepress": "^2.0.0-alpha.17",
     "vitepress-plugin-nprogress": "^0.1.1",
     "vue": "^3.0.0"
   }
