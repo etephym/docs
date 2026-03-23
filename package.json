@@ -14,17 +14,17 @@
   },
   "homepage": "https://etephym.github.io/rell-docs/",
   "scripts": {
-    "dev":          "vitepress dev docs",
-    "build":        "vitepress build docs",
-    "preview":      "vitepress preview docs",
-    "docs:dev":     "vitepress dev docs",
-    "docs:build":   "vitepress build docs",
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "vitepress":                  "^2.0.0-alpha.16",
-    "vue":                        "^3.0.0",
-    "medium-zoom":                "^1.1.0",
-    "vitepress-plugin-nprogress": "^0.1.1"
+    "medium-zoom": "^1.1.0",
+    "vitepress": "^1.6.4",
+    "vitepress-plugin-nprogress": "^0.1.1",
+    "vue": "^3.0.0"
   }
 }
