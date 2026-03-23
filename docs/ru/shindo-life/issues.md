@@ -1,6 +1,6 @@
 ---
 title: Проблемы Shindo
-description: Актуальные проблемы и уязвимости Shindo Life (с ~01.03.2025)
+description:
 outline: [2, 3]
 ---
 
