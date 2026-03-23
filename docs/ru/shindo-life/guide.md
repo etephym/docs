@@ -1,6 +1,6 @@
 ---
-title: Гайд — Shindo Life
-description: Полный гайд по механикам Shindo Life — менторы, расы, элементы, термины и многое другое.
+title: Гайд — Shindo Life 2
+description: 
 outline: [2, 3]
 ---
 
