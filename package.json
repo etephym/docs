@@ -1,5 +1,5 @@
 {
-  "name": "rell-docs",
+  "name": "docs",
   "version": "1.0.0",
   "type": "module",
   "description": "Unofficial community documentation for Rell Games",
@@ -7,12 +7,12 @@
   "license": "CC-BY-NC-SA-4.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/etephym/rell-docs.git"
+    "url": "git+https://github.com/etephym/docs.git"
   },
   "bugs": {
-    "url": "https://github.com/etephym/rell-docs/issues"
+    "url": "https://github.com/etephym/docs/issues"
   },
-  "homepage": "https://etephym.github.io/rell-docs/",
+  "homepage": "https://etephym.github.io/docs/",
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
