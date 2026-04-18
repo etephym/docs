@@ -1,6 +1,6 @@
 ---
 title: ガイド — Rell Seas
-description: ETEPHYMによるRell Seasガイド。
+description: EtephymによるRell Seasガイド。
 outline: [2, 3]
 ---
 # ガイド — Rell Seas

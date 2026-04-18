@@ -1,10 +1,10 @@
 ---
 layout: home
-title: ETEPHYM Docs
-description: ETEPHYM 出品的所有游戏攻略、机制与技巧
+title: Etephym Docs
+description: Etephym 出品的所有游戏攻略、机制与技巧
 hero:
-  name: "Docs"
-  text: "by ETEPHYM"
+  name: "Documentation"
+  text: "by Etephym Coalition"
   tagline: 所有游戏的攻略、机制与技巧
   image:
     dark: /logo.png

@@ -1,10 +1,10 @@
 ---
 layout: home
-title: ETEPHYM Docs
-description: ETEPHYMによるすべてのゲームのガイド、メカニクス、ヒント
+title: Etephym Docs
+description: Etephymによるすべてのゲームのガイド、メカニクス、ヒント
 hero:
-  name: "Docs"
-  text: "by ETEPHYM"
+  name: "Documentation"
+  text: "by Etephym Coalition"
   tagline: すべてのゲームのガイド、メカニクス、ヒント
   image:
     dark: /logo.png

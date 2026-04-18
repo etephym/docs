@@ -1,6 +1,6 @@
 ---
 title: ガイド — Shindo Life
-description: ETEPHYMによるShindo Lifeガイド。
+description: EtephymによるShindo Lifeガイド。
 outline: [2, 3]
 ---
 # ガイド — Shindo Life

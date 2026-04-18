@@ -1,12 +1,12 @@
 ---
 layout: home
 
-title: ETEPHYM Docs
-description: Гайды, механики и советы по всем играм от ETEPHYM
+title: Etephym Docs
+description: Гайды, механики и советы по всем играм от Etephym
 
 hero:
-  name: "Docs"
-  text: "by ETEPHYM"
+  name: "Documentation"
+  text: "by Etephym Coalition"
   tagline: Гайды, механики и советы по всем играм
   image:
     dark: /logo.png

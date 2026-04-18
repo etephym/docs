@@ -1,6 +1,6 @@
 ---
 title: About
-description: About ETEPHYM Docs
+description: About Etephym Docs
 outline: false
 ---
 

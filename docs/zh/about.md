@@ -1,6 +1,6 @@
 ---
 title: 关于
-description: 关于 ETEPHYM Docs
+description: 关于 Etephym Docs
 outline: false
 ---
 # 关于

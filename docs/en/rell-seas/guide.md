@@ -1,6 +1,6 @@
 ---
 title: Guide — Rell Seas
-description: Rell Seas guide by ETEPHYM.
+description: Rell Seas guide by Etephym.
 outline: [2, 3]
 ---
 

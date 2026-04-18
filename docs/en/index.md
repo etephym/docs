@@ -1,12 +1,12 @@
 ---
 layout: home
 
-title: ETEPHYM Docs
-description: Guides, mechanics and tips for all games by ETEPHYM
+title: Etephym Docs
+description: Guides, mechanics and tips for all games by Etephym
 
 hero:
-  name: "Docs"
-  text: "by ETEPHYM"
+  name: "Documentation"
+  text: "by Etephym Coalition"
   tagline: Guides, mechanics and tips for all games
   image:
     dark: /logo.png

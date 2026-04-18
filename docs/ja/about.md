@@ -1,6 +1,6 @@
 ---
 title: このサイトについて
-description: ETEPHYM Docs について
+description: Etephym Docs について
 outline: false
 ---
 # このサイトについて

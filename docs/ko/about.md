@@ -1,6 +1,6 @@
 ---
 title: 소개
-description: ETEPHYM Docs 소개
+description: Etephym Docs 소개
 outline: false
 ---
 # 소개
