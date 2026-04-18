@@ -25,27 +25,27 @@ hero:
 
 features:
   - icon: ⚔️
-    title: NEED TO BE EDIT
-    details: NEED TO BE EDIT
+    title: Скоро...
+    details: Скоро...
     link: /ru/shindo-life/guide
   - icon: 🧪
-    title: NEED TO BE EDIT
-    details: NEED TO BE EDIT
+    title: Скоро...
+    details: Скоро...
     link: /ru/shindo-life/guide
   - icon: 💊
-    title: NEED TO BE EDIT
-    details: NEED TO BE EDIT
+    title: Скоро...
+    details: Скоро...
     link: /ru/shindo-life/guide
   - icon: 💡
-    title: NEED TO BE EDIT
-    details: NEED TO BE EDIT
+    title: Скоро...
+    details: Скоро...
     link: /ru/shindo-life/tips
   - icon: 📖
-    title: NEED TO BE EDIT
-    details: NEED TO BE EDIT
+    title: Скоро...
+    details: Скоро...
     link: /ru/shindo-life/guide
   - icon: 🐛
-    title: NEED TO BE EDIT
-    details: NEED TO BE EDIT
+    title: Скоро...
+    details: Скоро...
     link: /ru/shindo-life/guide
 ---
