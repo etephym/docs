@@ -1,13 +1,13 @@
 ---
 layout: home
 
-title: RELL Games Docs
-description: Гайды и механики по играм RELL Games от ETEPHYM
+title: ETEPHYM Docs
+description: Гайды, механики и советы по всем играм от ETEPHYM
 
 hero:
-  name: "RELL Games"
-  text: "Docs by ETEPHYM"
-  tagline: NEED TO BE EDIT
+  name: "Docs"
+  text: "by ETEPHYM"
+  tagline: Гайды, механики и советы по всем играм
   image:
     dark: /logo.png
     light: /logo2.png

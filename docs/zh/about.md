@@ -1,6 +1,6 @@
 ---
 title: 关于
-description: 关于 RELL Games Docs 项目
+description: 关于 ETEPHYM Docs
 outline: false
 ---
 # 关于
@@ -12,6 +12,6 @@ outline: false
 ## 联系方式
 - Discord: [服务器](https://discord.gg/cmCpgkb5zq)
 - Telegram: [@etephym](https://t.me/etephym)
-- GitHub: [etephym/rell-docs](https://github.com/etephym/rell-docs)
+- GitHub: [etephym/docs](https://github.com/etephym/docs)
 ## 许可证
 内容遵循 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。

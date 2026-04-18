@@ -1,6 +1,6 @@
 ---
 title: 소개
-description: RELL Games Docs 프로젝트 소개
+description: ETEPHYM Docs 소개
 outline: false
 ---
 # 소개
@@ -12,6 +12,6 @@ outline: false
 ## 연락처
 - Discord: [서버](https://discord.gg/cmCpgkb5zq)
 - Telegram: [@etephym](https://t.me/etephym)
-- GitHub: [etephym/rell-docs](https://github.com/etephym/rell-docs)
+- GitHub: [etephym/docs](https://github.com/etephym/docs)
 ## 라이선스
 콘텐츠는 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 라이선스를 따릅니다.

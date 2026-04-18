@@ -1,6 +1,6 @@
 ---
 title: このサイトについて
-description: RELL Games Docs プロジェクトについて
+description: ETEPHYM Docs について
 outline: false
 ---
 # このサイトについて
@@ -12,6 +12,6 @@ outline: false
 ## 連絡先
 - Discord: [サーバー](https://discord.gg/cmCpgkb5zq)
 - Telegram: [@etephym](https://t.me/etephym)
-- GitHub: [etephym/rell-docs](https://github.com/etephym/rell-docs)
+- GitHub: [etephym/docs](https://github.com/etephym/docs)
 ## ライセンス
 コンテンツは [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) ライセンスの下に提供されています。

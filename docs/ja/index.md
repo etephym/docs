@@ -1,11 +1,11 @@
 ---
 layout: home
-title: RELL Games Docs
-description: ETEPHYMによるRELL Gamesのガイドとゲームメカニクス解説
+title: ETEPHYM Docs
+description: ETEPHYMによるすべてのゲームのガイド、メカニクス、ヒント
 hero:
-  name: "RELL Games"
-  text: "Docs by ETEPHYM"
-  tagline: すべてのガイド、ティアリスト、ゲームメカニクスを一か所に
+  name: "Docs"
+  text: "by ETEPHYM"
+  tagline: すべてのゲームのガイド、メカニクス、ヒント
   image:
     dark: /logo.png
     light: /logo2.png

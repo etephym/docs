@@ -1,13 +1,13 @@
 ---
 layout: home
 
-title: RELL Games Docs
-description: Guides and mechanics for RELL Games by ETEPHYM
+title: ETEPHYM Docs
+description: Guides, mechanics and tips for all games by ETEPHYM
 
 hero:
-  name: "RELL Games"
-  text: "Docs by ETEPHYM"
-  tagline: All guides, tier lists and mechanics in one place
+  name: "Docs"
+  text: "by ETEPHYM"
+  tagline: Guides, mechanics and tips for all games
   image:
     dark: /logo.png
     light: /logo2.png

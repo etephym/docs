@@ -1,6 +1,6 @@
 ---
 title: About
-description: About the Rell Games Docs project
+description: About ETEPHYM Docs
 outline: false
 ---
 
@@ -20,7 +20,7 @@ Created and maintained by **[etephym / lewisky](https://github.com/ezrqq)**.
 
 - Discord: [Server](https://discord.gg/cmCpgkb5zq)
 - Telegram: [@etephym](https://t.me/etephym)
-- GitHub: [etephym/rell-docs](https://github.com/etephym/rell-docs)
+- GitHub: [etephym/docs](https://github.com/etephym/docs)
 
 ## License
 

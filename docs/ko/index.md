@@ -1,11 +1,11 @@
 ---
 layout: home
-title: RELL Games Docs
-description: ETEPHYM이 제작한 RELL Games 가이드 및 게임 메커니즘
+title: ETEPHYM Docs
+description: ETEPHYM이 제작한 모든 게임 가이드, 메커니즘 및 팁
 hero:
-  name: "RELL Games"
-  text: "Docs by ETEPHYM"
-  tagline: 모든 가이드, 등급표, 게임 메커니즘을 한 곳에서
+  name: "Docs"
+  text: "by ETEPHYM"
+  tagline: 모든 게임 가이드, 메커니즘 및 팁
   image:
     dark: /logo.png
     light: /logo2.png

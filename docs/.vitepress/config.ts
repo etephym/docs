@@ -261,7 +261,7 @@ const sidebarJa: DefaultTheme.Sidebar = [
 
 const SHARED_THEME = {
   logo:        DEFAULT_LOGO,
-  siteTitle:   'RELL Games',
+  siteTitle:   'ETEPHYM Docs',
   socialLinks: SOCIAL_LINKS,
 }
 
@@ -296,7 +296,7 @@ export default defineConfig({
   // Filter RU pages (secondary, noindex).
   sitemap: {
     hostname: SITE_HOSTNAME,
-    transformItems: items => items.filter(item => !item.url.startsWith('ru/')),
+    transformItems: items => items.filter(item => !['ru/', 'zh/', 'ko/', 'ja/'].some(p => item.url.startsWith(p))),
   },
 
   markdown: {
@@ -314,15 +314,15 @@ export default defineConfig({
     root: {
       label:         'English',
       lang:          'en-US',
-      title:         'RELL Games Docs',
-      titleTemplate: ':title · RELL Games',
-      description:   'Guides, tier lists and mechanics for RELL Games by ETEPHYM',
+      title:         'ETEPHYM Docs',
+      titleTemplate: ':title · ETEPHYM',
+      description:   'Guides, mechanics and tips for all games by ETEPHYM',
       head: [
         ...SHARED_HEAD,
         ['meta', { property: 'og:url',         content: FULL_URL }],
         ['meta', { property: 'og:locale',      content: 'en_US' }],
-        ['meta', { property: 'og:title',       content: 'RELL Games Docs' }],
-        ['meta', { property: 'og:description', content: 'Guides, tier lists and mechanics for RELL Games' }],
+        ['meta', { property: 'og:title',       content: 'ETEPHYM Docs' }],
+        ['meta', { property: 'og:description', content: 'Guides, mechanics and tips for all games' }],
       ],
       themeConfig: {
         ...SHARED_THEME,
@@ -364,7 +364,7 @@ export default defineConfig({
         docFooter:   { prev: '← Previous', next: 'Next →' },
         lastUpdated: { text: 'Updated', formatOptions: { dateStyle: 'long', timeStyle: 'short' } },
         editLink:    { pattern: EDIT_LINK, text: 'Edit this page on GitHub' },
-        footer:      { message: FOOTER_MESSAGE, copyright: 'RELL Games Docs © 2024–2026' },
+        footer:      { message: FOOTER_MESSAGE, copyright: 'ETEPHYM Docs © 2024–2026' },
       },
     },
 
@@ -373,15 +373,15 @@ export default defineConfig({
       label:         'Русский',
       lang:          'ru-RU',
       link:          '/ru/',
-      title:         'RELL Games Docs',
-      titleTemplate: ':title · RELL Games',
-      description:   'Гайды, тир-листы и механики игр RELL Games от ETEPHYM',
+      title:         'ETEPHYM Docs',
+      titleTemplate: ':title · ETEPHYM',
+      description:   'Гайды, механики и советы по всем играм от ETEPHYM',
       head: [
         ...SHARED_HEAD,
         ['meta', { property: 'og:url',         content: `${FULL_URL}ru/` }],
         ['meta', { property: 'og:locale',      content: 'ru_RU' }],
-        ['meta', { property: 'og:title',       content: 'RELL Games Docs' }],
-        ['meta', { property: 'og:description', content: 'Гайды, тир-листы и механики игр RELL Games' }],
+        ['meta', { property: 'og:title',       content: 'ETEPHYM Docs' }],
+        ['meta', { property: 'og:description', content: 'Гайды, механики и советы по всем играм' }],
         ['meta', { name: 'robots',             content: 'noindex' }],
       ],
       themeConfig: {
@@ -424,20 +424,20 @@ export default defineConfig({
         docFooter:   { prev: '← Предыдущая', next: 'Следующая →' },
         lastUpdated: { text: 'Обновлено', formatOptions: { dateStyle: 'long', timeStyle: 'short' } },
         editLink:    { pattern: EDIT_LINK, text: 'Редактировать на GitHub' },
-        footer:      { message: FOOTER_MESSAGE, copyright: 'RELL Games Docs © 2024–2026' },
+        footer:      { message: FOOTER_MESSAGE, copyright: 'ETEPHYM Docs © 2024–2026' },
       },
     },
 
     zh: {
       label: '中文', lang: 'zh-CN', link: '/zh/',
-      title: 'RELL Games Docs', titleTemplate: ':title · RELL Games',
+      title: 'RELL Games Docs', titleTemplate: ':title · ETEPHYM',
       description: 'RELL Games 游戏攻略、评级列表与机制说明，由 ETEPHYM 制作',
       head: [
         ...SHARED_HEAD,
         ['meta', { property: 'og:url',         content: `${FULL_URL}zh/` }],
         ['meta', { property: 'og:locale',      content: 'zh_CN' }],
-        ['meta', { property: 'og:title',       content: 'RELL Games Docs' }],
-        ['meta', { property: 'og:description', content: 'RELL Games 游戏攻略与机制说明' }],
+        ['meta', { property: 'og:title',       content: 'ETEPHYM Docs' }],
+        ['meta', { property: 'og:description', content: '所有游戏的攻略、机制与技巧' }],
         ['meta', { name: 'robots',             content: 'noindex' }],
       ],
       themeConfig: {
@@ -464,20 +464,20 @@ export default defineConfig({
         docFooter: { prev: '← 上一页', next: '下一页 →' },
         lastUpdated: { text: '更新于', formatOptions: { dateStyle: 'long', timeStyle: 'short' } },
         editLink: { pattern: EDIT_LINK, text: '在 GitHub 上编辑此页' },
-        footer: { message: FOOTER_MESSAGE, copyright: 'RELL Games Docs © 2024–2026' },
+        footer: { message: FOOTER_MESSAGE, copyright: 'ETEPHYM Docs © 2024–2026' },
       },
     },
 
     ko: {
       label: '한국어', lang: 'ko-KR', link: '/ko/',
-      title: 'RELL Games Docs', titleTemplate: ':title · RELL Games',
+      title: 'RELL Games Docs', titleTemplate: ':title · ETEPHYM',
       description: 'ETEPHYM이 제작한 RELL Games 가이드, 티어 리스트 및 게임 메커니즘',
       head: [
         ...SHARED_HEAD,
         ['meta', { property: 'og:url',         content: `${FULL_URL}ko/` }],
         ['meta', { property: 'og:locale',      content: 'ko_KR' }],
-        ['meta', { property: 'og:title',       content: 'RELL Games Docs' }],
-        ['meta', { property: 'og:description', content: 'RELL Games 가이드 및 게임 메커니즘' }],
+        ['meta', { property: 'og:title',       content: 'ETEPHYM Docs' }],
+        ['meta', { property: 'og:description', content: '모든 게임 가이드 및 메커니즘' }],
         ['meta', { name: 'robots',             content: 'noindex' }],
       ],
       themeConfig: {
@@ -504,20 +504,20 @@ export default defineConfig({
         docFooter: { prev: '← 이전', next: '다음 →' },
         lastUpdated: { text: '업데이트됨', formatOptions: { dateStyle: 'long', timeStyle: 'short' } },
         editLink: { pattern: EDIT_LINK, text: 'GitHub에서 이 페이지 편집' },
-        footer: { message: FOOTER_MESSAGE, copyright: 'RELL Games Docs © 2024–2026' },
+        footer: { message: FOOTER_MESSAGE, copyright: 'ETEPHYM Docs © 2024–2026' },
       },
     },
 
     ja: {
       label: '日本語', lang: 'ja-JP', link: '/ja/',
-      title: 'RELL Games Docs', titleTemplate: ':title · RELL Games',
+      title: 'RELL Games Docs', titleTemplate: ':title · ETEPHYM',
       description: 'ETEPHYMによるRELL Gamesのガイド、ティアリスト、ゲームメカニクス解説',
       head: [
         ...SHARED_HEAD,
         ['meta', { property: 'og:url',         content: `${FULL_URL}ja/` }],
         ['meta', { property: 'og:locale',      content: 'ja_JP' }],
-        ['meta', { property: 'og:title',       content: 'RELL Games Docs' }],
-        ['meta', { property: 'og:description', content: 'RELL GamesのガイドとゲームメカニクスをETEPHYMが解説' }],
+        ['meta', { property: 'og:title',       content: 'ETEPHYM Docs' }],
+        ['meta', { property: 'og:description', content: 'すべてのゲームのガイドとメカニクスをETEPHYMが解説' }],
         ['meta', { name: 'robots',             content: 'noindex' }],
       ],
       themeConfig: {
@@ -544,7 +544,7 @@ export default defineConfig({
         docFooter: { prev: '← 前へ', next: '次へ →' },
         lastUpdated: { text: '更新日', formatOptions: { dateStyle: 'long', timeStyle: 'short' } },
         editLink: { pattern: EDIT_LINK, text: 'GitHubでこのページを編集' },
-        footer: { message: FOOTER_MESSAGE, copyright: 'RELL Games Docs © 2024–2026' },
+        footer: { message: FOOTER_MESSAGE, copyright: 'ETEPHYM Docs © 2024–2026' },
       },
     },
   },

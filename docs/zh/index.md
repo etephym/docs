@@ -1,11 +1,11 @@
 ---
 layout: home
-title: RELL Games Docs
-description: RELL Games 游戏指南与机制说明，由 ETEPHYM 制作
+title: ETEPHYM Docs
+description: ETEPHYM 出品的所有游戏攻略、机制与技巧
 hero:
-  name: "RELL Games"
-  text: "Docs by ETEPHYM"
-  tagline: 所有攻略、评级列表和游戏机制汇聚一处
+  name: "Docs"
+  text: "by ETEPHYM"
+  tagline: 所有游戏的攻略、机制与技巧
   image:
     dark: /logo.png
     light: /logo2.png
