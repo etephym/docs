@@ -3,8 +3,8 @@ layout: home
 title: Etephym Docs
 description: Etephym이 제작한 모든 게임 가이드, 메커니즘 및 팁
 hero:
-  name: "Documentation"
-  text: "by Etephym Coalition"
+  name: "문서"
+  text: "Etephym Coalition 제작"
   tagline: 모든 게임 가이드, 메커니즘 및 팁
   image:
     dark: /logo.png

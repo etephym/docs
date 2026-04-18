@@ -5,8 +5,8 @@ title: Etephym Docs
 description: Гайды, механики и советы по всем играм от Etephym
 
 hero:
-  name: "Documentation"
-  text: "by Etephym Coalition"
+  name: "Документация"
+  text: "от Etephym Coalition"
   tagline: Гайды, механики и советы по всем играм
   image:
     dark: /logo.png

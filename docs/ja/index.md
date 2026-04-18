@@ -3,8 +3,8 @@ layout: home
 title: Etephym Docs
 description: Etephymによるすべてのゲームのガイド、メカニクス、ヒント
 hero:
-  name: "Documentation"
-  text: "by Etephym Coalition"
+  name: "ドキュメント"
+  text: "Etephym Coalition 制作"
   tagline: すべてのゲームのガイド、メカニクス、ヒント
   image:
     dark: /logo.png
