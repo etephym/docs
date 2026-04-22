@@ -145,6 +145,7 @@ const SVG_ABOUT  = '<span class="sb-icon sb-icon-about"><svg xmlns="http://www.w
 const SVG_ISSUES = '<span class="sb-icon sb-icon-issues"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.17 12l-4.58-4.59L16 6l6 6-3.59 3.59L17 14.17 19.17 12zM1.39 4.22l4.19 4.19L2 12l6 6 1.41-1.41L4.83 12 7 9.83 19.78 22.61l1.41-1.41L2.81 2.81 1.39 4.22z"/></svg></span>'
 const SVG_GUIDE  = '<span class="sb-icon sb-icon-guide"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg></span>'
 const SVG_RES    = '<span class="sb-icon sb-icon-res"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg></span>'
+const SVG_FAQ    = '<span class="sb-icon sb-icon-faq"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg></span>'
 const SVG_TIPS   = '<span class="sb-icon sb-icon-tips"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 20h4c0 1.1-.9 2-2 2s-2-.9-2-2zm-2-1h8v-2H5v2zm11.5-9.5c0 3.82-2.66 5.86-3.77 6.5H5.27C4.16 15.36 1.5 13.32 1.5 9.5 1.5 5.36 4.86 2 9 2s7.5 3.36 7.5 7.5zm4.87-2.13L20 8l1.37.63L22 10l.63-1.37L24 8l-1.37-.63L22 6l-.63 1.37zM19 6l.94-2.06L22 3l-2.06-.94L19 0l-.94 2.06L16 3l2.06.94L19 6z"/></svg></span>'
 
 // ---------------------------------------------------------------------------
@@ -168,6 +169,7 @@ const sidebarEn: DefaultTheme.Sidebar = [
       { text: `${SVG_ISSUES} Shindo Life Issues`, link: '/shindo-life/issues',  badge: { type: 'danger',  text: 'Active'    } },
       { text: `${SVG_GUIDE} Guide`,               link: '/shindo-life/guide',   badge: { type: 'tip',     text: 'Read'      } },
       { text: `${SVG_TIPS} Tips & Tricks`,        link: '/shindo-life/tips',    badge: { type: 'warning', text: 'Important' } },
+      { text: `${SVG_FAQ} FAQ`,                       link: '/shindo-life/faq',     badge: { type: 'info',    text: 'Soon'      } },
     ],
   },
   {
@@ -177,6 +179,7 @@ const sidebarEn: DefaultTheme.Sidebar = [
       { text: `${SVG_RES} Resources`,      link: '/rell-seas/resources', badge: { type: 'info', text: 'Soon' } },
       { text: `${SVG_GUIDE} Guide`,        link: '/rell-seas/guide', badge: { type: 'tip',  text: 'Soon' } },
       { text: `${SVG_TIPS} Tips & Tricks`, link: '/rell-seas/tips',  badge: { type: 'info', text: 'Soon' } },
+      { text: `${SVG_FAQ} FAQ`,                link: '/rell-seas/faq',   badge: { type: 'info', text: 'Soon' } },
     ],
   },
 ]
@@ -198,6 +201,7 @@ const sidebarRu: DefaultTheme.Sidebar = [
       { text: `${SVG_ISSUES} Проблемы Shindo Life`, link: '/ru/shindo-life/issues',  badge: { type: 'danger',  text: 'Актуально' } },
       { text: `${SVG_GUIDE} Гайд`,                  link: '/ru/shindo-life/guide',   badge: { type: 'tip',     text: 'Читать'    } },
       { text: `${SVG_TIPS} Советы и фишки`,         link: '/ru/shindo-life/tips',    badge: { type: 'warning', text: 'Важно'     } },
+      { text: `${SVG_FAQ} FAQ`,                        link: '/ru/shindo-life/faq',    badge: { type: 'info',    text: 'Скоро'    } },
     ],
   },
   {
@@ -207,6 +211,7 @@ const sidebarRu: DefaultTheme.Sidebar = [
       { text: `${SVG_RES} Ресурсы`,          link: '/ru/rell-seas/resources', badge: { type: 'info', text: 'Скоро' } },
       { text: `${SVG_GUIDE} Гайд`,          link: '/ru/rell-seas/guide', badge: { type: 'tip',  text: 'Скоро' } },
       { text: `${SVG_TIPS} Советы и фишки`, link: '/ru/rell-seas/tips',  badge: { type: 'info', text: 'Скоро' } },
+      { text: `${SVG_FAQ} FAQ`,                link: '/ru/rell-seas/faq',   badge: { type: 'info', text: 'Скоро' } },
     ],
   },
 ]
@@ -222,11 +227,13 @@ const sidebarZh: DefaultTheme.Sidebar = [
       { text: `${SVG_ISSUES} Shindo Life 问题`, link: '/zh/shindo-life/issues', badge: { type: 'danger',  text: '活跃' } },
       { text: `${SVG_GUIDE} 攻略`,              link: '/zh/shindo-life/guide',  badge: { type: 'tip',     text: '阅读' } },
       { text: `${SVG_TIPS} 技巧与窍门`,         link: '/zh/shindo-life/tips',   badge: { type: 'warning', text: '重要' } },
+      { text: `${SVG_FAQ} FAQ`,                  link: '/zh/shindo-life/faq',    badge: { type: 'info',    text: '即将' } },
   ]},
   { text: '🌊 Rell Seas', collapsed: false, items: [
       { text: `${SVG_RES} 资源`,        link: '/zh/rell-seas/resources', badge: { type: 'info', text: '即将' } },
       { text: `${SVG_GUIDE} 攻略`,      link: '/zh/rell-seas/guide', badge: { type: 'tip',  text: '即将' } },
       { text: `${SVG_TIPS} 技巧与窍门`, link: '/zh/rell-seas/tips',  badge: { type: 'info', text: '即将' } },
+      { text: `${SVG_FAQ} FAQ`,          link: '/zh/rell-seas/faq',   badge: { type: 'info', text: '即将' } },
   ]},
 ]
 
@@ -240,11 +247,13 @@ const sidebarKo: DefaultTheme.Sidebar = [
       { text: `${SVG_ISSUES} Shindo Life 이슈`, link: '/ko/shindo-life/issues', badge: { type: 'danger',  text: '활성' } },
       { text: `${SVG_GUIDE} 가이드`,            link: '/ko/shindo-life/guide',  badge: { type: 'tip',     text: '읽기' } },
       { text: `${SVG_TIPS} 팁 & 트릭`,          link: '/ko/shindo-life/tips',   badge: { type: 'warning', text: '중요' } },
+      { text: `${SVG_FAQ} FAQ`,              link: '/ko/shindo-life/faq',    badge: { type: 'info',    text: '곧' } },
   ]},
   { text: '🌊 Rell Seas', collapsed: false, items: [
       { text: `${SVG_RES} 리소스`,     link: '/ko/rell-seas/resources', badge: { type: 'info', text: '곧' } },
       { text: `${SVG_GUIDE} 가이드`,   link: '/ko/rell-seas/guide', badge: { type: 'tip',  text: '곧' } },
       { text: `${SVG_TIPS} 팁 & 트릭`, link: '/ko/rell-seas/tips',  badge: { type: 'info', text: '곧' } },
+      { text: `${SVG_FAQ} FAQ`,          link: '/ko/rell-seas/faq',   badge: { type: 'info', text: '곧' } },
   ]},
 ]
 
@@ -258,11 +267,13 @@ const sidebarJa: DefaultTheme.Sidebar = [
       { text: `${SVG_ISSUES} 既知の問題`,         link: '/ja/shindo-life/issues', badge: { type: 'danger',  text: '対応中' } },
       { text: `${SVG_GUIDE} ガイド`,              link: '/ja/shindo-life/guide',  badge: { type: 'tip',     text: '読む'   } },
       { text: `${SVG_TIPS} ヒント＆テクニック`,   link: '/ja/shindo-life/tips',   badge: { type: 'warning', text: '重要'   } },
+      { text: `${SVG_FAQ} FAQ`,                link: '/ja/shindo-life/faq',    badge: { type: 'info',    text: '近日'  } },
   ]},
   { text: '🌊 Rell Seas', collapsed: false, items: [
       { text: `${SVG_RES} リソース`,            link: '/ja/rell-seas/resources', badge: { type: 'info', text: '近日' } },
       { text: `${SVG_GUIDE} ガイド`,            link: '/ja/rell-seas/guide', badge: { type: 'tip',  text: '近日' } },
       { text: `${SVG_TIPS} ヒント＆テクニック`, link: '/ja/rell-seas/tips',  badge: { type: 'info', text: '近日' } },
+      { text: `${SVG_FAQ} FAQ`,             link: '/ja/rell-seas/faq',   badge: { type: 'info', text: '近日' } },
   ]},
 ]
 
@@ -347,6 +358,7 @@ export default defineConfig({
               { text: `${SVG_ISSUES} Shindo Life Issues`, link: '/shindo-life/issues' },
               { text: `${SVG_GUIDE} Guide`,               link: '/shindo-life/guide'  },
               { text: `${SVG_TIPS} Tips & Tricks`,        link: '/shindo-life/tips'   },
+              { text: `${SVG_FAQ} FAQ`,                       link: '/shindo-life/faq'    },
             ],
           },
           {
@@ -355,6 +367,7 @@ export default defineConfig({
               { text: `${SVG_RES} Resources`,      link: '/rell-seas/resources' },
               { text: `${SVG_GUIDE} Guide`,        link: '/rell-seas/guide' },
               { text: `${SVG_TIPS} Tips & Tricks`, link: '/rell-seas/tips'  },
+              { text: `${SVG_FAQ} FAQ`,                link: '/rell-seas/faq'   },
             ],
           },
         ],
@@ -409,6 +422,7 @@ export default defineConfig({
               { text: `${SVG_ISSUES} Проблемы Shindo Life`, link: '/ru/shindo-life/issues' },
               { text: `${SVG_GUIDE} Гайд`,                  link: '/ru/shindo-life/guide'  },
               { text: `${SVG_TIPS} Советы и фишки`,         link: '/ru/shindo-life/tips'   },
+              { text: `${SVG_FAQ} FAQ`,                        link: '/ru/shindo-life/faq'    },
             ],
           },
           {
@@ -417,6 +431,7 @@ export default defineConfig({
               { text: `${SVG_RES} Ресурсы`,          link: '/ru/rell-seas/resources' },
               { text: `${SVG_GUIDE} Гайд`,          link: '/ru/rell-seas/guide' },
               { text: `${SVG_TIPS} Советы и фишки`, link: '/ru/rell-seas/tips'  },
+              { text: `${SVG_FAQ} FAQ`,                link: '/ru/rell-seas/faq'   },
             ],
           },
         ],
@@ -465,11 +480,13 @@ export default defineConfig({
               { text: `${SVG_ISSUES} Shindo Life 问题`, link: '/zh/shindo-life/issues' },
               { text: `${SVG_GUIDE} 攻略`,              link: '/zh/shindo-life/guide'  },
               { text: `${SVG_TIPS} 技巧与窍门`,         link: '/zh/shindo-life/tips'   },
+              { text: `${SVG_FAQ} FAQ`,                  link: '/zh/shindo-life/faq'    },
           ]},
           { text: '🌊 Rell Seas', items: [
               { text: `${SVG_RES} 资源`,        link: '/zh/rell-seas/resources' },
               { text: `${SVG_GUIDE} 攻略`,      link: '/zh/rell-seas/guide' },
               { text: `${SVG_TIPS} 技巧与窍门`, link: '/zh/rell-seas/tips'  },
+              { text: `${SVG_FAQ} FAQ`,          link: '/zh/rell-seas/faq'   },
           ]},
         ],
         sidebar: sidebarZh,
@@ -507,11 +524,13 @@ export default defineConfig({
               { text: `${SVG_ISSUES} Shindo Life 이슈`, link: '/ko/shindo-life/issues' },
               { text: `${SVG_GUIDE} 가이드`,            link: '/ko/shindo-life/guide'  },
               { text: `${SVG_TIPS} 팁 & 트릭`,          link: '/ko/shindo-life/tips'   },
+              { text: `${SVG_FAQ} FAQ`,              link: '/ko/shindo-life/faq'    },
           ]},
           { text: '🌊 Rell Seas', items: [
               { text: `${SVG_RES} 리소스`,     link: '/ko/rell-seas/resources' },
               { text: `${SVG_GUIDE} 가이드`,   link: '/ko/rell-seas/guide' },
               { text: `${SVG_TIPS} 팁 & 트릭`, link: '/ko/rell-seas/tips'  },
+              { text: `${SVG_FAQ} FAQ`,          link: '/ko/rell-seas/faq'   },
           ]},
         ],
         sidebar: sidebarKo,
@@ -549,11 +568,13 @@ export default defineConfig({
               { text: `${SVG_ISSUES} 既知の問題`,       link: '/ja/shindo-life/issues' },
               { text: `${SVG_GUIDE} ガイド`,            link: '/ja/shindo-life/guide'  },
               { text: `${SVG_TIPS} ヒント＆テクニック`, link: '/ja/shindo-life/tips'   },
+              { text: `${SVG_FAQ} FAQ`,             link: '/ja/shindo-life/faq'    },
           ]},
           { text: '🌊 Rell Seas', items: [
               { text: `${SVG_RES} リソース`,            link: '/ja/rell-seas/resources' },
               { text: `${SVG_GUIDE} ガイド`,            link: '/ja/rell-seas/guide' },
               { text: `${SVG_TIPS} ヒント＆テクニック`, link: '/ja/rell-seas/tips'  },
+              { text: `${SVG_FAQ} FAQ`,             link: '/ja/rell-seas/faq'   },
           ]},
         ],
         sidebar: sidebarJa,
